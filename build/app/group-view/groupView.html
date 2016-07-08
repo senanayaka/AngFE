@@ -1,0 +1,53 @@
+<div class="vd_content-wrapper no_padding">
+    <div class="vendor_content">
+        <div class="vd_content clearfix">
+            <div class="vd_title-section clearfix">
+                <div class="vd_panel-header">
+                    <h1>Select a {{pageTitle}}</h1>
+                </div>
+            </div>
+            <div class="nav-right-hide col-md-12">
+                <div class="vendor_list_sec" >
+                    <div class="col-sm-3" data-ng-repeat="list in lists">
+                        <div class="vendor_list" >
+                            <div class="alert_icon">
+                                <ul>
+                                    <li><a><i class="fa fa-bell"></i><sup>{{list.remindersCount}}</sup></a></li>
+                                    <li><a><i class="fa fa-envelope"></i><sup>{{list.messageCount}}</sup></a></li>
+                                    <li><a><i class="fa fa-globe"></i><sup>{{list.notificationCount}}</sup></a></li>
+                                </ul>
+                            </div>
+                            <a data-ng-click="companyId(list.companyId, list.companyName)">
+                                <div class="logo_img"><img ng-src="{{API_URL}}{{list.logo}}"></div>
+                                <div class="title"><h3>{{list.companyName}}</h3></div>
+                            </a>
+                            <div class="content-list">
+                                <ul class="list-wrapper">
+                                    <li>
+                                        <span class="menu-icon"><i class="li_line"></i></span>
+                                        <span>Open Orders : <a href="#">{{list.orderCount}}</a></span>
+                                    </li>
+                                    <li>
+                                        <span class="menu-icon vd_green"><i class="li_line"></i></span>
+                                        <span>Value of Open Orders :
+                                            <a href="#" data-ng-show="list.orderTotal == 0">0</a>
+                                            <a href="#" data-ng-show="list.orderTotal != 0">${{list.orderTotal}}</a>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span class="menu-icon vd_green"><i class="li_line"></i></span>
+                                        <span>Customer Issues : <a href="#">{{list.openCase}}</a></span>
+                                    </li>
+                                    <li>
+                                        <span class="menu-icon vd_green"><i class="li_line"></i></span>
+                                        <span>Issues > 30 days : <a href="#">{{list.pastCaseCount}}</a> </span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

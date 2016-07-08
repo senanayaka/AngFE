@@ -1,0 +1,484 @@
+  <!-- Middle Content Start -->
+ <div class="vd_content-wrapper">
+            <div class="vd_container">
+                <div class="vd_content clearfix">
+                    <div class="vd_head-section clearfix">
+                        <div class="vd_panel-header" ng-include="'app/common/breadcrumb.html'"></div>
+                    </div>
+                    <!-- vd_head-section -->
+
+                    <div class="vd_title-section clearfix">
+                        <div class="vd_panel-header">
+                            <h1>Return Cases</h1>
+                            <!-- <small class="subtitle">&nbsp;</small> -->
+                        </div>
+                        <!-- vd_panel-header -->
+                    </div>
+                    <!-- vd_title-section -->
+
+                    <div class="vd_content-section clearfix">
+
+                        <!--remainder tab tttttttttttttttttttttttttttttttttttttttttttttt -->
+
+                        <div id="reminder-tab" class="tab-pane">
+                            <div class="pd-20" style="padding-top:0!important;">
+                                <div class="tr_reminder" is-allowed="CUSTOMER-SERVICE,RETURN,GENERAL|C,">
+                                    <a class="bt-add-com pull-right no_margin"
+                                       data-ng-click="addReturn()" href="#">
+                                        <i class="fa fa-plus append-icon"></i>Create Return Case</a>
+                                </div>
+
+                                <!-- Modal create-->
+
+
+                                <ul class="nav nav-pills" role="tablist">
+                                    <li class="{{statusActiveOpen}}" role="presentation"><a href="#open" aria-controls="openreminder" role="tab" data-toggle="tab" class="open" data-ng-click="openCases('open')">Open</a></li>
+                                    <li class="{{statusActiveResolve}}" role="presentation"><a href="#resolve" aria-controls="completedreminder" role="tab" data-toggle="tab" class="resolve" data-ng-click="openCases('resolve')">Resolved</a></li>
+                                    <li class="{{statusActiveCancel}}" role="presentation"><a href="#cancel" aria-controls="completedreminder" role="tab" data-toggle="tab" class="cancel" data-ng-click="openCases('cancel')">Cancel</a></li>
+                                </ul>
+                                <br>
+                                <div class="clear">&nbsp;</div>
+                                <div class="case_search">
+                                    <form class="form-horizontal popupform" >
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="filter">
+                                                    <!-- Login Starts Here -->
+                                                    <div id="loginContainer">
+                                                        <ul id="loginButtonUl">
+                                                            <li> <a href="#" id="loginButton"><span>Priority &nbsp; <i class="fa fa-caret-down"></i> </span><em></em></a>
+                                                                <div style="clear:both"></div>
+                                                                <div id="loginBox">
+                                                                    <div id="loginForm">
+                                                                        <fieldset id="body">
+                                                                            <div class="vd_checkbox checkbox-success">
+                                                                                <input type="checkbox" id="high" data-ng-model="returnSearch.highPriority" value="true">
+                                                                                <label for="high">Show only High Priority Cases</label>
+                                                                            </div>
+                                                                        </fieldset>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                            <li> <a href="#" id="loginButton"><span>Created Date &nbsp; <i class="fa fa-caret-down"></i> </span><em></em></a>
+                                                                <div style="clear:both"></div>
+                                                                <div id="loginBox">
+                                                                    <div id="loginForm">
+                                                                        <fieldset id="body">
+                                                                            <div class="form-group">
+                                                                                <label class="col-sm-3 control-label">From: </label>
+                                                                                <div class="col-sm-9 controls">
+                                                                                    <div class="input-group">
+                                                                                        <input type="text" datepicker-popup="MM/dd/yyyy"
+                                                                                               ng-click="open($event,'opened1')"
+                                                                                               is-open="opened1"
+                                                                                               date-disabled="disabled(date, mode)"
+                                                                                               close-on-date-selection="true"
+                                                                                               show-weeks="false" data-ng-model="returnSearch.createDateFrom" required/>
+                                                                                <span class="input-group-addon">
+                                                                                    <i class="fa fa-calendar"
+                                                                                       ng-click="open($event,'opened1')"></i></span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <br>
+                                                                            <div class="form-group">
+                                                                                <label class="col-sm-3 control-label">TO: </label>
+                                                                                <div class="col-sm-9 controls">
+                                                                                    <div class="input-group">
+                                                                                        <input type="text" datepicker-popup="MM/dd/yyyy"
+                                                                                               ng-click="open($event,'opened2')"
+                                                                                               is-open="opened2"
+                                                                                               date-disabled="disabled(date, mode)"
+                                                                                               close-on-date-selection="true"
+                                                                                               show-weeks="false" data-ng-model="returnSearch.createDateTo" required/>
+                                                                                <span class="input-group-addon">
+                                                                                    <i class="fa fa-calendar"
+                                                                                       ng-click="open($event,'opened1')"></i></span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </fieldset>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                            <li> <a href="#" id="loginButton"><span>Due Date &nbsp; <i class="fa fa-caret-down"></i> </span><em></em></a>
+                                                                <div style="clear:both"></div>
+                                                                <div id="loginBox">
+                                                                    <div id="loginForm">
+                                                                        <fieldset id="body">
+                                                                            <div class="form-group">
+                                                                                <label class="col-sm-3 control-label">From: </label>
+                                                                                <div class="col-sm-9 controls">
+                                                                                    <div class="input-group">
+                                                                                        <input type="text" datepicker-popup="MM/dd/yyyy"
+                                                                                               ng-click="open($event,'opened3')"
+                                                                                               is-open="opened3"
+                                                                                               date-disabled="disabled(date, mode)"
+                                                                                               close-on-date-selection="true"
+                                                                                               show-weeks="false" data-ng-model="returnSearch.dueDateFrom" required/>
+                                                                                <span class="input-group-addon">
+                                                                                    <i class="fa fa-calendar"
+                                                                                       ng-click="open($event,'opened3')"></i></span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                            <br>
+                                                                            <div class="form-group">
+                                                                                <label class="col-sm-3 control-label">TO: </label>
+                                                                                <div class="col-sm-9 controls">
+                                                                                    <div class="input-group">
+                                                                                        <input type="text" datepicker-popup="MM/dd/yyyy"
+                                                                                               ng-click="open($event,'opened4')"
+                                                                                               is-open="opened4"
+                                                                                               date-disabled="disabled(date, mode)"
+                                                                                               close-on-date-selection="true"
+                                                                                               show-weeks="false" data-ng-model="returnSearch.dueDateTo" required/>
+                                                                                <span class="input-group-addon">
+                                                                                    <i class="fa fa-calendar"
+                                                                                       ng-click="open($event,'opened4')"></i></span>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </fieldset>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                            <li> <a href="#" id="loginButton"><span>Assignee &nbsp; <i class="fa fa-caret-down"></i> </span><em></em></a>
+                                                                <div style="clear:both"></div>
+                                                                <div id="loginBox">
+                                                                    <div id="loginForm">
+                                                                        <fieldset id="body">
+                                                                            <div class="form-group">
+                                                                                <!--  <label class="col-sm-3 control-label" for="assig">Assignee: </label> -->
+                                                                                <div class="col-sm-12">
+                                                                                    <div class="row">
+                                                                                        <dl class="dropdown_selec one1">
+                                                                                            <dt>
+                                                                                                <a>
+                                                                                                    <span class="hida">Assignee</span>
+                                                                                                    <p class="multiSel one1"></p>
+                                                                                                </a>
+                                                                                            </dt>
+                                                                                            <dd>
+                                                                                                <div class="mutliSelect one1">
+                                                                                                    <ul>
+                                                                                                        <li>
+                                                                                                            <div class="vd_checkbox checkbox-success" data-ng-repeat=" assignee in allUsers">
+                                                                                                                <input data-ng-model="returnSearch.assignee[assignee.id]" type="checkbox" value="{{assignee.displayName}}" id="{{assignee.id}}" name="{{assignee.id}}">
+                                                                                                                <label for="{{assignee.id}}">{{assignee.displayName}}</label>
+                                                                                                            </div>
+                                                                                                        </li>
+                                                                                                    </ul>
+                                                                                                </div>
+                                                                                            </dd>
+                                                                                        </dl>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </fieldset>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+
+                                                            <li is-allowed="CUSTOMER-SERVICE,RETURN,GENERAL|R,CASE-CAT">
+                                                                <a href="#" id="loginButton" class="loginButton"><span>Case Category &nbsp; <i
+                                                                        class="fa fa-caret-down"></i> </span><em></em></a>
+                                                                <div style="clear:both"></div>
+                                                                <div id="loginBox" class="loginBox">
+                                                                    <div id="loginForm" class="loginForm">
+                                                                        <fieldset id="body" class="body">
+                                                                            <div class="vd_checkbox checkbox-success">
+                                                                                <input type="checkbox" id="Resolution"
+                                                                                       data-ng-model="returnSearch.resolution"
+                                                                                       value="true">
+                                                                                <label for="Resolution">Resolution</label>
+                                                                            </div>
+                                                                            <div class="vd_checkbox checkbox-success">
+                                                                                <input type="checkbox" id="Escalation"
+                                                                                       data-ng-model="returnSearch.escalation"
+                                                                                       value="true">
+                                                                                <label for="Escalation">Escalation</label>
+                                                                            </div>
+                                                                        </fieldset>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+
+                                                            <li>
+                                                                <input type="text" placeholder="Case ID"  class="fixed-id-width"
+                                                                       data-ng-model="returnSearch.caseId">
+                                                            </li>
+                                                            <li>
+                                                                <input type="text" placeholder="Keyword" data-ng-model="returnSearch.keyWords">
+                                                            </li>
+                                                            <li> <a class="bt-add-com pull-right no_margin" data-ng-click="searchReturn()"> <i class="fa fa-search"></i> </a> </li>
+                                                            <li> <a class="bt-add-com pull-right bg_white no_margin" data-ng-click="clearList()"> <i class="fa fa-refresh"></i> </a> </li>
+                                                        </ul>
+                                                    </div>
+                                                    <!-- Login Ends Here -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <!-- <div class="input-group width-30">
+                                        <input type="text" placeholder="Search">
+                                        <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                                      </div> -->
+
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="openreminder"><!-- open -->
+
+                                        <div class="view-container">
+                                            <div class="view-container">
+
+                                                <div id="newCaseListDiv">
+                                                    <!--<div class="order-table-editor">
+                                                        <a href="#" data-ng-click="showTableEditor()" id="edit">
+                                                            <i class="fa fa-pencil-square-o"></i> Edit Columns
+                                                        </a>
+
+                                                        <div id="tableEditor" ng-show="tableEditor">
+                                                            <div class="manege_table">
+                                                                <table>
+                                                                    <thead>
+                                                                    <tr ng-repeat="displayField in displayFields">
+                                                                        <th>
+                                                                            <input type="checkbox" ng-disabled="$first" ng-model="displayField.checked">
+                                                                            {{displayField.fieldName}}
+                                                                        </th>
+                                                                    </tr>
+                                                                    </thead>
+                                                                </table>
+                                                            </div>
+                                                            <button id="done" data-ng-click="doneTableEditor(selectedFields)"><i
+                                                                    class="fa fa-check"></i> Done
+                                                            </button>
+                                                        </div>-->
+
+                                                        <span class="pull-right"><b class="font-22 font_green">{{totalItems}} </b> records found</span>
+                                                    <div class="clear"></div>
+                                                    </div>
+                                                    <div class="table-responsive order_list_scroll">
+
+                                                        <table id="table" class="table table-striped table-hover order_list_table">
+
+                                                            <thead>
+                                                            <tr>
+                                                                <th data-ng-repeat="fld in checkedFields" class="maxsize" ng-click="sort(fld.field)">
+                                                                    {{fld.fieldName}}
+                                                                    <span ng-show="sort.field === fld.field && !sort.order" class="fa fa-caret-down down_active"></span>
+                                                                    <span ng-show="sort.field === fld.field && sort.order" class="fa fa-caret-up"></span>
+                                                                </th>
+                                                            </tr>
+                                                            </thead>
+                                                            <tbody>
+
+
+                                                            <tr ng-repeat="list in filtered = (return|orderBy:sort.field: sort.order)"
+                                                                class="clickable"
+                                                                ui-sref="view" target="_blank"
+                                                                ng-click="viewCase(list.case_id)">
+
+                                                                <th data-ng-repeat="fld in checkedFields" ng-init="f = list[fld.field]">
+                                                                    <span ng-if="fld.field == 'case_created_date'" format-date-without-time="{{f}}"></span>
+                                                                    <span ng-if="fld.field == 'case_due_date'" format-date-without-time="{{f}}"></span>
+
+                                                                    <span ng-if="!(fld.field == 'case_created_date') && !(fld.field == 'case_due_date')">
+                                                                        {{f}}
+                                                                    </span>
+                                                                    <span data-ng-if="f == null">--</span>
+
+                                                                </th>
+
+                                                                <!--<td>{{caseItem.case_id}}</td>
+                                                                <td>{{caseItem.case_title}}</td>
+                                                                <td>{{caseItem.case_status | capitalize}}</td>
+                                                                <td>...</td>
+                                                                &lt;!&ndash;<td>...</td>&ndash;&gt;
+                                                                &lt;!&ndash;<td>{{caseItem.case_created_by}}</td>&ndash;&gt;
+
+                                                                <td><span class="small" data-ng-if="caseItem.case_created_date.date" format-date-without-time="{{caseItem.case_created_date.date}}">(EST)</span></td>
+                                                                <td><span data-ng-if="caseItem.case_due_date.date" format-date-without-time="{{caseItem.case_due_date.date}}"></span></td>
+                                                                <td>{{caseItem.case_assigned_to}}</td>
+                                                                <td>{{caseItem.case_customer_name}}</td>
+                                                                <td>{{caseItem.case_customer_id}}</td>
+                                                                <td>{{caseItem.case_po_id}}</td>
+                                                                <td>{{caseItem.case_OrderId}}</td>
+                                                                <td>...</td>
+                                                                <td>{{caseItem.case_num_days}}</td>
+                                                                &lt;!&ndash;<td><span class="red" data-ng-if="caseItem.case_priority == true">High</span>
+                                                                <span class="black" data-ng-if="caseItem.case_priority == false">Low</span>
+                                                                </td>
+                                                                <td>{{caseItem.case_company}}</td>
+                                                                <td>{{caseItem.case_customer_email}}</td>&ndash;&gt;
+                                                                <td>{{caseItem.case_created_by}}</td>-->
+                                                            </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+
+                                                    <span data-ng-show="return.length <= 0">
+                                                        <div class="vd_panel-header">
+                                                            <h1 style="font-size: 18px">No Data Found !!!</h1>
+                                                        </div>
+                                                    </span>
+
+                                                    <div data-ng-show="totalItems > pageLimit" class="text-right">
+                                                        <pagination boundary-links="true" direction-links="true" current-page="currentPage"
+                                                                    num-pages="totalItems/pageLimit | number:0" max-size="maxSize"
+                                                                    total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"
+                                                                    items-per-page="pageLimit"></pagination>
+
+
+                                                    </div>
+
+                                                </div>
+
+                                                <!--<div class="cmt-cnt cm_view" data-ng-repeat="value in return">
+                                                    &lt;!&ndash;| startFrom:(currentPage - 1) * pageSize | limitTo:pageSize&ndash;&gt;
+                                                    <div class="row form-group cm_view_head">
+                                                        <label class="col-sm-6 col-xs-12 note_label control-label pd-5-10">{{value.case_title}}</label>
+                                                        <label class="col-sm-6 col-xs-12 pull-right note_label ontrol-label">
+                                                            <div class="col-md-4 col-sm-3"></div>
+                                                            &lt;!&ndash; <a class="bt-add-view"  data-target="#approve" data-toggle="modal" href="#">Approve</a> &nbsp; &ndash;&gt;
+                                                            <div class="col-sm-4 col-xs-6">
+                                                                <div class="select-style temp_hide_status row">
+                                                                    <select name="cat-com" id="cat-com">
+                                                                        <option value="test0" data-ng-click="changeStatus('open',value.case_id)">Open</option>
+                                                                        <option value="test1" data-ng-click="changeStatus('resolve',value.case_id)">Resolved</option>
+                                                                        <option value="test2" data-ng-click="changeStatus('cancel',value.case_id)">Cancelled</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                              &lt;!&ndash;<label class="col-sm-4 note_label ontrol-label"> Case number: {{value.case_id}} &nbsp;</label>&ndash;&gt;
+                                                            <div class="col-md-4 col-sm-5 col-xs-6 compen_view">
+                                                                <span class="pull-right row">
+                                                                    <span is-allowed="CUSTOMER-SERVICE,RETURN,GENERAL|U,">
+                                                                        <a class="bt-add-view"  data-toggle="modal" data-ng-click="editReturnCase(value.case_id, value)"  data-target="#editCase">Edit</a> &nbsp;
+                                                                    </span>
+                                                                   <span is-allowed="CUSTOMER-SERVICE,RETURN,GENERAL|R,">
+                                                                       <a class="bt-add-view" ui-sref="customerService.returnCases.view({id:value.case_id})" >View</a>
+                                                                   </span>
+
+                                                                </span>
+                                                            </div>
+                                                        </label>
+
+                                                        &lt;!&ndash;<label class="col-sm-6 note_label control-label"> <span class="pull-right"> Case number: {{value.case_id}}
+                                                            &nbsp;
+                                                            <a data-target="#editCase" data-toggle="modal" href="#" data-ng-click="editReturnCase(value.case_id)" class="bt-add-view">Edit</a>
+                                                            &nbsp;
+                                                            <a href="#"  class="bt-add-view" ui-sref="customerService.returnCases.view({id:value.case_id})">View</a></span> </label>&ndash;&gt;
+                                                    </div>
+
+                                                    <div class="col-sm-12">
+                                                        <div class="row cm_view_foot pull-left">
+                                                            <label class="note_label control-label">
+                                                                <span class="pull-right"> <b>Case number:</b> {{value.case_id}} </span>
+                                                            </label>
+                                                        </div>
+                                                        <div class="row cm_view_foot pull-right">
+                                                            <label class="note_label control-label" data-ng-if="value.case_due_date.date != null">
+                                                                <b>Due Date:</b> <span data-ng-if="value.case_due_date.date" format-date-without-time="{{value.case_due_date.date}}"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-12">
+                                                        <div class="row cm_view_foot pull-right">
+                                                            <label class="control-label"><p class="note_label"><b>Status</b>: <span class="green">{{value.case_status | capitalize}}</span></p></label>
+                                                            <label class="control-label"><p class="note_label"><b>Priority</b>:
+                                                                <span class="red" data-ng-if="value.case_priority == true">High</span>
+                                                                <span class="black" data-ng-if="!value.case_priority || value.case_priority == false">Low</span>
+                                                            </p></label>
+                                                            &lt;!&ndash;<label class="control-label"><p class="note_label price green">${{value.case_compensation | number:2}}</p></label>&ndash;&gt;
+                                                        </div>
+                                                        <div class="row cm_view_foot pull-left">
+                                                            <label class="ontrol-label">
+                                                                <p class="note_label"><b>By : </b> <span class="green">{{value.case_created_by}} </span> <span class="vd_black note"> at {{value.case_company}}</span></p>
+                                                                <p class="small"><span format-date="{{value.case_created_date.date}}"></span> (EST)</p>
+                                                            </label><br>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-12">
+                                                        <div class="form-group">
+                                                            <p>{{value.case_description}}</p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-12">
+                                                        <div class="row cm_view_foot">
+                                                            <label class="note_label ontrol-label width25"><p class="title">Order Number</p> <p>{{value.case_OrderId}}</p></label>
+                                                            <label class="note_label ontrol-label width25"><p class="title">Customer Name</p><p> {{value.case_customer_name}}</p></label>
+                                                            <label class="note_label ontrol-label width25"><p class="title">Customer Email</p> <p>{{value.case_customer_email}}</p></label>
+                                                            <label class="note_label ontrol-label width25"><p class="title">Assigned</p> <p>{{value.case_assigned_to}}</p></label>
+                                                        </div>
+                                                    </div>
+                                                </div>-->
+
+                                            </div>
+                                        </div>
+
+
+                                      <!--  <div>
+                                            <div pagination total-items="filtered.length"  ng-model="currentPage" page="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" style="float: right"></div>
+                                        </div>-->
+                                        <!--<span data-ng-show="return.length > 1">
+                                            <pagination total-items="return.data.length" ng-model="currentPage"
+                                                        items-per-page="pageSize" class="pagination-sm" boundary-links="true" rotate="false" style="float: right" >
+                                            </pagination>
+                                            <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"
+                                                        items-per-page="pageLimit" boundary-links="true" rotate="false"
+                                                        max-size="maxSize">
+                                            </pagination>
+                                        </span>-->
+                                        <!--</span>-->
+                                        <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"
+                                                    items-per-page="pageLimit" boundary-links="true" rotate="false"
+                                                    max-size="maxSize">
+                                        </pagination>
+                                    </div><!-- open-->
+
+                                </div>
+                                <!-- Tab panes -->
+
+                            </div>
+                        </div>
+
+                        <!--remainder tab -->
+
+                    </div>
+                    <!-- .vd_content-section -->
+
+                </div>
+                <!-- .vd_content -->
+            </div>
+     <!-- .vd_container -->
+ </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="approve" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title" id="myModalLabel">Approve?</h4>
+              </div>
+              <div class="modal-body"> Would you like to approve a compensation of USD 300 For this order? </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">NO</button>
+                  <button type="button" class="btn btn-primary"  data-dismiss="modal">Yes</button>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- Modal -->
+
+  <!-- .vd_content-wrapper -->
+
+  <!-- Middle Content End -->

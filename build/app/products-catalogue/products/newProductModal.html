@@ -1,0 +1,491 @@
+<div class="modal-header">
+    <button type="button" class="close" data-ng-click="cancel()">
+        <span aria-hidden="true"><i class="fa fa-times-circle-o"></i></span></button>
+    <h4 class="modal-title" id="myModalLabel">{{title}} Product</h4>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal popupform" name="itemForm" novalidate>
+        <div class="row">
+            <div class="col-sm-12">
+                <tabset>
+                    <tab heading="General">
+                        <div class="">
+                            <br>
+                            <!--<pre>products Object = {{products | json}}</pre>-->
+                            <div class="form-group" data-ng-class="{'has-error' : itemForm.name.$invalid && !itemForm.name.$pristine}">
+                                <label class="col-sm-4 control-label">Name: *</label>
+                                <div class="col-sm-8  note_input controls">
+                                    <input type="text" data-ng-model="products.name" required name="name">
+                                    <p data-ng-show="itemForm.name.$invalid && !itemForm.name.$pristine"
+                                       class="help-block">Product name is required</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Category: </label>
+                                <div class="col-sm-8">
+                                    <dl class="dropdown_selec">
+                                        <dt>
+                                            <a data-ng-if="products.productCatsArr">
+                                                <span class="hida" data-ng-repeat="carArr in products.productCatsArr">
+                                                    <span>{{carArr.name}}, </span>
+                                                </span>
+                                                <p class="multiSel"></p>
+                                            </a>
+                                            <a data-ng-if="!products.productCatsArr">
+                                                <span class="hida">
+                                                    Select the Categories
+                                                </span>
+                                                <p class="multiSel"></p>
+                                            </a>
+                                        </dt>
+                                        <dd>
+                                            <div class="mutliSelect sel-visibility">
+                                                <ul>
+                                                    <li name="repeatSelect" data-ng-repeat="cats in productCats">
+                                                        <div class="vd_checkbox checkbox-success" data-ng-if="!products.productCatsArr">
+                                                            <input type="checkbox" id="checkbox-{{$index}}"
+                                                                   value="{{cats.name}}"
+                                                                   checklist-model="products.categories"
+                                                                   checklist-value="cats.id"/>
+                                                            <label for="checkbox-{{$index}}">{{cats.name}}</label>
+                                                        </div>
+                                                        <div class="vd_checkbox checkbox-success" data-ng-if="products.productCatsArr">
+                                                            <input type="checkbox" id="check-{{$index}}"
+                                                                   value="{{cats.name}}"
+                                                                   ng-checked="products.categories.indexOf(cats.id) > -1"
+                                                                   checked="checked"
+                                                                   checklist-model="products.categories"
+                                                                   checklist-value="cats.id"/>
+                                                            <label for="check-{{$index}}">{{cats.name}}</label>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Short Description: *</label>
+                                <div class="col-sm-8 controls" data-ng-class="{'has-error' : itemForm.shortDesc.$invalid && !itemForm.shortDesc.$pristine}">
+                                    <div class="row mgbt-xs-0">
+                                        <div class="col-sm-12">
+                                            <textarea rows="3" data-ng-model="products.shortDesc" name="shortDesc"></textarea>
+                                        </div>
+                                    </div>
+                                    <p data-ng-show="itemForm.shortDesc.$invalid && !itemForm.shortDesc.$pristine"
+                                       class="help-block">Short Description is required</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Description:</label>
+                                <div class="col-sm-8 controls">
+                                    <div class="row mgbt-xs-0">
+                                        <div class="col-sm-12">
+                                            <textarea rows="3" data-ng-model="products.desc"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- form-group -->
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Default Price: *</label>
+                                <div class="col-sm-8 controls" data-ng-class="{'has-error' : itemForm.price.$error.pattern}">
+                                    <div class="input-group">
+                                        <span class="input-group-addon bg-green"><i class="fa fa-usd"></i></span>
+                                        <input type="text" name="price" data-ng-model="products.price" required
+                                               ng-pattern="/^[1-9][0-9]{0,2}(?:,?[0-9]{3}){0,3}(?:\.[0-9]{1,2})?$/">
+                                    </div>
+                                    <p data-ng-show="itemForm.price.$error.pattern"  class="help-block">
+                                        Default Price value is invalid.</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Declared Value: *</label>
+                                <div class="col-sm-8 controls" data-ng-class="{'has-error' : itemForm.declaredPrice.$error.pattern}">
+                                    <div class="input-group">
+                                        <span class="input-group-addon bg-green"><i class="fa fa-usd"></i></span>
+                                        <input type="text" name="declaredPrice" data-ng-model="products.declaredPrice" required
+                                               ng-pattern="/^[1-9][0-9]{0,2}(?:,?[0-9]{3}){0,3}(?:\.[0-9]{1,2})?$/">
+                                    </div>
+                                    <p data-ng-show="itemForm.declaredPrice.$error.pattern"  class="help-block">
+                                        Declared Value value is invalid.</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label">Country of Manufacture:</label>
+                                <div class="col-sm-8 controls">
+                                    <div class="row mgbt-xs-0">
+                                        <div class="col-sm-12">
+                                            <select id="cat-com" data-ng-model="products.country"
+                                                    data-ng-options="country as country.name for country in countryArr track by country.code">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group" data-ng-class="{'has-error' : itemForm.state_id.$invalid && !itemForm.state_id.$pristine}">
+                                <label class="col-sm-4 control-label" style="padding:0 15px;">Status: </label>
+                                <div class="col-sm-8 controls">
+                                    <div class="row mgbt-xs-0">
+                                        <div class="col-sm-12">
+                                  <span class="vd_radio radio-info">
+                                    <input type="radio"  data-ng-model="products.status"
+                                           id="optionsRadios31" name="state_id"  data-ng-value="true" required>
+                                    <label for="optionsRadios31"> Active </label>
+                                  </span>
+
+                                  <span class="vd_radio  radio-danger" >
+                                    <input type="radio"
+                                           id="optionsRadios41" data-ng-model="products.status"
+                                           data-ng-value="false"
+                                           name="state_id" required>
+                                    <label for="optionsRadios41"> Inactive </label>
+                                  </span>
+                                        </div>
+                                    </div>
+                                    <p data-ng-show="itemForm.state_id.$invalid && !itemForm.state_id.$pristine"
+                                       class="help-block">Product Status is required</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </tab>
+                    <tab heading="Specification">
+                        <div class="">
+                            <br />
+
+                            <div class="form-group" data-ng-class="{'has-error' : itemForm.type.$invalid && !itemForm.type.$pristine}">
+                                <label class="col-sm-4 control-label">Type: *</label>
+                                <div class="col-sm-8 controls">
+                                    <div class="vd_radio radio-success">
+                                        <input type="radio" required value="UNIT" data-ng-model="products.type" id="Unit" name="type" data-ng-disabled="products.id !=null">
+                                        <label for="Unit"> Unit </label>
+                                        <input type="radio" required value="COLLECTION" data-ng-model="products.type" id="Collection" name="type" data-ng-disabled="products.id !=null">
+                                        <label for="Collection"> Collection </label>
+                                    </div>
+                                    <p data-ng-show="itemForm.type.$invalid && !itemForm.type.$pristine"
+                                       class="help-block">Product Type is required</p>
+                                </div>
+                            </div>
+                            <div class="sub_skus_main" data-ng-if="products.type == 'COLLECTION'">
+                                <h3>Sub-SKUs</h3>
+
+                                <div class="col-sm-8">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Collection ID: *</label>
+                                        <div class="col-sm-8  note_input controls">
+                                            <div>
+                                                <input data-ng-if="products.id > 0" type="text" data-ng-model="products.collectionId" name="name" readonly>
+                                                <input type="text"data-ng-if="products.id==null" data-ng-model="products.collectionId" name="name">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="sub_skus pull-right">
+                                    <span data-ng-click="addConfiguration()" class="input-group-addon a1 vd_bg-yellow vd_white">
+                                        <i class="fa fa-plus"></i>
+                                    </span>
+                                    </div>
+                                </div>
+
+                                <div class="clearfix"></div>
+                                <!--<pre>configurationProducts Object = {{configurationProducts | json}}</pre>-->
+                                <div data-ng-class="{'hideCollec': !$last}" class="sub_skusCollection"
+                                     data-ng-repeat="configurationProduct in products.configurationProducts">
+
+                                    <div class="proCollecTitle" data-ng-click="showPanel($event, 'showPanel')">{{configurationProduct.Title}}</div>
+
+                                    <div class="collec_panel">
+
+                                        <div class="sub_skus">
+                                            <input type="text" placeholder="Configuration Title" style="min-width: 270px" data-ng-model="configurationProduct.Title" name="title-{{$index}}">
+                                        </div>
+
+                                        <div class="sub_skus">
+                                            <input data-ng-if="products.id > 0" type="text" placeholder="Configuration SKU" style="min-width: 270px" data-ng-model="configurationProduct.sku" name="sku-{{$index}}" readonly>
+                                            <input data-ng-if="products.id==null" type="text" placeholder="Configuration SKU" style="min-width: 270px" data-ng-model="configurationProduct.sku" name="sku-{{$index}}">
+                                        </div>
+
+                                        <div class="sub_skus_row"  data-ng-repeat="configUnit in configurationProduct.configUnits">
+
+                                            <div class="sub_skus_select">
+                                                <!--<div class="select-style">-->
+                                                <!--<select data-ng-options="unitP as unitP.name for unitP in unitProducts"
+                                                        data-ng-model="products.subProduct.unit[choice.id]"
+                                                        data-ng-change="getUnitProductData(choice.id)">
+                                                        {{$select.selected.sku}}
+                                                </select>-->
+
+
+                                                <!--<p>Selected: {{products.subProduct[$index].sku}}</p>-->
+                                                <ui-select ng-model="configUnit.unit.product" ng-disabled="disabled">
+                                                    <ui-select-match placeholder="Select">{{$select.selected.sku}}</ui-select-match>
+                                                    <ui-select-choices repeat="unit in unitProducts | filter: $select.search">
+                                                        <span ng-bind-html="unit.sku | highlight: $select.search"></span>
+                                                    </ui-select-choices>
+                                                </ui-select>
+                                                <!--</div>-->
+                                            </div>
+
+                                            <div class="sub_skus">
+                                                <input type="text" placeholder="Unit Item" disabled
+                                                       data-ng-model="configUnit.unit.product.name"
+                                                       name="subSku-{{(configurationProducts).indexOf(configurationProduct)}}-{{$index}}">
+                                            </div>
+                                            <div class="sub_skus">
+                                                <input type="text" data-ng-model="configUnit.unit.product.price" placeholder="Price" name="price-{{(configurationProducts).indexOf(configurationProduct)}}-{{$index}}">
+                                            </div>
+                                            <div class="sub_skus">
+                                                <input type="number" data-ng-model="configUnit.unit.quantity" min="1" placeholder="Quantity" name="quantity-{{(configurationProducts).indexOf(configurationProduct)}}-{{$index}}">
+                                            </div>
+
+                                            <div class="sub_skus" data-ng-if="configurationProduct.configUnits.length==1">
+                                                <span
+                                                      class="input-group-addon vd_bg-red vd_white rmMainIcon">
+                                                    <i class="fa fa-minus"></i>
+                                                </span>
+                                            </div>
+                                            <div class="sub_skus" data-ng-if="configurationProduct.configUnits.length > 1">
+                                                <span ng-click="removeConfigUnits(configurationProduct, (configurationProducts).indexOf(configurationProduct), $index)"
+                                                      class="input-group-addon vd_bg-red vd_white rmMainIcon">
+                                                    <i class="fa fa-minus"></i>
+                                                </span>
+                                            </div>
+                                        </div>
+
+                                        <div class="sub_skus">
+                                            <span ng-click="addNewConfigUnit(configurationProduct)" class="input-group-addon vd_bg-yellow vd_white">
+                                                <i class="fa fa-plus"></i>
+                                            </span>
+                                        </div>
+
+                                        <br/><br/>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <br>
+                            <div data-ng-if="products.type == 'UNIT'">
+                                <h3>General Specification</h3>
+                                <div class="col-sm-6">
+
+                                    <div class="form-group" data-ng-class="{'has-error' : itemForm.sku.$invalid && !itemForm.sku.$pristine || isSkuExist}">
+                                        <label class="col-sm-4 control-label">SKU: *</label>
+                                        <div class="col-sm-8  note_input controls">
+                                            <input type="text" data-ng-if="products.id > 0" data-ng-model="products.sku" name="sku" required readonly>
+                                            <input type="text" data-ng-if="products.id==null" data-ng-model="products.sku" name="sku" required>
+                                            <p data-ng-show="itemForm.sku.$invalid && !itemForm.sku.$pristine"
+                                               class="help-block">Product SKU is required</p>
+                                            <p data-ng-show="isSkuExist"
+                                               class="help-block">SKU should be unique. Please use different SKU</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Colour: </label>
+
+                                        <div class="col-sm-8">
+                                            <dl id="dropdown_selec_color" class="dropdown_selec_color">
+                                                <dt>
+                                                    <a data-ng-if="products.productColoursArr">
+                                                <span class="hida" data-ng-repeat="colourArr in products.productColoursArr">
+                                                    <span>{{colourArr.colour}}, </span>
+                                                </span>
+                                                        <p class="multiSelColor"></p>
+                                                    </a>
+                                                    <a data-ng-if="!products.productColoursArr">
+                                                <span class="hida">
+                                                    Select Colours
+                                                </span>
+                                                        <p class="multiSelColor"></p>
+                                                    </a>
+                                                </dt>
+                                                <dd>
+                                                    <div id="mutliSelect_color" class="mutliSelectColor sel-visibility">
+                                                        <ul>
+                                                            <li name="repeatSelectColour" data-ng-repeat="color in colours">
+                                                                <div class="vd_checkbox checkbox-success" data-ng-if="!products.productColoursArr">
+                                                                    <input type="checkbox" id="checkbox-color-{{$index}}"
+                                                                           value="{{color.colour}}"
+                                                                           checklist-model="products.colour"
+                                                                           checklist-value="color.id"/>
+                                                                    <label for="checkbox-color-{{$index}}">{{color.colour}}</label>
+                                                                </div>
+                                                                <div class="vd_checkbox checkbox-success" data-ng-if="products.productColoursArr">
+                                                                    <input type="checkbox" id="check-color-{{$index}}"
+                                                                           value="{{color.colour}}"
+                                                                           ng-checked="products.colour.indexOf(color.id) > -1"
+                                                                           checked="checked"
+                                                                           checklist-model="products.colour"
+                                                                           checklist-value="color.id"/>
+                                                                    <label for="check-color-{{$index}}">{{color.colour}}</label>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </dd>
+                                            </dl>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Primary Material: </label>
+
+                                        <div class="col-sm-8">
+                                            <dl id="dropdown_selec_material" class="dropdown_selec_material">
+                                                <dt>
+                                                    <a data-ng-if="products.productMaterialsArr">
+                                                <span class="hida" data-ng-repeat="materialArr in products.productMaterialsArr">
+                                                    <span>{{materialArr.material}}, </span>
+                                                </span>
+                                                        <p class="multiSelMaterial"></p>
+                                                    </a>
+                                                    <a data-ng-if="!products.productMaterialsArr">
+                                                <span class="hida">
+                                                    Select Materials
+                                                </span>
+                                                        <p class="multiSelMaterial"></p>
+                                                    </a>
+                                                </dt>
+                                                <dd>
+                                                    <div id="mutliSelect_material" class="mutliSelectMaterial sel-visibility">
+                                                        <ul>
+                                                            <li name="repeatSelectMaterial" data-ng-repeat="material in materials">
+                                                                <div class="vd_checkbox checkbox-success" data-ng-if="!products.productMaterialsArr">
+                                                                    <input type="checkbox" id="checkbox-material-{{$index}}"
+                                                                           value="{{material.material}}"
+                                                                           checklist-model="products.material"
+                                                                           checklist-value="material.id"/>
+                                                                    <label for="checkbox-material-{{$index}}">{{material.material}}</label>
+                                                                </div>
+                                                                <div class="vd_checkbox checkbox-success" data-ng-if="products.productMaterialsArr">
+                                                                    <input type="checkbox" id="check-material-{{$index}}"
+                                                                           value="{{material.material}}"
+                                                                           ng-checked="products.material.indexOf(material.id) > -1"
+                                                                           checked="checked"
+                                                                           checklist-model="products.material"
+                                                                           checklist-value="material.id"/>
+                                                                    <label for="check-material-{{$index}}">{{material.material}}</label>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </dd>
+                                            </dl>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group" data-ng-class="{'has-error' : itemForm.weight.$invalid}">
+                                        <label class="col-sm-4 control-label">Weight: </label>
+                                        <div class="col-sm-8  note_input controls">
+                                            <div class="input-group">
+                                                <input type="number" min="0" data-ng-model="products.weight" name="weight">
+                                                <span class="input-group-addon bg-green">lb</span>
+                                            </div>
+                                            <p data-ng-show="itemForm.weight.$invalid"  class="help-block">
+                                                Weight value is invalid.</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-6">
+
+                                    <div class="form-group" data-ng-class="{'has-error' : itemForm.height.$invalid}">
+                                        <label class="col-sm-4 control-label">Height: </label>
+                                        <div class="col-sm-8  note_input controls">
+                                            <div class="input-group">
+                                                <input type="number" min="0" data-ng-model="products.height" name="height">
+                                                <span class="input-group-addon bg-green">ft</span>
+                                            </div>
+                                            <p data-ng-show="itemForm.height.$invalid"  class="help-block">
+                                                Height value is invalid.</p>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" data-ng-class="{'has-error' : itemForm.width.$invalid}">
+                                        <label class="col-sm-4 control-label">Width: </label>
+                                        <div class="col-sm-8  note_input controls">
+                                            <div class="input-group">
+                                                <input type="number" min="0" data-ng-model="products.width" name="width">
+                                                <span class="input-group-addon bg-green">ft</span>
+                                            </div>
+                                            <p data-ng-show="itemForm.width.$invalid"  class="help-block">
+                                                Width value is invalid.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" data-ng-class="{'has-error' : itemForm.depth.$invalid}">
+                                        <label class="col-sm-4 control-label">Depth: </label>
+                                        <div class="col-sm-8  note_input controls">
+                                            <div class="input-group">
+                                                <input type="number" min="0" data-ng-model="products.depth" name="depth">
+                                                <span class="input-group-addon bg-green">ft</span>
+                                            </div>
+                                            <p data-ng-show="itemForm.depth.$invalid"  class="help-block">
+                                                Depth value is invalid.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group" data-ng-class="{'has-error' : itemForm.volume.$invalid}">
+                                        <label class="col-sm-4 control-label">Volume: </label>
+                                        <div class="col-sm-8  note_input controls">
+                                            <div class="input-group">
+                                                <input type="number" min="0" data-ng-model="products.volume" name="volume" readonly>
+                                                <span class="input-group-addon bg-green">ft<sup>3</sup></span>
+                                            </div>
+                                            <p data-ng-show="itemForm.depth.$invalid"  class="help-block">
+                                                Volume value is invalid.</p>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </tab>
+                    <tab heading="Images">
+                        <div class="form-group">
+                            <br>
+
+                            <button ngf-select="uploadFiles($files)" multiple
+                                    accept="image/*" ngf-max-height="1000" ngf-max-size="5MB">
+                                Select Files</button>
+                            <br><br>
+
+                            <ul class="thumb-images-list">
+                                <li ng-repeat="imageFile in products.imageFiles" class="thumb-image-content" data-ng-if="imageFile.isDeleted==0">
+                                    <div class="thumb-image-wrapper">
+                                        <img ng-src="{{API_URL}}images/products/{{imageFile.fileName}}">
+                                    </div>
+                                    <span class="thumb-image-delete-button" data-ng-click="removeProductImage(imageFile)">X</span>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </tab>
+                </tabset>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="add_note_footer">
+                <div class="footer_align">
+                    <button type="button" class="btn btn-default" data-ng-click="cancel()">Close</button>
+                    <button type="button" class="btn btn-warning visibility_alert"
+                            data-ng-disabled="itemForm.$invalid"
+                            data-ng-click="productSave(products)">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

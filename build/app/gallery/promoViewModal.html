@@ -1,0 +1,114 @@
+<div class="modal-content">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-ng-click="cancel()">
+            <span aria-hidden="true"><i class="fa fa-times-circle-o"></i></span></button>
+        <h4 class="modal-title">Details</h4>
+    </div>
+    <div class="modal-body gallery_body">
+        <div>
+            <div class="carousel-inner" role="listbox">
+                <div>
+                    <h2>{{singleViewPromotion.promotionName}}</h2>
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-4 row">
+                                Collection: <b>{{singleViewPromotion.collectionName}}</b>
+                            </div>
+                            <div class="col-sm-4 pdl-30">
+                                Retailer: <b>{{singleViewPromotion.retailerName}}</b>
+                            </div>
+                            <div class="col-sm-4 pdl-30">
+                                Vendor: <b>{{singleViewPromotion.vendorName}}</b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 details_box new_blue">
+                        <div class="icon_box">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <div class="details_content">
+                            <ul>
+                                <li>Promo. Start Date: <b data-ng-if="singleViewPromotion.startDate" format-date-without-time-for-promo="{{singleViewPromotion.startDate}}"></b></li>
+                                <li>Promo. End Date: <b data-ng-if="singleViewPromotion.calEndDate" format-date-without-time-for-promo="{{singleViewPromotion.calEndDate}}"></b></li>
+                                <li>Total # of Promo. Days: <b> {{singleViewPromotion.dateDifference}}</b></li>
+                                <li># of Days Promo. Running: <b ng-if="singleViewPromotion.runningDifference < 0"> 0</b> <b ng-if="singleViewPromotion.dateDifference > singleViewPromotion.runningDifference && singleViewPromotion.runningDifference >= 0"> {{singleViewPromotion.runningDifference}}</b> <b ng-if="singleViewPromotion.runningDifference >= singleViewPromotion.dateDifference"> {{singleViewPromotion.dateDifference}}</b></li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="col-sm-4 details_box new_green">
+                        <div class="icon_box">
+                            <i class="fa fa-shopping-cart"></i>
+                        </div>
+                        <div class="details_content">
+                            <ul>
+                                <li>Overall Projections: <b> {{singleViewPromotion.projections}} (U)</b></li>
+                                <li>Projection up to Current Date: <b>{{singleViewPromotion.projectionUpToDate | number : 1}}  (U)</b></li>
+                                <li>Sales to Date: <b> {{singleViewPromotion.sales}} <span data-ng-if="singleViewPromotion.sales==null">0</span> (U)</b></li>
+                                <li>Sell through %: <b data-ng-if="singleViewPromotion.projectionUpToDate">  {{(singleViewPromotion.sales/singleViewPromotion.projectionUpToDate)*100 | number : 1}} %</b></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 details_box new_purble">
+                        <div class="icon_box">
+                            <i class="fa fa-file-text"></i>
+                        </div>
+                        <div class="details_content">
+                            <ul>
+                                <li>Open Orders: <b> {{singleViewPromotion.openOrders}}</b></li>
+                                <li>Orders in Transit: <b> {{singleViewPromotion.inTransitOrders}}</b></li>
+                                <li>Orders Delivered: <b> {{singleViewPromotion.deliveredOrders}}</b></li>
+                                <li>Orders Shipped on Time: <b>-</b></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br/>
+                    <div class="col-sm-12">
+                        <div class="responsive row">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Configurations</th>
+                                        <!--<th>KIT ID</th>-->
+                                        <th>Projections (Units)</th>
+                                        <th>Actual (Units)</th>
+                                        <th>Expected Sales ($)</th>
+                                        <th>Sales to Date ($)</th>
+                                        <th>Number of Open Orders</th>
+                                        <th>Number of Orders in Transit</th>
+                                        <th>Number of Orders Delivered</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="singlePromotionSetting in promotionSettings">
+                                        <td>{{singlePromotionSetting.name}}</td>
+                                        <!--<td>{{singlePromotionSetting.sku}}</td>-->
+                                        <td>{{singlePromotionSetting.expectedSales}}</td>
+                                        <td>{{singlePromotionSetting.promotionSettingSales}}</td>
+                                        <td>{{singlePromotionSetting.promotionalPrice*singlePromotionSetting.expectedSales | number:2}}</td>
+                                        <td>{{singlePromotionSetting.promotionSettingSalesToDate | number:2 }}</td>
+                                        <td>{{singlePromotionSetting.promotionSettingOpenOrders}}</td>
+                                        <td>{{singlePromotionSetting.promotionSettingInTransitOrders}}</td>
+                                        <td>{{singlePromotionSetting.promotionSettingDeliveredOrders}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <span  is-allowed="PROMOTION,GENERAL|U,">
+            <a  data-ng-disable="!singleViewPromotion.promotionId" data-ng-click="promotionEditFromModal($event,singleViewPromotion)" class="btn btn-primary"> <i class="fa fa-pencil-square-o append-icon"></i>Edit</a>
+        </span>
+        <span is-allowed="PROMOTION,GENERAL|D,">
+            <a  data-ng-disable="!singleViewPromotion.promotionId" data-ng-click="promotionDeleteFromModal($event,singleViewPromotion)" class="btn btn-primary"> <i class="fa fa-close append-icon"></i>Delete</a>
+        </span>
+        <a data-ng-disable="!singleViewPromotion.promotionId" data-ng-click="showProductDetail(singleViewPromotion.collectionId)" class="btn btn-primary">View Product Page</a>
+    </div>
+</div><!-- /.modal-content -->

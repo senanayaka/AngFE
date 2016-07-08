@@ -1,0 +1,81 @@
+<!-- Modal Setting-->
+
+<div class="modal-header">
+    <button type="button" class="close" ng-click="addAttachmentCancel()" aria-label="Close"><span
+            aria-hidden="true"><i class="fa fa-times-circle-o"></i></span></button>
+    <h4 class="modal-title" id="Create General Note">Add Attachment</h4>
+</div>
+
+<div class="modal-body">
+
+    <form class="form-horizontal popupform" autocomplete="off" novalidate name="addAttach">
+        <div class="row">
+
+            <div class="col-sm-12">
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Attachment: * </label>
+
+                    <div class="col-sm-8 controls full-attach"
+                         data-ng-class="{'has-error' : addAttach.attachFile.$invalid }">
+                        <div class="input-group">
+                            <input type="file" file-model="orderAttachmentData.file"
+                                   data-ng-model="orderAttachmentData.file" name="attachFile" required>
+                        </div>
+                        <p data-ng-show="addAttach.attachFile.$invalid"
+                           class="help-block">Attachment is required.</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label
+                           class="col-sm-3 control-label">Type: *</label>
+
+                    <div class="col-sm-8">
+                        <div class="select-style"
+                             data-ng-class="{'has-error' : addAttach.cat-com.$invalid && !addAttach.cat-com.$pristine }">
+                            <select name="cat-com" id="cat-com" data-ng-model="orderAttachmentData.attType" required>
+                                <option value="INVOICE">Invoice</option>
+                                <option value="POD">POD Document</option>
+                                <option value="IMAGE">Image</option>
+                                <option value="OTHER">Other</option>
+                            </select>
+                            <p data-ng-show="addAttach.cat-com.$invalid && !addAttach.cat-com.$pristine"
+                               class="help-block">Type should select.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Description: </label>
+
+                    <div class="col-sm-8 controls">
+                        <textarea data-ng-model="orderAttachmentData.attDescription"></textarea>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-sm-12">
+            <div class="add_note_footer">
+
+                <div class="footer_align">
+                    <button type="button" class="btn btn-default"
+                            ng-click="addAttachmentCancel()">Close
+                    </button>
+                    <button type="button"
+                            class="btn btn-warning visibility_alert"
+                            ng-click="addAttachmentSave()"
+                            data-ng-disabled="addAttach.$invalid">Create
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<!-- Modal end Setting-->

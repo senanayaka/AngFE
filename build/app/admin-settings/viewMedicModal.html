@@ -1,0 +1,298 @@
+<script>
+    $('.nav-tabs li a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    });
+</script>
+<!-- Modal create-->
+
+
+<div class="modal-header">
+    <button type="button" class="close"  data-ng-click="cancel()" aria-label="Close">
+        <span aria-hidden="true"><i class="fa fa-times-circle-o"></i></span></button>
+    <h4 class="modal-title" id="myModalLabel">View Medic</h4>
+</div>
+
+<div class="modal-body">
+
+    <form class="form-horizontal popupform" id="newRetailer" name="newMedic" novalidate >
+
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active"><a href="#basicInformation" aria-controls="basicInformation" role="tab" data-toggle="tab">Basic Information</a></li>
+                    <li role="presentation"><a href="#contracts" aria-controls="contracts" role="tab" data-toggle="tab">Contracts</a></li>
+                </ul>
+            </div>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="basicInformation">
+
+                    <div class="col-sm-12">
+
+                        <br>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Orange Trax Serial: </label>
+                            <div class="col-sm-8 controls">
+                                <div class="row mgbt-xs-0">
+                                    <div class="col-xs-12 control-label_view">
+                                        <b>{{medicForm.orangetraxSerial}}</b>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Name: </label>
+                            <div class="col-sm-8 controls">
+                                <div class="row mgbt-xs-0">
+                                    <div class="col-xs-12 control-label_view">
+                                        {{medicForm.name}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Address Line 1: </label>
+                            <div class="col-sm-8 controls">
+                                <div class="row mgbt-xs-0">
+                                    <div class="col-sm-12 control-label_view">
+                                        {{medicForm.address1}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+                        <div class="form-group" data-ng-show="medicForm.address2">
+                            <label class="col-sm-3 control-label">Address Line 2: </label>
+                            <div class="col-sm-8 controls">
+                                <div class="row mgbt-xs-0">
+                                    <div class="col-sm-12">
+                                        {{medicForm.address2}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+                        <div class="form-group" data-ng-show="medicForm.address3">
+                            <label class="col-sm-3 control-label">Address Line 3: </label>
+                            <div class="col-sm-8 controls">
+                                <div class="row mgbt-xs-0">
+                                    <div class="col-sm-12">
+                                        {{medicForm.address3}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Zip Code: </label>
+                            <div class="col-sm-8 controls">
+                                <div class="row mgbt-xs-0">
+                                    <div class="col-sm-12">
+                                        {{medicForm.zip}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">State: </label>
+                            <div class="col-sm-8 controls">
+                                <div class="row mgbt-xs-0">
+                                    <div class="col-sm-12">
+                                        {{medicForm.stateName}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Country: </label>
+                            <div class="col-sm-8 controls">
+                                <div class="row mgbt-xs-0">
+                                    <div class="col-sm-12">
+                                        {{medicForm.countryName}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+
+
+
+                        <div class="form-group phone1">
+                            <label class="col-sm-3 control-label">Phone: </label>
+                            <div class="col-sm-8 controls">
+                                <div class="input-group control-label_view">
+                                    {{medicForm.phone1 | tel}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group phone2" ng-show="medicForm.phone2">
+                            <label class="col-sm-3 control-label">Phone: </label>
+                            <div class="col-sm-8 controls">
+                                <div class="input-group control-label_view">
+                                    {{medicForm.phone2 | tel}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group phone3" ng-show="medicForm.phone3">
+                            <label class="col-sm-3 control-label">Phone: </label>
+                            <div class="col-sm-8 controls">
+                                <div class="input-group control-label_view">
+                                    {{medicForm.phone3 | tel}}
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Fax: </label>
+                            <div class="col-sm-8 controls">
+                                <div class="input-group control-label_view">
+                                    {{medicForm.fax | tel}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Email: </label>
+                            <div class="col-sm-8 controls">
+                                <div class="input-group control-label_view">
+                                    {{medicForm.email}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Industry SIC No.: </label>
+                            <div class="col-sm-8 controls">
+                                <div class="row mgbt-xs-0">
+                                    <div class="col-sm-12 control-label_view">
+                                        {{medicForm.industrySicNo}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">EIN No.: </label>
+                            <div class="col-sm-8 controls">
+                                <div class="row mgbt-xs-0">
+                                    <div class="col-sm-12 control-label_view">
+                                        {{medicForm.einNo}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">VAT No.: </label>
+                            <div class="col-sm-8 controls">
+                                <div class="row mgbt-xs-0">
+                                    <div class="col-sm-12 control-label_view">
+                                        {{medicForm.vatNo}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Status: </label>
+                            <div class="col-sm-8 controls">
+                                <div class="row mgbt-xs-0">
+                                    <div class="col-sm-12 green control-label_view" data-ng-if="medicForm.recordStatus">
+                                        Active
+                                    </div>
+                                    <div class="col-sm-12 red control-label_view" data-ng-if="!medicForm.recordStatus">
+                                        Deactive
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Man Hour Rate: </label>
+                            <div class="col-sm-8  note_input controls">
+                                <div class="input-group">
+                                    {{medicForm.hourRate | currency}}
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="form-group">
+                            <h3  class="col-sm-12">Service Categories</h3>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row mgbt-xs-0">
+                                <div class="col-sm-3" data-ng-if="medicForm.painting">
+                                    Painting
+                                </div>
+                                <div class="col-sm-3" data-ng-if="medicForm.upholstery">
+                                    Upholstery
+                                </div>
+                                <div class="col-sm-3" data-ng-if="medicForm.carpentry">
+                                    General Carpentry
+                                </div>
+                                <div class="col-sm-3" data-ng-if="medicForm.metal">
+                                    Metal Work
+                                </div>
+                                <div class="col-sm-3" data-ng-if="medicForm.electronic">
+                                    Electronic Work
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div role="tabpanel" class="tab-pane" id="contracts">
+                    <div class="col-sm-12">
+                        <br>
+                        <div class="form-group contact">
+                            <label class="col-sm-4 control-label">Contract</label>
+                            <div class="col-sm-8 controls">
+                                <div class="input-group">
+                                    <div ng-show="medicForm.contracts[0]"><a ng-href="{{API_URL + medicForm.contracts[0]['attachmentPath']}}" target="_blank">Contract 1 <i class="fa fa-download"></i></a></div>
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+
+                        <div class="form-group contact" ng-show="showimage2">
+                            <label class="col-sm-4 control-label">Contract </label>
+                            <div class="col-sm-8 controls">
+                                <div class="input-group">
+                                    <div ng-show="medicForm.contracts[1]"><a ng-href="{{API_URL + medicForm.contracts[1]['attachmentPath']}}" target="_blank">Contract 2 <i class="fa fa-download"></i></a></div>
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+
+                        <div class="form-group contact" ng-show="showimage3">
+                            <label class="col-sm-4 control-label">Contract</label>
+                            <div class="col-sm-8 controls">
+                                <div class="input-group">
+                                    <div ng-show="medicForm.contracts[2]"><a ng-href="{{API_URL + medicForm.contracts[2]['attachmentPath']}}" target="_blank">Contract 3 <i class="fa fa-download"></i></a></div>
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+
+                    </div>
+                </div>
+            </div><!-- Tab panes -->
+        </div>
+        <div class="col-sm-12">
+            <div class="add_note_footer">
+
+                <div class="footer_align">&nbsp;</div>
+
+            </div>
+        </div>
+
+    </form>
+</div>
+<!--model Create-->

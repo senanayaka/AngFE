@@ -1,0 +1,73 @@
+
+<div class="modal-header">
+    <button type="button" class="close" data-ng-click="cancel()" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true"><i class="fa fa-times-circle-o"></i></span></button>
+    <h4 class="modal-title" id="myModalLabel">View User</h4>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal" role="form" action="#">
+        <div class="row">
+            <div class="col-sm-10">
+                <br>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">User Name</label>
+                    <div class="col-sm-8 controls">
+                        <div class="row mgbt-xs-0">
+                            <div class="col-xs-12">
+                                <p class="control-label_view">{{user.displayName}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Email</label>
+                    <div class="col-sm-8 controls">
+                        <div class="row mgbt-xs-0">
+                            <div class="col-xs-12">
+                                <p class="control-label_view">{{user.userName}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Role</label>
+                    <div class="col-sm-8 controls">
+                        <div class="row mgbt-xs-0">
+                            <div class="col-sm-12">
+                                <p class="control-label_view">{{user.role.roleName}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Company</label>
+                    <div class="col-sm-8 controls">
+                        <div class="row mgbt-xs-0">
+                            <div class="col-sm-12">
+                                <p class="control-label_view">{{user.company}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Status</label>
+                    <div class="col-sm-8 controls">
+                        <div class="row mgbt-xs-0">
+                            <div class="col-sm-12">
+                                <p class="control-label_view" data-ng-if="user.recordStatus==true">Active</p>
+                                <p class="control-label_view" data-ng-if="!user.recordStatus || user.recordStatus==false ">Deactive</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="add_note_footer">
+                <div class="footer_align">
+                    <button type="button" class="btn btn-default" data-ng-click="cancel()" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

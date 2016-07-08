@@ -1,0 +1,365 @@
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" data-ng-click="cancel()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title">{{modalTitle}}</h4>
+</div>
+<div class="modal-body">
+
+    <div class="row" data-ng-show="inEditMode">
+        <div class="col-sm-12">
+            <div class="vd_menu-search inner-search">
+                <form id="search-box"  novalidate>
+                    <input type="text" name="search" class="vd_menu-search-text width-50"
+                           placeholder="Search" data-ng-model="compFrom.searchValue">
+                    <div class="select-style search_select">
+                        <select name="cat-com" id="cat-search" data-ng-model="compFrom.catSearch">
+                            <option value="orderId">Order ID</option>
+                            <option value="confId">Confirmation ID</option>
+                            <option value="trackId">Tracking ID</option>
+                            <option value="custName">Customer Name</option>
+                            <option value="productName">Product Name</option>
+                        </select>
+                    </div>
+                    <a href="#" class="click_search" data-ng-click="searchDataMaster(compFrom)">
+                        <span class="vd_menu-search-submit"><i class="fa fa-search"></i> </span>
+                    </a>
+                </form>
+            </div>
+             <span data-ng-hide="caseSearch_info" class="caseSearch_info alert alert-info">
+                <span class="vd_alert-icon"><i class="fa fa-info-circle vd_blue"></i></span>
+                To enable case fields, <br> please search for and select and order.
+            </span>
+        </div>
+    </div>
+
+    <form class="form-horizontal popupform" id="newCompensation" name="newCompensation" novalidate>
+        <div class="row">
+            <div class="col-sm-6">
+                <div data-ng-show="isEmptyReasults">
+                    <br />
+                    <p class="red" style="color:red">No Data Found!</p>
+                </div>
+
+                <div data-ng-show="isOrderList">
+                    <br />
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Order Id</th>
+                            <th>Title</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr data-ng-repeat="list in orderList | startFrom:currentPageSearch*10 | limitTo:10" data-ng-click="getListOrder(list.id)"
+                            style="cursor: pointer">
+                            <td>{{list.orderNumber}}</td>
+                            <td data-ng-if="list.name">{{list.name}}</td>
+                            <td data-ng-if="list.firstName">{{list.firstName}} {{list.lastName}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div pagination total-items="orderList.length"  ng-model="currentPageSearch" page="currentPageSearch" max-size="5" class="pagination-sm" boundary-links="true" style="float: right"></div>
+                </div>
+
+                <br>
+
+                <div data-ng-show="haveReturnOrders" >
+                    <div class="form-group view_customer">
+                        <label class="col-sm-5 control-label">Purchase Order: </label>
+                        <div class="col-sm-7">
+                            <label class="control-label">{{orderData.purchase_orderId}}</label>
+                        </div>
+                    </div>
+                    <div class="form-group view_customer">
+                        <label class="col-sm-5 control-label">Order ID: </label>
+                        <div class="col-sm-7">
+                            <label class="control-label">{{orderData.order_number}}</label>
+                        </div>
+                    </div>
+                    <div class="form-group view_customer">
+                        <label class="col-sm-5 control-label">Customer Name: </label>
+                        <div class="col-sm-7">
+                            <label class="control-label">{{orderData.customer_name}}</label>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="form-group view_customer">
+                        <label class="col-sm-5 control-label">Customer Email:</label>
+                        <div class="col-sm-7">
+                            <label class="control-label">{{orderData.customer_email}}</label>
+                        </div>
+                    </div>
+                    <div class="form-group view_customer">
+                        <label class="col-sm-5 control-label">Vendor: </label>
+                        <div class="col-sm-7">
+                            <label class="control-label">{{orderData.vendor}}</label>
+                        </div>
+                    </div>
+                    <!--<div class="form-group view_customer">
+                        <label class="col-sm-5 control-label">Product: </label>
+                        <div class="col-sm-7">
+                            <label class="control-label"></label>
+                        </div>
+                    </div>-->
+                    <br>
+
+                    <div class="form-group view_customer">
+                        <div class="col-sm-12">
+                            <table>
+                                <tr>
+                                    <td style="padding:10px" >
+                                        <a class="bt-add-view" ui-sref="orders.view({id:orderData.order_id})"  target="_blank">View Order</a>
+                                    </td>
+                                    <td style="padding:10px">
+                                        <a class="bt-add-view" ui-sref="customers.view({id:orderData.customer_id})"   target="_blank">View Customer</a>
+                                    </td>
+                                    <td style="padding:10px">
+                                        <div id="loginContainer">
+                                            <ul id="loginButtonUl">
+                                                <li> <a href="#" id="loginButton"><span>Product &nbsp; <i class="fa fa-caret-down"></i> </span><em></em></a>
+                                                    <div style="clear:both"></div>
+                                                    <div id="loginBox">
+                                                        <div id="loginForm">
+                                                            <fieldset id="body">
+                                                                <div class="vd_checkbox checkbox-success" data-ng-repeat="line_items in orderItems">
+                                                                    <a  href="#" ui-sref="productsCatalogue.products.view({ productId: line_items.product_id })" target="_blank">{{line_items.name}}</a>
+                                                                </div>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-sm-6">
+
+                <div class="form-group" >
+                    <label class="col-sm-4 control-label">Title:</label>
+                    <div class="col-sm-8  note_input controls">
+                        <input type="text" data-ng-model="comp.title" required name="title" ng-disabled="!orderData.purchase_orderId">
+                    </div>
+                </div>
+
+                <div class="form-group"     >
+                    <label class="col-sm-4 control-label">Description:</label>
+                    <div class="col-sm-8 note_input controls">
+                        <textarea name="desc" data-ng-model="comp.description" required ng-disabled="!orderData.purchase_orderId"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Type: </label>
+                    <div class="col-sm-8">
+                        <div class="select-style">
+                            <select data-ng-model="comp.type" ng-disabled="!orderData.purchase_orderId">
+                                <option ng-selected="comp.type === 'Generic' " value="Generic">Generic</option>
+                                <option ng-selected="comp.type === 'Inquiry' " value="Inquiry">Inquiry</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Assignee: </label>
+                    <div class="col-sm-8">
+
+                        <ui-select name="to" data-ng-model="comp.assignee" required ng-disabled="!orderData.purchase_orderId">
+                            <ui-select-match placeholder="Select a user...">
+                                <span ng-bind="$select.selected.displayName"></span>
+                            </ui-select-match>
+                            <ui-select-choices group-by="createOptGroups" repeat="item in (assignArr | filter: $select.search) track by item.id">
+                                <span ng-bind="item.displayName"></span>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Due Date: </label>
+                    <div class="col-sm-8 controls">
+                        <div class="input-group">
+                            <input class="form-control" type="text" name="cal_date" datepicker-popup="MM/dd/yyyy"
+                                   ng-click="open($event,'opened1')" ng-model="comp.duedate"
+                                   is-open="opened1"
+                                   date-disabled="disabled(date, mode)" close-on-date-selection="true"
+                                   show-weeks="false" min-date="minDate" required ng-disabled="!orderData.purchase_orderId">
+                            <span class="input-group-addon"><i class="fa fa-calendar"
+                                                               ng-click="open($event,'opened1')"></i></span>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">High Priority: </label>
+                    <div class="col-sm-8">
+                        <div class="vd_checkbox checkbox-success">
+                            <input type="checkbox" id="checkbox"
+                                   data-ng-model="comp.priority" ng-disabled="!orderData.purchase_orderId">
+                            <label for="checkbox">&nbsp; </label>
+                        </div>
+                    </div>
+                </div>
+
+                <span is-allowed="CUSTOMER-SERVICE,OTHER,GENERAL|R,CASE-CAT">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Case Category: </label>
+                    <div class="col-sm-8">
+                        <div class="select-style">
+                            <select name="cat-case"
+                                    data-ng-init="comp.caseCategory = caseCategoryArr[0]"
+                                    data-ng-model="comp.caseCategory"
+                                    ng-disabled="!orderData.purchase_orderId"
+                                    data-ng-options="cat.value for cat in caseCategoryArr track by cat.id" required>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                </span>
+
+              <!--  <div class="form-group" ng-if="false">
+                    <label class="col-sm-4 control-label">Visibility: </label>
+                    <div class="col-sm-8">
+                        <dl class="dropdown_selec">
+                            <dt> <a> <span class="hida">Platform</span>
+                                <p class="multiSel"></p>
+                            </a> </dt>
+                            <dd>
+                                <div class="mutliSelect sel-visibility">
+                                    <ul>
+                                        <li>
+                                            <div class="vd_checkbox checkbox-success">
+                                                <input type="checkbox" checked="checked" disabled value="Platform" id="Platform" name="cc" disabled>
+                                                <label for="Platform">Platform</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="vd_checkbox checkbox-success">
+                                                <input type="checkbox" value="Retailer" id="Retailer" name="cc">
+                                                <label for="Retailer">Retailer</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="vd_checkbox checkbox-success">
+                                                <input type="checkbox" value="Vendor" id="Vendor" name="cc">
+                                                <label for="Vendor">Vendor</label>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="vd_checkbox checkbox-success">
+                                                <input type="checkbox" value="DA" id="DA" name="cc">
+                                                <label for="DA">DA</label>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>-->
+
+                <div ng-if="pageStatus == 'EDIT'" class="form-group">
+                    <label class="col-sm-4 control-label">Status: </label>
+
+                    <div class="col-sm-8">
+                        <div class="select-style">
+                            <select name="cat-com"
+                                    data-ng-model="comp.case_status"
+                                    data-ng-options="status.value for status in statusArr track by status.id" required>
+                            </select>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <div class="view_customer">
+                <div class="col-sm-12" data-ng-show="haveReturnOrders">
+                    <h3 class="mgbt-xs-15 mgtp-10 font-semibold">Order Line Items</h3>
+                    <div class="responsive table-scroll">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>Collection Name</th>
+                                <th width="40">Item Name</th>
+                                <th width="70">Item Code</th>
+                                <th width="70">Unit Cost ($)</th>
+                                <th width="70">Order Qty</th>
+                                <th width="100">Qty for Case</th>
+                                <th  style="padding-left:50px">Select</th>
+                            </tr>
+                            </thead>
+                            <tbody >
+                            <tr data-ng-repeat="line_items in orderItems">
+                                <td>{{line_items.name}} </td>
+                                <td>{{line_items.name}} </td>
+                                <td>{{line_items.sku}}</td>
+                                <td>{{line_items.price | currency}}</td>
+                                <td>{{line_items.quantity}}</td>
+                                <td data-ng-if="!comp.id">
+                                    <input name="quantity"
+                                           data-ng-init="comp.orderItems.qty[line_items.id] = 0"
+                                           data-ng-model="comp.orderItems.qty[line_items.id]"
+                                           type="number" min="0" max="{{line_items.quantity}}"
+                                           data-ng-value="line_items.quantity" restrict-num>
+                                </td>
+                                <td data-ng-if="comp.id">
+                                    <input name="quantity"
+                                           data-ng-init="comp.orderItems.qty[line_items.id] = line_items.quantity"
+                                           data-ng-model="comp.orderItems.qty[line_items.id]"
+                                           type="number" min="0" max="{{line_items.quantity}}"
+                                           data-ng-value="line_items.quantity" restrict-num>
+                                </td>
+                                <td align="center">
+                                    <div class="vd_checkbox checkbox-success">
+                                        <input type="checkbox" id="checkbox-{{$index}}"
+                                               checklist-model="comp.orderItemSelect"
+                                               checklist-value="line_items.id"/>
+                                        <label for="checkbox-{{$index}}">&nbsp;</label>
+                                    </div>
+
+                                </td>
+                            </tr>
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-sm-12">
+            <div class="add_note_footer">
+                <div class="footer_align">
+                    <button type="button" class="btn btn-default" data-ng-click="cancel()">Close
+                    </button>
+                    &nbsp;
+                    <button type="button" class="btn btn-warning"
+                            data-ng-disabled="newCompensation.$invalid"
+                            data-ng-click="saveFormComp(comp, orderData.order_id, shippingAdd)">
+                        {{buttonLabel}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

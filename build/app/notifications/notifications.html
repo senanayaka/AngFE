@@ -1,0 +1,79 @@
+<!-- Middle Content Start -->
+
+<div class="vd_content-wrapper">
+    <div class="vd_container">
+        <div class="vd_content clearfix">
+            <div class="vd_head-section clearfix">
+                <div class="vd_panel-header" ng-include="'app/common/breadcrumb.html'"></div>
+            </div>
+            <!-- vd_head-section -->
+            <div class="vd_title-section clearfix">
+                <div class="vd_panel-header">
+                    <div class="col-sm-6">
+
+                    </div>
+                    <div class="vd_info tr">
+
+                    </div>
+                </div>
+                <!-- vd_panel-header -->
+            </div>
+            <!-- vd_title-section -->
+
+            <div class="vd_content-section clearfix">
+                <div class="panel widget light-widget">
+
+                    <div class="panel-body">
+                        <div data-ng-if="pageNotifications.length > 0">
+                            <table class="table table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <!--<th>&nbsp;</th>-->
+                                    <th>&nbsp;</th>
+                                    <th>&nbsp;</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr data-ng-repeat="notification in pageNotifications">
+
+                                    <td>
+                                        <span data-ng-if="notification.status == 0"
+                                              class="label vd_bg-blue append-icon">New</span>
+
+                                        <a data-ng-click="clickNotification(notification.id, notification.link, notification.status)"
+                                           href="#">{{notification.massage}}</a>
+                                    </td>
+                                    <td class="text-right">
+                                        <strong am-time-ago="notification.date.timestamp | amFromUnix"></strong>
+                                    </td>
+                                </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                        <div data-ng-show="totalItems > pageLimit" class="text-center">
+                            <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"
+                                        items-per-page="pageLimit" boundary-links="true" rotate="false"
+                                        max-size="maxSize"></pagination>
+                        </div>
+                        <div data-ng-if="pageNotifications.length == 0" class="text-center"><h4>No notifications!</h4>
+                        </div>
+                    </div>
+
+
+                    <!-- panel-body  -->
+
+                </div>
+                <!-- panel -->
+
+            </div>
+
+        </div>
+        <!-- .vd_content -->
+    </div>
+    <!-- .vd_container -->
+</div>
+<!-- .vd_content-wrapper -->
+
+<!-- Middle Content End -->

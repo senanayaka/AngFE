@@ -1,0 +1,297 @@
+<!-- Middle Content Start -->
+
+<div class="vd_content-wrapper">
+    <div class="vd_container">
+        <div class="vd_content clearfix">
+
+            <div class="vd_head-section clearfix">
+                <div class="vd_panel-header" ng-include="'app/common/breadcrumb.html'"></div>
+            </div>
+            <!-- vd_head-section -->
+
+            <div class="vd_title-section clearfix" ng-controller="ordersListController">
+                <div class="vd_panel-header">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <h1>Order List</h1>
+                        </div>
+                    </div>
+
+                    <!--<div class="vd_info m-relative tr m_mg-top">
+                        <div class="email_download" style="display: block">
+                            <a href="{{API_URL}}api/orders/po/list/excel/{{changeOrderStatus}}" ><i class="fa fa-download"></i></a>
+                            <a href="#" data-ng-click="notConnected()"><i class="fa fa-envelope"></i></a
+                        </div>
+                    </div>-->
+
+                </div>
+                <!-- vd_panel-header -->
+            </div>
+            <!-- vd_title-section -->
+
+            <div class="vd_content-section clearfix">
+                <ul class="col-sm-8 row nav nav-pills year_margin" id="status-buttons">
+                    <li data-ng-class="{active:$index==selectedStatus}" ng-repeat="status in statuses">
+                        <a href="#" ng-click="setStatus($index)">{{status}}</a>
+                    </li>
+                </ul>
+                <div class="col-sm-4">
+                        <div class=" pull-right">
+                            <div class="vd_info m-relative tr m_mg-top">
+                                <div class="email_download" style="display: block">
+                                    <!--{{API_URL}}api/orders/po/list/excel/{{changeOrderStatus}}-->
+                                    <a href="#" data-ng-click="downloadExcel()">
+                                        <i class="fa fa-download"></i></a>
+                                    <a href="#" data-ng-click="sendListEmail()"><i class="fa fa-envelope"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <br class="clear">
+
+                <div class="case_search">
+                    <form class="form-horizontal popupform" method="post">
+                        <div class="row no_row_bottom">
+                            <div class="col-sm-12">
+                                <div class="filter">
+                                    <!-- Login Starts Here -->
+                                    <div id="loginContainer" class="loginContainer">
+                                        <ul id="loginButtonUl" class="loginButtonUl">
+                                            <li data-ng-if="userType != 'RETAILER'">
+                                                <a href="#" id="loginButton"><span>Retailer &nbsp; <i
+                                                        class="fa fa-caret-down"></i> </span><em></em></a>
+
+                                                <div style="clear:both"></div>
+                                                <div id="loginBox" class="loginBox">
+                                                    <div id="loginForm" class="loginForm">
+                                                        <fieldset id="body" class="body">
+                                                            <div class="vd_checkbox checkbox-success"
+                                                                 data-ng-repeat="company in companies.retailer">
+                                                                <input type="checkbox"
+                                                                       data-ng-model="poForm.retailer[company.companyId]"
+                                                                       value="{{company.companyId}}"
+                                                                       id="{{company.companyId}}"
+                                                                       name="{{company.companyId}}">
+                                                                <label for="{{company.companyId}}">{{company.companyName}}</label>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li data-ng-if="userType != 'VENDOR'">
+                                                <a href="#" id="loginButton"><span>Vendor &nbsp; <i
+                                                        class="fa fa-caret-down"></i> </span><em></em></a>
+
+                                                <div style="clear:both"></div>
+                                                <div id="loginBox">
+                                                    <div id="loginForm">
+                                                        <fieldset id="body">
+                                                            <div class="vd_checkbox checkbox-success"
+                                                                 data-ng-repeat="company in companies.vendor">
+                                                                <input type="checkbox"
+                                                                       data-ng-model="poForm.vendor[company.companyId]"
+                                                                       value="{{company.companyId}}"
+                                                                       id="v{{company.companyId}}"
+                                                                       name="{{company.companyId}}">
+                                                                <label for="v{{company.companyId}}">{{company.companyName}}</label>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <a href="#" id="loginButton" class="loginButton">
+                                                <span>PO Date &nbsp; <i
+                                                        class="fa fa-caret-down"></i> </span><em></em></a>
+
+                                                <div style="clear:both"></div>
+                                                <div id="loginBox" class="loginBox">
+                                                    <div id="loginForm" class="loginForm">
+                                                        <fieldset id="body" class="body">
+                                                            <div class="form-group">
+                                                                <label class="col-sm-3 control-label">From: </label>
+
+                                                                <div class="col-sm-9 controls">
+                                                                    <div class="input-group">
+                                                                        <input type="text" datepicker-popup="MM-dd-yyyy"
+                                                                               ng-click="open($event,'opened1')"
+                                                                               ng-model="poForm.createFrom"
+                                                                               is-open="opened1"
+                                                                               date-disabled="disabled(date, mode)"
+                                                                               close-on-date-selection="true"
+                                                                               show-weeks="false"/>
+                                                                        <span class="input-group-addon"><i
+                                                                                class="fa fa-calendar"
+                                                                                ng-click="open($event,'opened1')"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <br>
+
+                                                            <div class="form-group">
+                                                                <label class="col-sm-3 control-label">TO: </label>
+
+                                                                <div class="col-sm-9 controls">
+                                                                    <div class="input-group">
+                                                                        <input type="text" datepicker-popup="MM-dd-yyyy"
+                                                                               ng-click="open($event,'opened2')"
+                                                                               ng-model="poForm.createTo"
+                                                                               is-open="opened2"
+                                                                               date-disabled="disabled(date, mode)"
+                                                                               close-on-date-selection="true"
+                                                                               show-weeks="false"/>
+                                                                        <span class="input-group-addon"><i
+                                                                                class="fa fa-calendar"
+                                                                                ng-click="open($event,'opened2')"></i></span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <!--<li>-->
+                                            <!--<input type="text" disabled placeholder="From Zip" style="width: 100px;" data-ng-model="poForm.fromZip" >-->
+                                            <!--</li>-->
+                                            <!--<li>-->
+                                            <!--<input type="text"  disabled placeholder="To Zip" style="width: 100px;" data-ng-model="poForm.toZip">-->
+                                            <!--</li>-->
+                                            <li>
+                                                <input style="width: 100px;" type="text" placeholder="PO ID"
+                                                       data-ng-model="poForm.poId">
+                                            </li>
+                                            <li>
+                                                <input style="width: 100px;" type="text" placeholder="Order ID"
+                                                       data-ng-model="poForm.orderId">
+                                            </li>
+                                            <li>
+                                                <input style="width: 100px;" type="text" placeholder="Keyword"
+                                                       data-ng-model="poForm.keyWord">
+                                            </li>
+                                            <li>
+                                                <a class="bt-add-com pull-right no_margin" data-ng-click="searchPO()">
+                                                    <i class="fa fa-search"></i>
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a class="bt-add-com pull-right bg_white no_margin"
+                                                   data-ng-click="clearSearch()">
+                                                    <i class="fa fa-refresh"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- Login Ends Here -->
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <br class="clear">
+
+                <div class="order-table-editor">
+                    <a href="#" data-ng-click="showTableEditor()" id="edit">
+                        <i class="fa fa-pencil-square-o"></i> Edit Columns
+                    </a>
+
+                    <div id="tableEditor" ng-show="tableEditor">
+                        <div class="manege_table">
+                            <table>
+                                <thead>
+                                <tr ng-repeat="displayField in displayFields">
+                                    <th>
+                                        <input type="checkbox" ng-disabled="$first" ng-model="displayField.checked">
+                                        {{displayField.fieldName}}
+                                    </th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+                        <button id="done" data-ng-click="doneTableEditor(selectedFields)"><i
+                                class="fa fa-check"></i> Done
+                        </button>
+                    </div>
+                    <span class="pull-right"><b class="font-22 font_green">{{recordCount}} </b> records found</span>
+
+                </div>
+
+                <div>
+                    <div class="table-responsive order_list_scroll">
+
+                        <table id="table" class="table table-striped table-hover order_list_table">
+                            <thead>
+                            <tr>
+                                <th data-ng-repeat="fld in checkedFields" class="maxsize" ng-click="sort(fld.field)">
+                                    {{fld.fieldName}}
+                                <span ng-show="sort.field === fld.field && !sort.order"
+                                      class="fa fa-caret-down down_active"></span>
+                                    <span ng-show="sort.field === fld.field && sort.order" class="fa fa-caret-up">
+                                    </span>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+
+
+                            <tr ng-repeat="list in filtered = (orders.data | filter:search:strict | orderBy: sort.field : sort.order)"
+                                class="clickable"
+                                ui-sref="view" target="_blank"
+                                ng-click="showDetail(list.id)">
+
+                                <th data-ng-class="{orderAmountRight: fld.field == 'orderAmount'}"
+                                    data-ng-repeat="fld in checkedFields" ng-init="f = list[fld.field]">
+                                <span ng-if="fld.field == 'soDate'" format-date-without-time="{{f}}"></span>
+                                <span ng-if="fld.field == 'orderAmount'">
+                                    {{f | currency}}
+                                </span>
+                                <span ng-if="fld.field == 'cName'">
+                                    {{f | capitalize:true}}
+                                </span>
+                                <span ng-if="fld.field == 'phone'">
+                                    {{f | tel}}
+                                </span>
+                                <span ng-if="!(fld.field == 'soDate') && !(fld.field == 'orderAmount') && !(fld.field == 'cName') && !(fld.field == 'phone')">
+                                    {{f}}
+                                </span>
+                                <span data-ng-if="!f">--</span>
+                                </th>
+
+
+                            </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                    <!--<span> data-ng-show="filtered.length > 1">-->
+                    <!--<pagination total-items="orders.data.length" ng-model="currentPage"-->
+                    <!--items-per-page="pageSize" class="pagination-sm" boundary-links="true" rotate="false"-->
+                    <!--style="float: right"></pagination>-->
+                    <!--</span>-->
+
+                    <div data-ng-show="totalItems > pageLimit" class="text-right">
+
+
+                        <pagination boundary-links="true" direction-links="true" current-page="currentPage"
+                                    num-pages="totalItems/pageLimit | number:0" max-size="5" total-items="totalItems"
+                                    ng-model="currentPage" ng-change="pageChanged()" items-per-page="10"></pagination>
+
+
+                    </div>
+
+                </div>
+
+                <!-- .vd_content-section -->
+
+            </div>
+            <!-- .vd_content -->
+        </div>
+        <!-- .vd_container -->
+    </div>
+
+    <!-- .vd_content-wrapper -->
+
+    <!-- Middle Content End -->
+

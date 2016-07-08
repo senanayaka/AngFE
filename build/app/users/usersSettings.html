@@ -1,0 +1,184 @@
+<!-- Modal Setting-->
+
+<div class="modal-header">
+    <button type="button" class="close" ng-click="settingsCancel()" aria-label="Close">
+        <span aria-hidden="true"><i class="fa fa-times-circle-o"></i></span>
+    </button>
+    <h4 class="modal-title" id="myModalLabel">Settings</h4>
+</div>
+
+<div class="modal-body">
+
+    <form class="form-horizontal" action="#" role="form" name="userSettings">
+        <div class="row">
+            <div class="col-sm-3 mgbt-xs-20">
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <div class="form-img text-center mgbt-xs-15">
+                            <img check-image
+                                 ng-src="{{API_URL}}images/profiles/{{userSettingsData.profilePicturePath}}"/>
+                        </div>
+                        <div class="form-img-action text-center mgbt-xs-20">
+                            <input type="file" id="someFile" file-model="userSettingsData.file"/>
+                        </div>
+                        <br/>
+
+                        <div>
+                            <table class="table table-striped table-hover">
+                                <tbody>
+                                <tr>
+                                    <td style="width:60%;">Status</td>
+                                    <td><span class="label label-success">Active</span></td>
+                                </tr>
+
+                                <tr>
+                                    <td>Member Since</td>
+                                    <td ng-if="userSettingsData.date.date" format-date-without-time="{{userSettingsData.date.date}}"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-sm-9">
+                <h3 class="mgbt-xs-15">{{userSettingsData.displayName}}
+                    <small> ({{userSettingsData.email}})</small>
+                </h3>
+                <br>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Displayed Name</label>
+
+                    <div class="col-sm-8 controls">
+                        <div class="row mgbt-xs-0">
+                            <div class="col-xs-9"
+                                 data-ng-class="{'has-error' : userSettings.name.$invalid }">
+                                <input type="text"
+                                       data-ng-model="userSettingsData.displayName"
+                                       name="name" value="{{userSettingsData.displayName}}" required>
+
+                                <p data-ng-show="userSettings.name.$invalid"
+                                   class="help-block">Name is required.</p>
+                            </div>
+                            <!-- col-xs-12 -->
+                        </div>
+                        <!-- row -->
+                    </div>
+                    <!-- col-sm-10 -->
+                </div>
+                <!-- form-group -->
+
+                <!--<div class="form-group">
+                    <label class="col-sm-3 control-label">Email Address</label>
+
+                    <div class="col-sm-9 controls">
+                        <div class="row mgbt-xs-0">
+                            <div class="col-xs-9">
+                                <input type="text" class="width-40" name="name" data-ng-model="userSettingsData.email" value="{{userDetails.output.data.email}}">
+                            </div>
+                            &lt;!&ndash; col-xs-12 &ndash;&gt;
+                        </div>
+                        &lt;!&ndash; row &ndash;&gt;
+                    </div>
+                    &lt;!&ndash; col-sm-10 &ndash;&gt;
+                </div>-->
+                <!-- form-group -->
+
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Current Password</label>
+
+                    <div class="col-sm-8 controls">
+                        <div class="row mgbt-xs-0">
+                            <div class="col-xs-9" data-ng-class="{ 'has-error' : isPasswordError}">
+                                <input type="password"
+                                        data-ng-model="userSettingsData.password"
+                                        placeholder="Password">
+                                <p data-ng-show="isPasswordError" class="help-block pull-left">Please enter the correct
+                                    Password</p>
+                            </div>
+                            <!-- col-xs-12 -->
+                        </div>
+                        <!-- row -->
+                    </div>
+                    <!-- col-sm-10 -->
+                </div>
+                <!-- form-group -->
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">New Password</label>
+
+                    <div class="col-sm-8 controls">
+                        <div class="row mgbt-xs-0">
+                            <div class="col-xs-9"
+                                 data-ng-class="{ 'has-error' : userSettingsData.password && (userSettingsData.newPassword.length<6 || userSettingsData.newPassword == userSettingsData.password) }">
+                                <input
+                                        type="password"
+                                        data-ng-model="userSettingsData.newPassword"
+                                        placeholder="New Password"
+                                        >
+                                <p data-ng-show="userSettingsData.newPassword && userSettingsData.newPassword.length<6"
+                                   class="help-block">Password length should at lease 6 characters!
+                                </p>
+                                <p data-ng-show="userSettingsData.password && userSettingsData.newPassword == userSettingsData.password"
+                                   class="help-block">New password should not similar to existing password!
+                                </p>
+                            </div>
+
+                            <!-- col-xs-12 -->
+                        </div>
+                        <!-- row -->
+                    </div>
+                    <!-- col-sm-10 -->
+                </div>
+                <!-- form-group -->
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label">Confirm New Password</label>
+
+                    <div class="col-sm-8 controls">
+                        <div class="row mgbt-xs-0">
+                            <div class="col-xs-9"
+                                 data-ng-class="{ 'has-error' : userSettingsData.newPassword && userSettingsData.newPassword != userSettingsData.newConfPassword}">
+                                <input type="password"
+                                       data-ng-model="userSettingsData.newConfPassword"
+                                       placeholder="Confirm New Password">
+
+                                <p data-ng-show="userSettingsData.newPassword && userSettingsData.newPassword != userSettingsData.newConfPassword"
+                                   class="help-block">Confirm Password is not match
+                                </p>
+
+                            </div>
+                            <!-- col-xs-12 -->
+                        </div>
+                        <!-- row -->
+                    </div>
+                    <!-- col-sm-10 -->
+                </div>
+                <!-- form-group -->
+
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="add_note_footer">
+
+                <div class="footer_align">
+                    <button type="button" class="btn btn-default" ng-click="settingsCancel()">Close</button>
+                    <button type="button" class="btn btn-warning"
+                            data-ng-disabled="userSettingsData.newPassword != userSettingsData.newConfPassword || userSettings.name.$invalid"
+                            ng-click="userSettingsSave()">Update
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+
+</div>
+
+
+<!-- Modal end Setting-->

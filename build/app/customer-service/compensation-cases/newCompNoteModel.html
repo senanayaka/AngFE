@@ -1,0 +1,120 @@
+<!--<div class="modal fade" id="addNote" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">-->
+            <div class="modal-header">
+                <button type="button" data-ng-click="cancel()" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"><i class="fa fa-times-circle-o"></i></span></button>
+                <h4 class="modal-title" id="myModalLabel">Create Note</h4>
+            </div>
+            <div class="modal-body">
+
+
+                <form enctype="multipart/form-data"  class="form-horizontal popupform" name="compensationNotes" id="compensationNotes" novalidate>
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <!-- <div class="form-group">
+                                <label class="col-sm-3 control-label">Name: </label>
+                               <div class="col-sm-8 note_input controls">
+                                   <label class="control-label">Guest</label>
+                                </div>
+                             </div> -->
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Note: </label>
+                                <div class="col-sm-8 note_input controls" data-ng-class="{'has-error' :  !compensationNotes.note.$pristine }">
+                                    <textarea data-ng-model="compensationNotesData.note" required></textarea>
+                                    <!--<p ng-show="!compensationNotes.note.$pristine" class="help-block">Note is required.</p>-->
+                                </div>
+                            </div>
+
+                            <div class="form-group image1">
+                                <label class="col-sm-3 control-label">Image: </label>
+                                <div class="col-sm-8 controls full-attach">
+                                    <div class="input-group">
+                                        <input type="file" id="file" file-model="compensationNotesData.file">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">Description: </label>
+                                <div class="col-sm-8 note_input controls">
+                                    <textarea data-ng-model="compensationNotesData.description"></textarea>
+                                </div>
+                            </div>
+
+                     <!--       <div class="form-group">
+                                <label class="col-sm-3 control-label" for="assig">Visibility: </label>
+                                <div class="col-sm-8">
+
+                                    <dl class="dropdown_selec">
+                                        <dt>
+                                            <a>
+                                                <span class="hida">Platform</span>
+                                                <p class="multiSel"></p>
+                                            </a>
+                                        </dt>
+
+                                        <dd>
+                                            <div class="mutliSelect sel-visibility">
+                                                <ul>
+                                                    <li>
+                                                        <div class="vd_checkbox checkbox-success">
+                                                            <input type="checkbox" checked="checked" disabled="disabled" value="Platform" id="Platform" name="cc">
+                                                            <label for="Platform">Platform</label>
+                                                        </div>
+                                                    </li>
+
+                                                    <li>
+                                                        <div class="vd_checkbox checkbox-success">
+                                                            <input type="checkbox" value="Retailer" id="Retailer" name="cc">
+                                                            <label for="Retailer">Retailer</label>
+                                                        </div>
+                                                    </li>
+
+                                                    <li>
+                                                        <div class="vd_checkbox checkbox-success">
+                                                            <input type="checkbox" value="Vendor" id="Vendor" name="cc">
+                                                            <label for="Vendor">Vendor</label>
+                                                        </div>
+                                                    </li>
+
+                                                </ul>
+                                            </div>
+                                        </dd>
+                                    </dl>
+
+                                </div>
+
+                                &lt;!&ndash; <div class="view_vendor_alert">
+                                Would you like to Assign? <br><br>
+                                  <button class="btn btn-default" type="button" visiblity="false">NO</button>
+                                  <button class="btn btn-primary" type="button" visiblity="true">Yes</button>
+                                </div>&ndash;&gt;
+                            </div>-->
+
+                            <div class="col-sm-6"></div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-sm-12">
+                        <div class="add_note_footer">
+
+                            <div class="footer_align">
+                                <button type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="cancel()">Close</button>
+                                <button type="button" class="btn btn-warning visibility_alert" data-dismiss="modal" data-ng-click="saveNotes()">Create</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+
+
+            </div>
+       <!-- </div>
+    </div>
+</div>--><!-- Modal end Add Note-->

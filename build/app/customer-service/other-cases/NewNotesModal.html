@@ -1,0 +1,97 @@
+<div class="modal-header">
+    <button type="button" class="close" data-ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" id="myModalLabel">Create Note</h4>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal popupform" novalidate name="noteForm">
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Note: </label>
+                    <div class="col-sm-8 note_input controls" data-ng-class="{'has-error' : noteForm.note.$invalid && !noteForm.note.$pristine }">
+                        <textarea data-ng-model="otherNotes.note" required name="note"></textarea>
+                        <p data-ng-show="noteForm.note.$invalid && !noteForm.note.$pristine"
+                           class="help-block">Note is required.</p>
+                    </div>
+                </div>
+
+                <div class="form-group image1">
+                    <label class="col-sm-3 control-label">Image: </label>
+                    <div class="col-sm-8 controls">
+                        <div class="input-group">
+                            <input type="file" file-model="otherNotes.imageNote">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Image Caption: </label>
+                    <div class="col-sm-8 note_input controls">
+                        <textarea data-ng-model="otherNotes.desc"></textarea>
+                    </div>
+                </div>
+
+            <!--    <div class="form-group">
+                    <label class="col-sm-3 control-label" >Visibility: </label>
+                    <div class="col-sm-8">
+
+                        <dl class="dropdown_selec">
+                            <dt>
+                                <a>
+                                    <span class="hida">Platform</span>
+                                    <p class="multiSel"></p>
+                                </a>
+                            </dt>
+
+                            <dd>
+                                <div class="mutliSelect sel-visibility">
+                                    <ul>
+                                        <li>
+                                            <div class="vd_checkbox checkbox-success">
+                                                <input type="checkbox" checked="checked" disabled="disabled" value="Platform" id="Platform" name="cc">
+                                                <label for="Platform">Platform</label>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <div class="vd_checkbox checkbox-success">
+                                                <input type="checkbox" value="Retailer" id="Retailer" name="cc">
+                                                <label for="Retailer">Retailer</label>
+                                            </div>
+                                        </li>
+
+                                        <li>
+                                            <div class="vd_checkbox checkbox-success">
+                                                <input type="checkbox" value="Vendor" id="Vendor" name="cc">
+                                                <label for="Vendor">Vendor</label>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </dd>
+                        </dl>
+
+                    </div>
+
+                </div>-->
+
+                <div class="col-sm-6"></div>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="add_note_footer">
+
+                <div class="footer_align">
+                    <button type="button" class="btn btn-default" data-ng-click="cancel()">Close</button>
+                    <button type="button" class="btn btn-warning visibility_alert"
+                            data-ng-disabled="noteForm.$invalid"
+                            data-ng-click="saveOtherNotes(otherNotes)">Create</button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+</div>

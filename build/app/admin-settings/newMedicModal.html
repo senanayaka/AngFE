@@ -1,0 +1,466 @@
+<script>
+    $('.nav-tabs li a').click(function (e) {
+        e.preventDefault();
+        $(this).tab('show');
+    });
+</script>
+<!-- Modal create-->
+
+
+<div class="modal-header">
+    <button type="button" class="close"  data-ng-click="cancel()" aria-label="Close"><span aria-hidden="true"><i class="fa fa-times-circle-o"></i></span></button>
+    <h4 class="modal-title" id="myModalLabel">{{title}} Medic</h4>
+</div>
+
+<div class="modal-body">
+
+    <form class="form-horizontal popupform" id="newRetailer" name="newMedic" novalidate >
+
+        <div class="row">
+            <div class="col-sm-12">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs tabpans" role="tablist">
+                    <li ng-class="{activeTab: tabs1 == true}">Basic Information</a></li>
+                    <li ng-class="{activeTab: tabs2 == true}">Contracts</a></li>
+                </ul>
+            </div>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="clearfix"></div>
+                <br/>
+
+                <div data-ng-show="tabs1" id="basicInformation">
+                    <div class="col-sm-6">
+                        <div class="form-group" ng-if="medicForm.orangetraxSerial">
+                            <label class="col-sm-4 control-label">Serial No.: </label>
+                            <div class="col-sm-8 controls">
+                                <div class="row mgbt-xs-0">
+                                    <div class="col-xs-12 control-label_view">
+                                        {{medicForm.orangetraxSerial}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Name: *</label>
+                            <div class="col-sm-8 controls">
+                                <div class="row mgbt-xs-0">
+                                    <div class="col-xs-12" data-ng-class="{ 'has-error' : newMedic.company_name.$invalid && !newMedic.company_name.$pristine || isNameExist }">
+                                        <input type="text" name="company_name"
+                                               id="company_name" data-ng-model="medicForm.name" ng-keyup="isNameExist = false" required >
+                                        <p data-ng-show="newMedic.company_name.$invalid && !newMedic.company_name.$pristine"
+                                           class="help-block">Medic Name is required.</p>
+                                        <p data-ng-show="isNameExist" class="help-block">Medic Name is already exist.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Address 1: *</label>
+                            <div class="col-sm-8 controls">
+                                <div class="row mgbt-xs-0">
+                                    <div class="col-sm-12">
+                                        <input type="text" name="address_1" id="address1" required
+                                               data-ng-model="medicForm.address1" data-ng-class="{ 'has-error' : newMedic.address_1.$invalid && !newMedic.address_1.$pristine }">
+                                        <p data-ng-show="newMedic.address_1.$invalid && !newMedic.address_1.$pristine" class="help-block">Address Line 1 is required.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Address 2:</label>
+                            <div class="col-sm-8 controls">
+                                <div class="row mgbt-xs-0">
+                                    <div class="col-sm-12">
+                                        <input type="text" name="address_2" id="address2"
+                                               data-ng-model="medicForm.address2" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Address 3:</label>
+                            <div class="col-sm-8 controls">
+                                <div class="row mgbt-xs-0">
+                                    <div class="col-sm-12">
+                                        <input type="text" name="address_3" id="address3"
+                                               data-ng-model="medicForm.address3" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Country: *</label>
+                            <div class="col-sm-8 controls">
+                                <div class="row mgbt-xs-0">
+                                    <div class="col-sm-12" data-ng-class="{ 'has-error' : newMedic.country.$invalid && !newMedic.country.$pristine }">
+                                        <div class="select-style">
+                                            <select id="country" name="country" data-ng-model="medicForm.compCountry"
+                                                    data-ng-change="getCountry()" required
+                                                    data-ng-options="country.name for country in countryArr track by country.code">
+                                            </select>
+                                        </div>
+                                        <p data-ng-show="newMedic.country.$invalid && !newMedic.country.$pristine" class="help-block">Country is required.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">State: *</label>
+                            <div class="col-sm-8 controls">
+                                <div class="row mgbt-xs-0">
+                                    <div class="col-sm-12" data-ng-class="{ 'has-error' : newMedic.state.$invalid && !newMedic.state.$pristine }">
+                                        <div class="select-style">
+                                            <select id="state" name="state" data-ng-model="medicForm.compState" required
+                                                    data-ng-options="state.name for state in stateArr track by state.code">
+                                            </select>
+                                        </div>
+                                        <p data-ng-show="newMedic.state.$invalid && !newMedic.state.$pristine" class="help-block">State is required.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Zip Code: *</label>
+                            <div class="col-sm-8 controls">
+                                <div class="row mgbt-xs-0">
+                                    <div class="col-sm-12">
+                                        <input type="text" name="zip" id="zip"
+                                               data-ng-model="medicForm.zip" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label">Man Hour Rate: *</label>
+                            <div class="col-sm-8  note_input controls" data-ng-class="{ 'has-error' : newMedic.man_hour.$error.pattern}">
+                                <div class="input-group">
+                            <span class="input-group-addon bg_green white"><i class="fa fa-usd"></i>
+                            </span>
+                                    <input name="man_hour" type="text"
+                                           data-ng-model="medicForm.hourRate" required
+                                           ng-pattern="/^[1-9][0-9]{0,2}(?:,?[0-9]{3}){0,3}(?:\.[0-9]{1,2})?$/">
+                                </div>
+                                <p data-ng-show="newMedic.man_hour.$error.pattern"  class="help-block">
+                                    Man Hour Rate value is invalid.</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-sm-6">
+                        <div class="form-group phone1">
+                            <label class="col-sm-3 control-label">Phone: *</label>
+                            <div class="col-sm-8 controls" data-ng-class="{ 'has-error' : newMedic.phone_1.$error.pattern && !newMedic.phone_1.$pristine || newMedic.phone_1.$error.minlength || newMedic.phone_1.$error.maxlength }">
+                                <div class="input-group">
+                                    <span class="input-group-addon bg-green"><i class="fa fa-phone"></i></span>
+                                    <input data-ng-minlength="10" data-ng-maxlength="10" type="text" data-ng-model="medicForm.phone1" name="phone_1" data-ng-pattern="/^(\d)+$/" id="phone_1" required>
+                                    <!--<span class="input-group-addon add_phonenum a1 vd_bg-yellow vd_white"><i class="fa fa-plus"></i></span>-->
+                                    <span class="input-group-addon add_phonenum a11 vd_bg-yellow vd_white" ng-hide="showphone2 && showphone3" ng-click="addPhoneNumber()"><i class="fa fa-plus"></i></span>
+                                </div>
+                                <p data-ng-show="newMedic.phone_1.$error.pattern && !newMedic.phone_1.$pristine || newMedic.phone_1.$error.minlength || newMedic.phone_1.$error.maxlength" class="help-block">
+                                    Phone Number is invalid.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group phone2" ng-show="showphone2">
+                            <label class="col-sm-3 control-label">Phone</label>
+                            <div class="col-sm-8 controls" data-ng-class="{ 'has-error' : newMedic.phone_2.$error.pattern || newMedic.phone_2.$error.minlength || newMedic.phone_2.$error.maxlength }">
+                                <div class="input-group">
+                                    <span class="input-group-addon bg-green"><i class="fa fa-phone"></i></span>
+                                    <input type="text" data-ng-model="medicForm.phone2" name="phone_2" id="phone_2">
+                                    <span class="input-group-addon add_phonenum a2 vd_bg-red vd_white" ng-click="removePhoneNumber(2)"><i class="fa fa-minus"></i></span>
+                                </div>
+                                <p data-ng-show="newMedic.phone_2.$error.pattern || newMedic.phone_2.$error.minlength || newMedic.phone_2.$error.maxlength" class="help-block">
+                                    Phone Number is invalid.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group phone3" ng-show="showphone3">
+                            <label class="col-sm-3 control-label">Phone</label>
+                            <div class="col-sm-8 controls" data-ng-class="{ 'has-error' : newMedic.phone_3.$error.pattern || newMedic.phone_3.$error.minlength || newMedic.phone_3.$error.maxlength}">
+                                <div class="input-group">
+                                    <span class="input-group-addon bg-green"><i class="fa fa-phone"></i></span>
+                                    <input  type="text" data-ng-model="medicForm.phone3" name="phone_3" id="phone_3">
+                                    <span class="input-group-addon add_phonenum a3 vd_bg-red vd_white" ng-click="removePhoneNumber(3)"><i class="fa fa-minus"></i></span>
+                                </div>
+                                <p data-ng-show="newMedic.phone_3.$error.pattern || newMedic.phone_3.$error.minlength || newMedic.phone_3.$error.maxlength" class="help-block">
+                                    Phone Number is invalid.</p>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Fax: </label>
+                            <div class="col-sm-8 controls" data-ng-class="{ 'has-error' : newMedic.fax.$error.pattern || newMedic.fax.$error.minlength || newMedic.fax.$error.maxlength }">
+                                <div class="input-group">
+                                    <span class="input-group-addon bg-green"><i class="fa fa-fax"></i></span>
+                                    <input data-ng-minlength="10" data-ng-maxlength="10" type="text" data-ng-model="medicForm.fax"
+                                           data-ng-pattern="/^(\d)+$/" name="fax" id="fax">
+                                </div>
+                                <p data-ng-show="newMedic.fax.$error.pattern || newMedic.fax.$error.minlength || newMedic.fax.$error.maxlength" class="help-block">
+                                    Fax Number is invalid.</p>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">Email: *</label>
+                            <div class="col-sm-8 controls" data-ng-class="{ 'has-error' : newMedic.email.$invalid && !newMedic.email.$pristine }">
+                                <div class="input-group">
+                                    <span class="input-group-addon bg-green"><i class="fa fa-envelope"></i></span>
+                                    <input type="email" data-ng-model="medicForm.email" name="email" id="email" required>
+                                </div>
+                                <p ng-show="newMedic.email.$invalid && !newMedic.email.$pristine" class="help-block">Enter a valid Email Address.</p>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">SIC No.:</label>
+                            <div class="col-sm-8 controls">
+                                <div class="row mgbt-xs-0">
+                                    <div class="col-sm-12">
+                                        <div class="select-style">
+                                            <select data-ng-model="medicForm.industrySicNo" name="industry_sic_no" id="industry_sic_no">
+                                                <option value="2211 Broadwoven Fabric Mills, Cotton">2211 Broadwoven Fabric Mills, Cotton</option>
+                                                <option value="2396 Automotive Trimmings, Apparel Findings, and Related Products">2396 Automotive Trimmings, Apparel Findings, and Related Products</option>
+                                                <option value="2421 Sawmills and Planing Mills, General">2421 Sawmills and Planing Mills, General</option>
+                                                <option value="2426 Hardwood Dimension and Flooring Mills">2426 Hardwood Dimension and Flooring Mills</option>
+                                                <option value="2499 Wood Products, Not Elsewhere Classified">2499 Wood Products, Not Elsewhere Classified</option>
+                                                <option value="2511 Wood Household Furniture, Except Upholstered">2511 Wood Household Furniture, Except Upholstered</option>
+                                                <option value="2512 Wood Household Furniture, Upholstered">2512 Wood Household Furniture, Upholstered</option>
+                                                <option value="2514 Metal Household Furniture">2514 Metal Household Furniture</option>
+                                                <option value="2515 Mattresses, Foundations, and Convertible Beds">2515 Mattresses, Foundations, and Convertible Beds</option>
+                                                <option value="2519 Household Furniture, Not Elsewhere Classified">2519 Household Furniture, Not Elsewhere Classified</option>
+                                                <option value="2521 Wood Office Furniture">2521 Wood Office Furniture</option>
+                                                <option value="2522 Office Furniture, Except Wood">2522 Office Furniture, Except Wood</option>
+                                                <option value="2531 Public Building and Related Furniture">2531 Public Building and Related Furniture</option>
+                                                <option value="2541 Wood Office and Store Fixtures, Partitions, Shelving, and Lockers">2541 Wood Office and Store Fixtures, Partitions, Shelving, and Lockers</option>
+                                                <option value="2542 Office and Store Fixtures, Partitions, Shelving, and Lockers, Except Wood">2542 Office and Store Fixtures, Partitions, Shelving, and Lockers, Except Wood</option>
+                                                <option value="2599 Furniture and Fixtures, Not Elsewhere Classified">2599 Furniture and Fixtures, Not Elsewhere Classified</option>
+                                                <option value="2842 Specialty Cleaning, Polishing, and Sanitation Preparations">2842 Specialty Cleaning, Polishing, and Sanitation Preparations</option>
+                                                <option value="3231 Glass Products, Made of Purchased Glass">3231 Glass Products, Made of Purchased Glass</option>
+                                                <option value="3255 Clay Refractories">3255 Clay Refractories</option>
+                                                <option value="3272 Concrete Products, Except Block and Brick">3272 Concrete Products, Except Block and Brick</option>
+                                                <option value="3281 Cut Stone and Stone Products">3281 Cut Stone and Stone Products</option>
+                                                <option value="3429 Hardware, Not Elsewhere Classified">3429 Hardware, Not Elsewhere Classified</option>
+                                                <option value="3469 Metal Stampings, Not Elsewhere Classified">3469 Metal Stampings, Not Elsewhere Classified</option>
+                                                <option value="3495 Wire Springs">3495 Wire Springs</option>
+                                                <option value="3499 Fabricated Metal Products, Not Elsewhere Classified">3499 Fabricated Metal Products, Not Elsewhere Classified</option>
+                                                <option value="3553 Woodworking Machinery">3553 Woodworking Machinery</option>
+                                                <option value="3821 Laboratory Apparatus and Furniture">3821 Laboratory Apparatus and Furniture</option>
+                                                <option value="3944 Games, Toys, and Children's Vehicles, Except Dolls and Bicycles">3944 Games, Toys, and Children's Vehicles, Except Dolls and Bicycles</option>
+                                                <option value="3999 Manufacturing Industries, Not Elsewhere Classified">3999 Manufacturing Industries, Not Elsewhere Classified</option>
+                                                <option value="4212 Local Trucking Without Storage">4212 Local Trucking Without Storage</option>
+                                                <option value="4214 Local Trucking With Storage">4214 Local Trucking With Storage</option>
+                                                <option value="4226 Special Warehousing and Storage, Not Elsewhere Classified">4226 Special Warehousing and Storage, Not Elsewhere Classified</option>
+                                                <option value="5021 Furniture">5021 Furniture</option>
+                                                <option value="5023 Home furnishings">5023 Home furnishings</option>
+                                                <option value="5044 Office Equipment">5044 Office Equipment</option>
+                                                <option value="5047 Medical, Dental, and Hospital Equipment and Supplies">5047 Medical, Dental, and Hospital Equipment and Supplies</option>
+                                                <option value="5169 Chemicals and Allied Products, Not Elsewhere Classified">5169 Chemicals and Allied Products, Not Elsewhere Classified</option>
+                                                <option value="5311 Department Stores">5311 Department Stores</option>
+                                                <option value="5712 Furniture Stores">5712 Furniture Stores</option>
+                                                <option value="5714 Drapery, Curtain, and Upholstery Stores">5714 Drapery, Curtain, and Upholstery Stores</option>
+                                                <option value="5932 Used Merchandise Stores">5932 Used Merchandise Stores</option>
+                                                <option value="6141 Personal Credit Institutions">6141 Personal Credit Institutions</option>
+                                                <option value="7217 Carpet and Upholstery Cleaning">7217 Carpet and Upholstery Cleaning</option>
+                                                <option value="7359 Equipment Rental and Leasing, Not Elsewhere Classified">7359 Equipment Rental and Leasing, Not Elsewhere Classified</option>
+                                                <option value="7389 Business Services, Not Elsewhere Classified">7389 Business Services, Not Elsewhere Classified</option>
+                                                <option value="7641 Reupholstery and Furniture Repair">7641 Reupholstery and Furniture Repair</option>
+                                                <option value="7699 Repair Shops and Related Services, Not Elsewhere Classified">7699 Repair Shops and Related Services, Not Elsewhere Classified</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">EIN No.: *</label>
+                            <div class="col-sm-8 controls">
+                                <div class="row mgbt-xs-0">
+                                    <div class="col-sm-12" data-ng-class="{'has-error' : newMedic.ein_no.$invalid && !newMedic.ein_no.$pristine }">
+                                        <input type="text"
+                                               data-ng-model="medicForm.einNo" name="ein_no" id="ein_no" required>
+                                        <p data-ng-show="newMedic.ein_no.$invalid && !newMedic.ein_no.$pristine" class="help-block">EIN Number is required.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">VAT No.: </label>
+                            <div class="col-sm-8 controls">
+                                <div class="row mgbt-xs-0">
+                                    <div class="col-sm-12">
+                                        <input type="text" data-ng-model="medicForm.vatNo"
+                                               name="vat_no" id="vat_no">
+                                        </div>
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label" style="padding:0 15px;">Status: </label>
+                            <div class="col-sm-8 controls">
+                                <div class="row mgbt-xs-0">
+                                    <div class="col-sm-12">
+                                  <span class="vd_radio radio-info">
+                                    <input type="radio"
+                                           data-ng-model="medicForm.recordStatus"
+                                           data-ng-value="1" id="optionsRadios3">
+                                    <label for="optionsRadios3"> Active </label>
+                                  </span>
+
+                                  <span class="vd_radio  radio-danger" >
+                                    <input type="radio" data-ng-model="medicForm.recordStatus"
+                                           data-ng-value="0" id="optionsRadios4">
+                                    <label for="optionsRadios4"> Deactive </label>
+                                  </span>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+
+                    </div>
+
+                    <div class="col-sm-12">
+                        <hr>
+                        <div class="form-group">
+                            <h3>Service Categories</h3>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="row mgbt-xs-0">
+                                <!--<label class="col-sm-3 control-label"></label>-->
+                                <div class="col-sm-3">
+                                    <div class="vd_checkbox checkbox-success">
+                                        <input type="checkbox" id="painting"
+                                               data-ng-value="1" data-ng-model="medicForm.painting">
+                                        <label for="painting">Painting</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="vd_checkbox checkbox-success">
+                                        <input type="checkbox" id="upholstery"
+                                               data-ng-value="1" data-ng-model="medicForm.upholstery">
+                                        <label for="upholstery">Upholstery</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="vd_checkbox checkbox-success">
+                                        <input type="checkbox" id="carpentry"
+                                               data-ng-value="1" data-ng-model="medicForm.carpentry">
+                                        <label for="carpentry">General Carpentry</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mgbt-xs-0">
+                                <div class="col-sm-3">
+                                    <div class="vd_checkbox checkbox-success">
+                                        <input type="checkbox" id="metal"
+                                               data-ng-value="1" data-ng-model="medicForm.metal">
+                                        <label for="metal">Metal Work</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="vd_checkbox checkbox-success">
+                                        <input type="checkbox" id="electronic"
+                                               data-ng-value="1" data-ng-model="medicForm.electronic">
+                                        <label for="electronic">Electronic Work</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div data-ng-show="tabs2" id="contracts">
+                    <div class="col-sm-12">
+                        <!--<h3 class="mgbt-xs-15 paltform_title">Contracts</h3>-->
+                        <div class="form-group contact">
+                            <label class="col-sm-3 control-label"><div ng-show="medicForm.contracts[0] || showimage1">Contract</div></label>
+
+                            <div class="col-sm-7 controls">
+                                <div class="input-group" ng-show="medicForm.contracts[0] || showimage1">
+
+                                    <input type="file" file-model="medicForm.contract"
+                                           data-ng-model="medicForm.contract" name="contract">
+<span class="input-group-addon add_contact2 c2 vd_bg-red vd_white"
+      ng-click="removeImage(1)"><i class="fa fa-minus"></i></span>
+                                </div>
+                                <div ng-show="medicForm.contracts[0]"><a
+                                        ng-href="{{API_URL + medicForm.contracts[0]['attachmentPath']}}"
+                                        target="_blank"><i>contract 1</i></a></div>
+
+                            </div>
+                            <div class="col-sm-1 controls">
+                                <div class="input-group">
+                                    <input type="file" style="visibility: hidden">
+                                <span class="input-group-addon add_contact c1 vd_bg-yellow vd_white"
+                                      ng-hide="showimage1 && showimage2 && showimage3" ng-click="addImage()"><i
+                                        class="fa fa-plus"></i></span>
+                                </div>
+                            </div>
+
+                        </div><!-- form-group -->
+
+                        <div class="form-group contact" ng-show="medicForm.contracts[1] || showimage2">
+                            <label class="col-sm-3 control-label">Contract </label>
+
+                            <div class="col-sm-7 controls">
+                                <div class="input-group">
+                                    <input type="file" file-model="medicForm.contract2"
+                                           data-ng-model="medicForm.contract2" name="contract2">
+ <span class="input-group-addon add_contact3 c3 vd_bg-red vd_white"
+       ng-click="removeImage(2)"><i class="fa fa-minus"></i></span>
+                                </div>
+                                <div ng-show="medicForm.contracts[1]"><a
+                                        ng-href="{{API_URL + medicForm.contracts[1]['attachmentPath']}}"
+                                        target="_blank"><i>contract 2</i></a></div>
+                            </div>
+                        </div><!-- form-group -->
+
+                        <div class="form-group contact" ng-show="medicForm.contracts[2] || showimage3">
+                            <label class="col-sm-3 control-label">Contract</label>
+
+                            <div class="col-sm-7 controls">
+                                <div class="input-group">
+                                    <input type="file" file-model="medicForm.contract3"
+                                           data-ng-model="medicForm.contract3" name="contract3">
+                                    <span class="input-group-addon add_contact3 c3 vd_bg-red vd_white"
+                                          ng-click="removeImage(3)"><i class="fa fa-minus"></i></span>
+                                </div>
+                                <div ng-show="medicForm.contracts[2]"><a
+                                        ng-href="{{API_URL + medicForm.contracts[2]['attachmentPath']}}"
+                                        target="_blank"><i>contract 3</i></a></div>
+                            </div>
+                        </div><!-- form-group -->
+
+                    </div>
+                </div>
+            </div><!-- Tab panes -->
+        </div>
+        <div class="col-sm-12">
+            <div class="add_note_footer">
+
+                <div class="footer_align">
+                    <!--<button type="button" class="btn btn-default"  data-ng-click="cancel()">Close</button>-->
+                    <button type="button" class="btn btn-default" ng-show="preve1" ng-click="tabPanal(1)">Back</button>
+                    <button type="button" class="btn btn-default" ng-show="preve2" ng-click="tabPanal(2)">Next</button>
+                    <button type="button" class="btn btn-warning" ng-show="preve3" data-ng-click="saveMedic(medicForm)" data-ng-disabled="newMedic.$invalid">Save</button>
+                </div>
+
+            </div>
+        </div>
+
+    </form>
+</div>
+<!--model Create-->

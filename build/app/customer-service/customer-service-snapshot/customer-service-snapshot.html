@@ -1,0 +1,389 @@
+<!-- Middle Content Start -->
+
+<div class="vd_content-wrapper">
+    <div class="vd_container">
+        <div class="vd_content clearfix">
+            <div class="vd_head-section clearfix">
+                <div class="vd_panel-header" ng-include="'app/common/breadcrumb.html'"></div>
+            </div>
+            <!-- vd_head-section -->
+            <div class="vd_title-section clearfix">
+                <div class="vd_panel-header">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h1>Customer Service View</h1>
+                            <!-- <small class="subtitle">&nbsp;</small> -->
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <ul class="nav nav-pills year_margin" id="years-buttons">
+                                        <li ng-if="years" data-ng-class="{active:year==selectedYear}" ng-repeat="year in years">
+                                            <a href="#" ng-click="setYear(year)">{{year}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <!--<div class="col-sm-4">
+                                    <a href="#" class="btn new_blue pull-right year_margin vd_white">Historical Info</a>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vd_info tr">
+                        <div class="email_download">
+                            <a href="#" data-ng-click="featureNotConnected()"><i class="fa fa-download"></i></a>
+                            <a href="#" data-ng-click="featureNotConnected()"><i class="fa fa-print"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- vd_panel-header -->
+            </div>
+            <!-- vd_title-section -->
+
+            <div class="vd_content-section clearfix">
+
+                <!-- Year Tab panes -->
+
+                <div>
+                    <div>
+                        <ul class="nav nav-pills" id="months-buttons">
+                            <li data-ng-class="{active:$index==selectedMonth}" ng-repeat="month in months">
+                                <a href="#" ng-click="setMonth($index)">{{month}}</a>
+                            </li>
+                        </ul>
+                        <br/>
+
+                        <!-- Month Tab panes -->
+                        <div>
+                            <div>
+                                <div class="row">
+                                    <div class="col-md-7 mgbt-md-20 mgbt-lg-0">
+
+                                        <div class="vd_interactive-widget light-widget">
+                                            <div class="panel-body-list">
+                                                <div class="vd_panel-menu">
+
+                                                </div>
+                                                <!-- vd_panel-menu -->
+
+                                                <div class="panel vd_map-widget mainPanel">
+                                                    <div class="panel-heading vd_bg-grey">
+                                                        <h3 class="panel-title"> <span class="menu-icon">
+                                                            <i class="icon-graph"></i> </span>
+                                                            <span class="menu-text">Number of Open Issues</span>
+                                                        </h3>
+
+                                                        <div class="vd_panel-menu">
+
+                                                            <!--<div data-action="minimize" data-original-title="Minimize"
+                                                                 data-toggle="tooltip" data-placement="bottom"
+                                                                 class=" menu entypo-icon"><i class="icon-minus3"></i>
+                                                            </div>-->
+
+                                                        </div>
+                                                        <!-- vd_panel-menu -->
+                                                    </div>
+                                                    <div class="panel-body-list pd-20">
+
+                                                        <flot dataset="myData" options="myChartOptions" width="100%"
+                                                              height="255px"
+                                                              on-plot-hover="onEventPloatHover(event, pos, item)"></flot>
+
+
+                                                    </div>
+
+                                                </div>
+
+
+
+                                                <div class="panel vd_map-widget mainPanel">
+                                                    <div class="panel-heading vd_bg-grey">
+                                                        <h3 class="panel-title"> <span class="menu-icon">
+                                                            <i class="icon-graph"></i> </span>
+                                                            <span class="menu-text">Number of Resolved Issues</span>
+                                                        </h3>
+
+                                                        <div class="vd_panel-menu">
+
+                                                            <!--<div data-action="minimize" data-original-title="Minimize"
+                                                                 data-toggle="tooltip" data-placement="bottom"
+                                                                 class=" menu entypo-icon"><i class="icon-minus3"></i>
+                                                            </div>-->
+
+                                                        </div>
+                                                        <!-- vd_panel-menu -->
+                                                    </div>
+                                                    <div class="panel-body-list pd-20">
+
+                                                        <flot dataset="resolved_data" options="myChartOptions" width="100%"
+                                                              height="255px"
+                                                              on-plot-hover="onEventPloatHover(event, pos, item)"></flot>
+
+                                                    </div>
+
+                                                </div>
+
+
+
+
+
+
+
+
+
+
+                                            </div>
+                                        </div>
+                                        <!--<div class="panel vd_interactive-widget light-widget widget">
+                                            <div class="panel-body-list">
+                                                <div class="vd_panel-menu">
+
+                                                </div>
+                                                &lt;!&ndash; vd_panel-menu &ndash;&gt;
+
+                                                &lt;!&ndash; <div class="pd-20">
+                                <h5 class="mgbt-xs-20 mgtp-20"><span class="menu-icon append-icon"><i class="icon-graph"></i></span> <strong>Number of Appointments Made</strong></h5>
+                                <div id="revenue-line-chart_customer_new" style="height:255px; "></div>
+                              </div> &ndash;&gt;
+
+                                            </div>
+                                        </div>-->
+
+                                        <!-- Panel Widget -->
+                                    </div>
+                                    <div class="col-md-5">
+
+                                        <!-- .row -->
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <div class="vd_status-widget widget_blue_light1">
+                                                    <div class="vd_panel-menu">
+                                                        <!--<div data-action="refresh" data-original-title="Refresh"
+                                                             data-rel="tooltip" class=" menu entypo-icon smaller-font">
+                                                        </div>-->
+                                                    </div>
+                                                    <!-- vd_panel-menu -->
+
+                                                    <a class="panel-body"  href="{{box1url}}" >
+
+                                                        <div class="clearfix"><span class="menu-icon"> <i
+                                                                class="icon-bars"></i> </span> <span class="menu-value">{{boxAval | currency:"":0}}</span>
+                                                        </div>
+                                                            <div class="menu-text clearfix">{{boxAtitle}} {{this_month_boxA}} {{asText}}</div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!--col-xs-6 -->
+                                            <div class="col-xs-6">
+                                                <div class="vd_status-widget widget_blue_light2">
+                                                    <div class="vd_panel-menu">
+                                                        <!--<div data-action="refresh" data-original-title="Refresh"
+                                                             data-rel="tooltip" class=" menu entypo-icon smaller-font">
+                                                        </div>-->
+                                                    </div>
+                                                    <!-- vd_panel-menu -->
+
+                                                    <a class="panel-body"  href="{{box2url}}">
+                                                        <div class="clearfix"><span class="menu-value">
+                                                            <span class="menu-icon">
+                                                          <i class="fa fa-adjust"></i>
+                                                        </span> {{boxBval | currency:"":0}} </span></div>
+                                                        <div class="menu-text clearfix">{{boxBtitle}} {{this_month_boxB}} </div>
+                                                    </a></div>
+                                            </div>
+                                            <!--col-xs-6 -->
+                                        </div>
+                                        <!-- .row -->
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <div class="vd_status-widget widget_blue_dark1">
+                                                    <div class="vd_panel-menu">
+                                                        <!--<div data-action="refresh" data-original-title="Refresh"
+                                                             data-rel="tooltip" class=" menu entypo-icon smaller-font">
+                                                        </div>-->
+                                                    </div>
+                                                    <!-- vd_panel-menu -->
+
+                                                    <a class="panel-body"   href="{{box3url}}">
+                                                        <div class="clearfix"><span class="menu-icon"> <i
+                                                                class="fa fa-adjust"></i> </span>
+                                                            <span class="menu-value" id="widget-orders-value-amount"> {{boxCval | currency:"":0}} </span></div>
+                                                        <div class="menu-text clearfix">{{boxCtitle}} {{this_month_boxC}} </div>
+                                                    </a></div>
+                                            </div>
+                                            <!--col-xs-6 -->
+                                            <div class="col-xs-6">
+                                                <div class="vd_status-widget widget_blue_dark2">
+                                                    <div class="vd_panel-menu">
+                                                        <!--<div data-action="refresh" data-original-title="Refresh"
+                                                             data-rel="tooltip" class=" menu entypo-icon smaller-font">
+                                                        </div>-->
+                                                    </div>
+                                                    <!-- vd_panel-menu -->
+
+                                                    <a class="panel-body"   href="{{box4url}}" >
+                                                        <div class="clearfix"><span class="menu-value">
+                                                            <span class="menu-icon">
+                                                            <i class="fa fa-adjust"></i>
+                                                        </span> {{boxDval | currency:"":0}} </span></div>
+                                                        <div class="menu-text clearfix">{{boxDtitle}} {{this_month_boxD}} </div>
+                                                    </a></div>
+                                            </div>
+                                            <!--col-md-xs-6 -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-7 mgbt-md-20 mgbt-lg-0">
+
+
+                                        <div class="vd_interactive-widget light-widget">
+                                            <div class="panel-body-list">
+                                                <div class="vd_panel-menu">
+
+                                                </div>
+                                                <!-- vd_panel-menu -->
+
+
+                                                <!--<div class="panel vd_map-widget mainPanel">
+                                                    <div class="panel-heading vd_bg-grey">
+                                                        <h3 class="panel-title"> <span class="menu-icon"> <i class="icon-graph"></i> </span> <span class="menu-text">Orders Shipped</span> </h3>
+                                                        <div class="vd_panel-menu">
+                                                        </div>
+                                                        &lt;!&ndash; vd_panel-menu &ndash;&gt;
+                                                    </div>
+                                                    <div class="panel-body-list pd-20">
+                                                        <div id="revenue-line-chart_customer_new" style="height:255px; "></div>
+                                                        <flot
+                                                            dataset="myData"
+                                                            options="myChartOptions"
+                                                            width="100%"
+                                                            height="255px"
+                                                            on-plot-hover="onEventPloatHover(event, pos, item)">
+
+                                                        </flot>
+                                                    </div>
+                                                </div>-->
+
+
+
+                                                <!-- <div class="pd-20">
+                                                     <h5 class="mgbt-xs-20 mgtp-20"><span class="menu-icon append-icon"><i class="icon-graph"></i></span> <strong>Number of Appointments Made</strong></h5>
+                                                     <div id="revenue-line-chart_customer_new" style="height:255px; "></div>
+                                                   </div> -->
+
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="col-md-5">
+
+
+                                        <div    class="panel vd_map-widget mainPanel hidden" >
+                                            <div class="panel-heading vd_bg-grey">
+                                                <h3 class="panel-title"> <span class="menu-icon">
+                                                    <i class="glyphicon glyphicon-map-marker">
+                                                    </i> </span> <span class="menu-text">{{piechart1_title}}</span></h3>
+
+                                                <div class="vd_panel-menu">
+                                                    <!--<div data-action="minimize" data-original-title="Minimize"
+                                                         data-toggle="tooltip" data-placement="bottom"
+                                                         class=" menu entypo-icon"></div>-->
+
+                                                </div>
+                                                <!-- vd_panel-menu -->
+                                            </div>
+                                            <div class="panel-body-list">
+
+                                                <flot dataset="pieDataset1" options="pieOptions1" height="300px"
+                                                      on-plot-click="onEventPieClicked(event, pos, item,pie_type)"
+                                                      on-plot-hover="onEventPieHover(event, pos, item)">>
+                                                </flot>
+
+                                            </div>
+                                        </div>
+
+                                        <!--     Pie Chart 2  -->
+
+                                        <div    class="panel vd_map-widget mainPanel hidden" >
+                                            <div class="panel-heading vd_bg-grey">
+                                                <h3 class="panel-title"> <span class="menu-icon">
+                                                    <i class="glyphicon glyphicon-map-marker">
+                                                    </i> </span> <span class="menu-text">{{piechart2_title}}</span></h3>
+
+                                                <div class="vd_panel-menu">
+                                                    <!--<div data-action="minimize" data-original-title="Minimize"
+                                                         data-toggle="tooltip" data-placement="bottom"
+                                                         class=" menu entypo-icon"></div>-->
+
+                                                </div>
+                                                <!-- vd_panel-menu -->
+                                            </div>
+                                            <div class="panel-body-list">
+
+                                                <flot dataset="pieDataset2" options="pieOptions2" height="300px"
+                                                      on-plot-click="onEventPieClicked(event, pos, item,pie_type)"
+                                                      on-plot-hover="onEventPieHover(event, pos, item)">>
+                                                </flot>
+
+                                            </div>
+                                        </div>
+
+
+                                        <!--     Pie Chart 3  -->
+
+                                        <div    class="panel vd_map-widget mainPanel hidden" >
+                                            <div class="panel-heading vd_bg-grey">
+                                                <h3 class="panel-title"> <span class="menu-icon">
+                                                    <i class="glyphicon glyphicon-map-marker">
+                                                    </i> </span> <span class="menu-text">{{piechart3_title}}</span></h3>
+
+                                                <div class="vd_panel-menu">
+                                                    <!--<div data-action="minimize" data-original-title="Minimize"
+                                                         data-toggle="tooltip" data-placement="bottom"
+                                                         class=" menu entypo-icon"></div>-->
+
+                                                </div>
+                                                <!-- vd_panel-menu -->
+                                            </div>
+                                            <div class="panel-body-list">
+
+                                                <flot dataset="pieDataset3" options="pieOptions3" height="300px"
+                                                      on-plot-click="onEventPieClicked(event, pos, item,pie_type)"
+                                                      on-plot-hover="onEventPieHover(event, pos, item)">>
+                                                </flot>
+
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <!--col-md-12 -->
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <!-- Month Tab panes -->
+
+                    </div>
+                </div>
+                <!-- year Tab panes -->
+
+            </div>
+            <!-- .vd_content-section -->
+
+        </div>
+        <!-- .vd_content -->
+    </div>
+    <!-- .vd_container -->
+</div>
+<!-- .vd_content-wrapper -->
+
+<!-- Middle Content End -->

@@ -1,0 +1,90 @@
+<!--Created by ab on 11/2/15.-->
+<div class="vd_content-wrapper">
+    <div class="vd_container">
+        <div class="vd_content clearfix">
+            <div class="vd_head-section clearfix">
+                <div class="vd_panel-header" data-ng-include="'app/common/breadcrumb.html'"></div>
+            </div>
+            <div class="vd_title-section clearfix">
+                <div class="vd_panel-header">
+                    <div class="col-sm-8">
+                        <h1>User Management</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="vd_content-section clearfix">
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="users">
+                        <div class="tr_reminder addnote" is-allowed="ADMIN-SETTINGS,USER-MANAGEMENT,GENERAL|C,">
+                            <a data-ng-click="addUser()" class="bt-add-com pull-right no_margin" data-toggle="modal" data-target="#create_admin">
+                                <i class="fa fa-plus append-icon"></i>
+                                Add User
+                            </a>
+                        </div>
+                        <form name="searchForm">
+                            <div class="input-group width-30">
+                                <input type="text" placeholder="Search" data-ng-model="search">
+                                <a class="input-group-addon" data-ng-click="searchData(search)" ><i class="fa fa-search"></i></a>
+                                <!--<a class="pull-right" data-ng-click="searchData('')">
+                                    <i class="fa fa-refresh"></i>
+                                </a>-->
+                            </div>
+
+                            <!--<div class="input-group width-30">
+                                <a class="bt-add-com pull-right bg_white no_margin" data-ng-click="refreshSearch()">
+                                <i class="fa fa-refresh"></i> </a>
+                            </div>-->
+                        </form>
+                        <div class="clear">&nbsp;</div>
+                        <span class="pull-right"><b class="font-22 font_green">{{users.length}} </b> records found</span>
+                        <div class="responsive" >
+                            <p data-ng-show="users.length < 1"> Search results is empty.</p>
+                            <table class="table table-striped" data-ng-show="users.length >= 1">
+                                <tbody>
+                                    <tr>
+                                        <th>User Name</th>
+                                        <th>Email</th>
+                                        <th>Company</th>
+                                        <th>Role</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    <tr data-ng-repeat="user in users">
+                                        <td>{{user.displayName}} </td>
+                                        <td>{{user.userName}}</td>
+                                        <td>{{user.company}}</td>
+                                        <td>{{user.role}}</td>
+                                        <td data-ng-if="user.state==true" class="green">Active</td>
+                                        <td data-ng-if="user.state==false || user.state== null" class="red">Deactive</td>
+                                        <td>
+                                            <a href="#" class="view_btn" data-toggle="modal" data-ng-click="viewUser(user.id)">
+                                                <i class="fa fa-eye"></i>
+                                            </a> &nbsp;
+                                            <span is-allowed="ADMIN-SETTINGS,USER-MANAGEMENT,GENERAL|U,">
+                                                     <a href="#" class="edit_btn" data-toggle="modal" data-ng-click="editUser(user.id, user)">
+                                                         <i class="fa fa-pencil-square-o"></i>
+                                                     </a>
+                                            </span>
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div>
+                            <div pagination total-items="filtered.length"  ng-model="currentPage" page="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" style="float: right"></div>
+                        </div>
+
+                        <!--<span data-ng-show="users.length > 1">
+                             <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"
+                                         items-per-page="pageLimit" boundary-links="true" rotate="false" max-size="maxSize">
+                             </pagination>
+                         </span>-->
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

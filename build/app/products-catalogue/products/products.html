@@ -1,0 +1,262 @@
+<!-- Middle Content Start -->
+
+<div class="vd_content-wrapper">
+    <div class="vd_container">
+        <div class="vd_content clearfix">
+            <div class="vd_head-section clearfix">
+                <div class="vd_panel-header" ng-include="'app/common/breadcrumb.html'"></div>
+            </div>
+            <!-- vd_head-section -->
+            <div class="vd_title-section clearfix">
+                <div class="vd_panel-header">
+                    <div class="col-sm-6 row">
+                        <h1>Products</h1>
+                    </div>
+                    <div class="vd_info tr m-relative m_mg-top">
+                        <div class="email_download">
+                            <a href="#" data-ng-click="featureNotConnected()"><i class="fa fa-download"></i></a>
+                            <a href="#" data-ng-click="featureNotConnected()"><i class="fa fa-print"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- vd_panel-header -->
+            </div>
+            <!-- vd_title-section -->
+
+            <div class="vd_content-section clearfix">
+
+                <!-- my Product codes -->
+                <div class="row">
+                    <div class="col-md-7">
+                        <form class="form-horizontal popupform" >
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="filter">
+                                        <!-- Login Starts Here -->
+                                        <div id="loginContainer">
+                                            <ul id="loginButtonUl">
+                                                <li>
+                                                    <a href="#" id="loginButton">
+                                                    <span>Category &nbsp; <i class="fa fa-caret-down"></i> </span><em></em>
+                                                    </a>
+                                                    <div style="clear:both"></div>
+                                                    <div id="loginBox">
+                                                        <div id="loginForm">
+                                                            <fieldset id="body">
+                                                                <div class="vd_checkbox checkbox-success" ng-repeat="searchCat in searchCats">
+                                                                    <input type="checkbox" id="cat-{{searchCat.id}}"
+                                                                           data-ng-value="searchCat.id"
+                                                                           data-ng-model="orderFilter.catSearch[searchCat.id]">
+                                                                    <label for="cat-{{searchCat.id}}">{{searchCat.name}}</label>
+                                                                </div>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <a href="#" id="loginButton">
+                                                        <span>Type &nbsp; <i class="fa fa-caret-down"></i> </span><em></em>
+                                                    </a>
+                                                    <div style="clear:both"></div>
+                                                    <div id="loginBox">
+                                                        <div id="loginForm">
+                                                            <fieldset id="body">
+                                                                <div class="vd_checkbox checkbox-success">
+                                                                    <input type="checkbox"
+                                                                           data-ng-model="orderFilter.collection" id="collection">
+                                                                    <label for="collection">Collection</label>
+                                                                </div>
+                                                                <div class="vd_checkbox checkbox-success">
+                                                                    <input type="checkbox"
+                                                                           data-ng-model="orderFilter.unit" id="unit">
+                                                                    <label for="unit">Unit</label>
+                                                                </div>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li> <a href="#" id="loginButton">
+                                                    <span>Status &nbsp; <i class="fa fa-caret-down"></i> </span><em></em>
+                                                </a>
+                                                    <div style="clear:both"></div>
+                                                    <div id="loginBox">
+                                                        <div id="loginForm">
+                                                            <fieldset id="body">
+                                                                <div class="vd_checkbox checkbox-success">
+                                                                    <input type="checkbox"
+                                                                           data-ng-model="orderFilter.active"
+                                                                           id="Active">
+                                                                    <label for="Active">Active</label>
+                                                                </div>
+                                                                <div class="vd_checkbox checkbox-success">
+                                                                    <input type="checkbox"
+                                                                           data-ng-model="orderFilter.inactive"
+                                                                           id="inactive">
+                                                                    <label for="inactive">Inactive</label>
+                                                                </div>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <input type="text" placeholder="Keyword" data-ng-model="orderFilter.keyword">
+                                                </li>
+                                                <li>
+                                                    <a class="bt-add-com pull-right no_margin" data-ng-click="productSearch(orderFilter)">
+                                                        <i class="fa fa-search"></i>
+                                                    </a>
+                                                </li>
+                                                <li> <a class="bt-add-com pull-right bg_white no_margin" data-ng-click="refreshSearch()">
+                                                    <i class="fa fa-refresh"></i> </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <!-- Login Ends Here -->
+
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tr_reminder col-md-5">
+                        <div  is-allowed="PRODUCTS-CATALOGUE,PRODUCTS,GENERAL|C,">
+                        <a data-ng-click="addProduct()" class="bt-add-com pull-right no_margin"><i class="fa fa-plus append-icon"></i>Create Product</a>
+                        </div>
+                        <!--<a data-ng-click="uploadCSV()" class="bt-add-com pull-right mg-right" data-toggle="modal" data-target="#uploadCSV"> <i class="fa fa-plus append-icon"></i>Upload CSV</a>-->
+                        <div  is-allowed="PRODUCTS-CATALOGUE,PRODUCTS,GENERAL|C,">
+                        <a data-ng-click="openProductCSVModal()" class="bt-add-com pull-right mg-right"> <i class="fa fa-plus append-icon"></i>Upload CSV</a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <span class="pull-right"><b class="font-22 font_green">{{totalItems}} </b> records found</span>
+
+                <!-- table list -->
+                <div class="clearfix"> </div>
+                <div class="responsive"> <!-- table-scroll -->
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Category</th>
+                            <th>Type</th>
+                            <th>Status</th>
+                            <th is-allowed="PRODUCTS-CATALOGUE,PRODUCTS,GENERAL|R,">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr data-ng-repeat="list in productList">
+                            <td>{{list.name}}</td>
+                            <td data-ng-if="!list.category"></td>
+                            <td data-ng-if="list.category">
+                                {{list.category}}
+                            </td>
+                            <td>{{list.type}}</td>
+                            <td>
+                                <span class="green" data-ng-show="list.status">Active</span>
+                                <span  class="red" data-ng-show="!list.status">Inactive</span>
+                            </td>
+                            <!--<td data-ng-if="!list.status">Inactive</td>-->
+
+                            <td>
+
+                                <a is-allowed="PRODUCTS-CATALOGUE,PRODUCTS,GENERAL|R," href="#" data-ng-click="showDetail(list.id,list.type)"><i class="fa fa-eye"></i></a>
+                                &nbsp;
+
+
+                                <a is-allowed="PRODUCTS-CATALOGUE,PRODUCTS,GENERAL|C," href="#" data-ng-click="editProduct(list.id, list)" class="edit_btn">
+                                    <i class="fa fa-pencil-square-o"></i>
+
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- table list -->
+
+                 <!--<span data-ng-show="productList.length > 1">
+                     <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"
+                                 items-per-page="pageLimit" boundary-links="true" rotate="false"
+                                 max-size="maxSize">
+                     </pagination>
+                 </span>-->
+
+                <!-- Modal upload csv and edit-->
+                <div class="modal fade bs-example-modal-md" id="uploadCSV" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog modal-md" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="Upload">Upload CSV - Product</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal popupform">
+
+                                    <div class="form-group">
+                                        <label class="control-label">File</label>
+                                        <div class="controls">
+                                            <div class="input-group">
+                                                <input type="file">
+                                            </div>
+                                        </div>
+                                    </div><!-- form-group -->
+
+                                    <label class="control-label">Set of Files</label>
+                                    <div data-ng-class="{'showPlus': $last}" class="form-group" data-ng-repeat="uploadSCV in uploadSCVs">
+                                        <div class="proimg">
+                                            <input type="file" value="{{uploadSCV.img}}">
+                                        </div>
+                                        <div class="proimg">
+                                            <span ng-click="uploadSCVs.splice($index,1)" class="input-group-addon a1 vd_bg-red vd_white rmicon">
+                                                <i class="fa fa-minus"></i>
+                                            </span>
+                                        </div>
+                                        <div class="proimg plus_btn">
+                                            <span ng-click="uploadSCVs.push($index)" class="input-group-addon c1 vd_bg-yellow vd_white">
+                                                <i class="fa fa-plus"></i>
+                                            </span>
+                                        </div>
+                                    </div><!-- form-group -->
+
+
+                                    <div class="col-sm-12">
+                                        <div class="add_note_footer">
+                                            <div class="footer_align">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-warning">Create</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            <div>
+
+                <span data-ng-show="totalItems > pageLimit">
+                     <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()" class="pagination-sm"
+                                 items-per-page="pageLimit" boundary-links="true" rotate="false"
+                                 max-size="maxSize">
+                     </pagination>
+                 </span>
+
+            </div>
+                <!-- Modal end upload csv and edit-->
+
+                <!-- my Product codes end-->
+
+            </div>
+            <!-- .vd_content-section -->
+
+        </div>
+        <!-- .vd_content -->
+    </div>
+    <!-- .vd_container -->
+</div>
+<!-- .vd_content-wrapper -->
+
+<!-- Middle Content End -->

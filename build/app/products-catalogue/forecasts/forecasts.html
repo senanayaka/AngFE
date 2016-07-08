@@ -1,0 +1,124 @@
+<!-- Middle Content Start -->
+
+<div class="vd_content-wrapper">
+    <div class="vd_container">
+        <div class="vd_content clearfix">
+            <div class="vd_head-section clearfix">
+                <div class="vd_panel-header" ng-include="'app/common/breadcrumb.html'"></div>
+            </div>
+            <!-- vd_head-section -->
+            <div class="vd_title-section clearfix">
+                <div class="vd_panel-header">
+                    <div class="col-sm-6">
+                        <h1>Forecast</h1>
+                    </div>
+                    <div class="vd_info tr">
+                        <div class="email_download">
+                            <a href="#" data-ng-click="featureNotConnected()"><i class="fa fa-download"></i></a>
+                            <a href="#" data-ng-click="featureNotConnected()"><i class="fa fa-print"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- vd_panel-header -->
+            </div>
+            <!-- vd_title-section -->
+
+            <div class="vd_content-section clearfix">
+
+                <!-- my Product codes -->
+                <div class="row">
+                    <div class="col-sm-7">
+                        <form class="form-horizontal popupform" >
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="filter">
+                                        <!-- Login Starts Here -->
+                                        <div id="loginContainer">
+                                            <ul id="loginButtonUl">
+                                                <li> <a href="#" id="loginButton">
+                                                    <span>Retailer &nbsp; <i class="fa fa-caret-down"></i> </span><em></em>
+                                                </a>
+                                                    <div style="clear:both"></div>
+                                                    <div id="loginBox">
+                                                        <div id="loginForm">
+                                                            <div class="vd_checkbox checkbox-success" ng-repeat="forecast in forecasts">
+                                                                <input type="checkbox" id="l_{{forecast.id}}" name="{{forecast.id}}" data-ng-model="forecastsRetailerSearch.forecast[forecast.id]">
+                                                                <label for="l_{{forecast.id}}"> {{forecast.name}}</label>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <a class="bt-add-com pull-right no_margin" data-ng-click="productSearch(orderFilter)">
+                                                        <i class="fa fa-search"></i>
+                                                    </a>
+                                                </li>
+                                                <li> <a class="bt-add-com pull-right bg_white no_margin" data-ng-click="refreshSearch()">
+                                                    <i class="fa fa-refresh"></i> </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <!-- Login Ends Here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tr_reminder col-sm-5">
+                        <a data-ng-click="uploadCSV()" class="bt-add-com pull-right mg-right">
+                            <i class="fa fa-plus append-icon"></i>
+                            Upload CSV
+                        </a>
+                    </div>
+                </div>
+
+                <!-- table list -->
+                <div class="clearfix"> </div>
+                <div class="responsive"> <!-- table-scroll -->
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Retailer</th>
+                            <th>Item / KIT Sku Code</th>
+                            <th>Item / KIT Sku Name</th>
+                            <th>Forecasted Units</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr data-ng-repeat="forecast in forecasts">
+                            <td>{{forecast.retailer}}</td>
+                            <td>{{forecast.productSku}}</td>
+                            <td>{{forecast.product}}</td>
+                            <td>{{forecast.forecastedUnits}}</td>
+                            <td format-date-without-time="{{forecast.startDate.date}}" ></td>
+                            <td format-date-without-time="{{forecast.endDate.date}}" ></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- table list -->
+
+                <!-- Pagination part-->
+                 <!--<span data-ng-show="productList.length > 1">
+                     <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"
+                                 items-per-page="pageLimit" boundary-links="true" rotate="false"
+                                 max-size="maxSize">
+                     </pagination>
+                 </span>-->
+
+                <!-- my Product codes end-->
+
+            </div>
+            <!-- .vd_content-section -->
+
+        </div>
+        <!-- .vd_content -->
+    </div>
+    <!-- .vd_container -->
+</div>
+<!-- .vd_content-wrapper -->
+
+<!-- Middle Content End -->

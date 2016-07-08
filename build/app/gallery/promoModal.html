@@ -1,0 +1,124 @@
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-ng-click="cancel()"><span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" id="myModalLabel">Create Promotion</h4>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal popupform" id="promotionForm" name="promotionForm" novalidate>
+        <div class="form-group" data-ng-class="{'has-error' : promotionForm.retailer.$invalid && !promotionForm.retailer.$pristine}">
+            <label class="col-sm-4 control-label">Retailer:* </label>
+            <div class="col-sm-7">
+                <div class="select-style">
+                    <select name="retailer" required data-ng-options="retailer.name for retailer in retailers track by retailer.id" data-ng-model="promotion.company" data-ng-disabled="promotion.id != null">
+                    </select>
+                </div>
+                <p data-ng-show="promotionForm.retailer.$invalid && !promotionForm.retailer.$pristine"
+                   class="help-block">Retailer is required</p>
+            </div>
+        </div>
+        <div class="form-group" data-ng-class="{'has-error' : promotionForm.promotionName.$invalid && !promotionForm.promotionName.$pristine}">
+            <label class="col-sm-4 control-label">Promotion Name:* </label>
+            <div class="col-sm-7  note_input controls">
+                <input required name="promotionName" type="text" data-ng-model="promotion.promotionName">
+                <p data-ng-show="promotionForm.promotionName.$invalid && !promotionForm.promotionName.$pristine"
+                   class="help-block">Promotion Name is required</p>
+            </div>
+        </div>
+        <div class="form-group" data-ng-class="{'has-error' : promotionForm.collection.$invalid && !promotionForm.collection.$pristine}">
+            <label class="col-sm-4 control-label" >Linked Collection:* </label>
+            <div class="col-sm-7">
+                <div class="select-style_search">
+
+                    <ui-select data-ng-disabled="promotion.id != null" required ng-model="promotion.collection" theme="selectize" on-select="loadCollectionSettings($item)">
+                        <ui-select-match placeholder="Select or search a Collection...">{{$select.selected.name}}</ui-select-match>
+                        <ui-select-choices repeat="linkedProduct in linkedCollection | filter: $select.search">
+                            <span ng-bind-html="linkedProduct.name | highlight: $select.search"></span>
+                        </ui-select-choices>
+                    </ui-select>
+
+                </div>
+                <p data-ng-show="promotionForm.product.$invalid && !promotionForm.product.$pristine"
+                   class="help-block">Linked Collection is required</p>
+            </div>
+        </div>
+        <div class="form-group" data-ng-class="{'has-error' : promotionForm.startDate.$invalid && !promotionForm.startDate.$pristine}">
+            <label class="col-sm-4 control-label">Start Date:* </label>
+            <div class="col-sm-6 controls">
+                <div class="input-group">
+                    <input required name="startDate" type="text" datepicker-popup="MM-dd-yyyy"
+                           ng-click="open($event,'opened1')"
+                           ng-model="promotion.startDate" is-open="opened1"
+                           date-disabled="disabled(date, mode)"
+                           close-on-date-selection="true"
+                           show-weeks="false"/>
+                    <span class="input-group-addon">
+                        <i class="fa fa-calendar" ng-click="open($event,'opened1')"></i>
+                    </span>
+                </div>
+                <p data-ng-show="promotionForm.startDate.$invalid && !promotionForm.startDate.$pristine"
+                   class="help-block">Start Date is required</p>
+            </div>
+
+        </div>
+        <div class="form-group" data-ng-class="{'has-error' : promotionForm.endDate.$invalid && !promotionForm.endDate.$pristine}">
+            <label class="col-sm-4 control-label">End Date:* </label>
+
+            <div class="col-sm-6 controls">
+                <div class="input-group">
+                    <input required name="endDate" type="text" datepicker-popup="MM-dd-yyyy"
+                           ng-click="open($event,'opened2')"
+                           ng-model="promotion.endDate" is-open="opened2"
+                           date-disabled="disabled(date, mode)"
+                           close-on-date-selection="true"
+                           show-weeks="false"/>
+                    <span class="input-group-addon">
+                        <i class="fa fa-calendar" data-ng-click="open($event,'opened2')"></i>
+                    </span>
+                </div>
+                <p data-ng-show="promotionForm.endDate.$invalid && !promotionForm.endDate.$pristine"
+                   class="help-block">End Date is required</p>
+                <p data-ng-show="promotionForm.endDate.$error.endBeforeStart"
+                   class="help-block">End date must be on or after start date</p>
+            </div>
+        </div>
+
+        </br>
+
+        <div ng-if="promotion.promotionSettings.length > 0">
+            <h4 class="mgbt-xs-15 mgtp-10 font-semibold">Configurations</h4>
+            <div class="responsive table-scroll">
+                <p data-ng-show='!validatedSingleRow' class="help-block has-error"> At least one configuration record should be filled *</p>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>Configurations</th>
+                        <th>KIT ID</th>
+                        <th>Expected Sales (Units)</th>
+                        <th>Promotional Price (US $)</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr ng-repeat="singlePromotionSetting in promotion.promotionSettings">
+                        <td>{{singlePromotionSetting.configuration.name}}</td>
+                        <td>{{singlePromotionSetting.configuration.sku}}</td>
+                        <td><input data-ng-model="singlePromotionSetting.expectedSales" min="1" type="number" name="expectedSales_{{$index}}"></td>
+                        <td><input data-ng-model="singlePromotionSetting.promotionalPrice" min="1" type="number" name="promotionalPrice_{{$index}}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-sm-12">
+            <div class="add_note_footer">
+                <div class="footer_align">
+                    <input type="hidden" date-ng-model="promotion.id">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="cancel()">Close</button>
+                    <button ng-if="!promotion.id" type="button" class="btn btn-warning visibility_alert" data-ng-click="createOrUpdate()" data-ng-disabled="promotionForm.$invalid || submitted">Create</button>
+                    <button ng-if="promotion.id" type="button" class="btn btn-warning visibility_alert" data-ng-click="createOrUpdate()" data-ng-disabled="promotionForm.$invalid || submitted">Update</button>
+                </div>
+            </div>
+        </div>
+        <span ng-date-converter></span>
+    </form>
+</div>

@@ -1,0 +1,52 @@
+<!-- Modal upload csv and edit-->
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close" data-ng-click="cancel()">
+        <span aria-hidden="true"><i class="fa fa-times-circle-o"></i></span></button>
+    <h4 class="modal-title" id="Upload">Upload CSV - Product</h4>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal popupform" id="newProductCSV" name="newProductCSV" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label class="col-sm-6 control-label">Unit Products CSV File</label>
+            <div class="col-sm-6 controls">
+                <div class="input-group">
+                    <input type="file" file-model="productCSV.unitProductsCSVFile"
+                           data-ng-model="productCSV.unitProductsCSVFile" name="unitProductsCSVFile">
+                </div>
+            </div>
+        </div><!-- form-group -->
+
+        <div class="form-group">
+            <label class="col-sm-6 control-label">Collections CSV File</label>
+            <div class="col-sm-6 controls">
+                <div class="input-group">
+                    <input type="file" file-model="productCSV.collecionsCSVFile"
+                           data-ng-model="productCSV.collecionsCSVFile" name="collecionsCSVFile">
+                </div>
+            </div>
+        </div><!-- form-group -->
+
+        <div class="form-group">
+            <label class="col-sm-6 control-label">Images Zip File</label>
+            <div class="col-sm-6 controls">
+                <div class="input-group">
+                    <input type="file" file-model="productCSV.imagesZip"
+                           data-ng-model="productCSV.imagesZip" name="imagesZip">
+                </div>
+            </div>
+        </div><!-- form-group -->
+
+        <div class="col-sm-12">
+            <div class="add_note_footer">
+                <div class="footer_align">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" data-ng-click="cancel()">Close</button>
+                    <button type="button" class="btn btn-warning" data-ng-disabled="productCSV.$invalid"  data-ng-click="uploadProductCSVFiles()">Create</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- Modal end upload csv and edit-->

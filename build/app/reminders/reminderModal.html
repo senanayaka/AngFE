@@ -1,0 +1,116 @@
+<div class="modal-header">
+    <button type="button" class="close" data-ng-click="cancel()" aria-label="Close">
+        <span aria-hidden="true"><i class="fa fa-times-circle-o"></i></span></button>
+
+    <h4 class="modal-title" id="myModalLabel">{{title}} Reminder</h4>
+</div>
+<div class="modal-body">
+
+
+    <form class="form-horizontal popupform" data-ng-submit="save(newReminder)" id="newReminder" name="newReminder"
+          novalidate>
+        <div class="row">
+
+            <div class="col-sm-12">
+
+                <div class="form-group"
+                     ng-class="{ 'has-error': newReminder.reminder.$dirty && newReminder.reminder.$invalid }">
+                    <label class="col-sm-3 control-label">Reminder: </label>
+
+                    <div class="col-sm-9 note_input controls">
+                        <textarea class="form-control" name="reminder" data-ng-model="reminderForm.reminder"
+                                  required></textarea>
+
+                        <div class="help-block" ng-messages="newReminder.reminder.$error"
+                             ng-if="newReminder.reminder.$dirty && newReminder.reminder.$invalid">
+                            <span ng-message="required">Reminder is required.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group"
+                     ng-class="{ 'has-error': newReminder.cal_date.$dirty && newReminder.cal_date.$invalid}">
+                    <label class="col-sm-3 control-label">Date: </label>
+
+                    <div class="col-sm-9 note_input controls">
+                        <div class="input-group">
+                            <input class="form-control" type="text" name="cal_date" datepicker-popup="MM/dd/yyyy"
+                                   ng-click="open($event,'opened1')" ng-model="reminderForm.calDate" is-open="opened1"
+                                   date-disabled="disabled(date, mode)" close-on-date-selection="true"
+                                   show-weeks="false" min-date="minDate" required checkInvalidDate>
+                            <span class="input-group-addon"><i class="fa fa-calendar"
+                                                               ng-click="open($event,'opened1')"></i></span>
+                        </div>
+                        <div class="help-block" ng-messages="newReminder.cal_date.$error"
+                             ng-if="newReminder.cal_date.$dirty && newReminder.cal_date.$invalid">
+                            <span ng-message="required">Date is required.</span>
+                            <span ng-message="date">Invalid date.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group"
+                     ng-class="{ 'has-error': (newReminder.cat_hour.$dirty && newReminder.cat_hour.$invalid) || (newReminder.cat_minute.$dirty && newReminder.cat_minute.$invalid) || (newReminder.cat_date_type.$dirty && newReminder.cat_date_type.$invalid)}">
+                    <label class="col-sm-3 control-label">Time: </label>
+
+                    <div class="col-sm-3 note_input controls">
+                        <select class="form-control" data-ng-model="reminderForm.hour" name="cat_hour" required
+                                data-ng-options='option.value as option.name for option in hoursOptions'>
+                        </select>
+
+                        <div class="help-block" ng-messages="newReminder.cat_hour.$error"
+                             ng-if="newReminder.cat_hour.$dirty && newReminder.cat_hour.$invalid">
+                            <span ng-message="required">Required.</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 note_input controls">
+                        <select class="form-control" data-ng-model="reminderForm.minute" name="cat_minute" required
+                                data-ng-options='option.value as option.name for option in minuteOptions'>
+                        </select>
+
+                        <div class="help-block" ng-messages="newReminder.cat_minute.$error"
+                             ng-if="newReminder.cat_minute.$dirty && newReminder.cat_minute.$invalid">
+                            <span ng-message="required">Required.</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 note_input controls">
+                        <select class="form-control" data-ng-model="reminderForm.dateType" name="cat_date_type" required
+                                data-ng-options='option.value as option.name for option in dateTypeOptions'>
+                        </select>
+
+                        <div class="help-block" ng-messages="newReminder.cat_date_type.$error"
+                             ng-if="newReminder.cat_date_type.$dirty && newReminder.cat_date_type.$invalid">
+                            <span ng-message="required">Required.</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-offset-3">
+                        <div class="help-block" style="padding-left: 15px;" ng-messages="newReminder.cal_date.$error"
+                             ng-if="newReminder.cal_date.$dirty && newReminder.cal_date.$invalid">
+                            <span ng-message="checkInvalidDate">Invalid date & time (Please be sure to select a future date & time)</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-sm-6"></div>
+
+            </div>
+
+        </div>
+
+        <div class="col-sm-12">
+            <div class="add_note_footer">
+
+                <div class="footer_align">
+                    <button type="button" class="btn btn-default" data-ng-click="cancel()">Close</button>
+                    <button type="submit" class="btn btn-warning"
+                            data-ng-disabled="isProcessing">Save <!--{{button}}-->
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+
+</div>

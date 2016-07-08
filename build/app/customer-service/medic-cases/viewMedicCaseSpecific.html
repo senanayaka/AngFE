@@ -1,0 +1,469 @@
+<!-- Middle Content Start -->
+
+<div class="vd_content-wrapper">
+    <div class="vd_container">
+        <div class="vd_content clearfix">
+
+            <div class="vd_head-section clearfix">
+                <div class="vd_panel-header" ng-include="'app/common/breadcrumb.html'"></div>
+            </div>
+            <!-- vd_head-section -->
+
+            <div class="vd_title-section clearfix">
+                <div class="vd_panel-header no-subtitle">
+                    <h1>Case - {{view[0].case_number}}: {{view[0].title}} <span is-allowed="CUSTOMER-SERVICE,MEDIC,GENERAL|U,">
+                        <a id="view-edit" class="bt-add-view bt-title-add-view" href="#"  data-ng-click="editMedicCase(view[0].case_number)">Edit</a>
+                    </span> &nbsp;</h1>
+
+                </div>
+
+            </div>
+            <div class="vd_content-section clearfix">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <div class="panel widget light-widget panel-bd-top">
+                            <div class="panel-heading no-title"> </div>
+                            <div class="panel-body normal_padding">
+
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <p class="note vd_green">Type: Medic</p>
+                                        <p>
+                                            {{view[0].description}}
+                                        </p>
+                                        <noscript>
+                                            {{$scope.fExt = view[0].image1.split(".").pop()}}
+                                        </noscript>
+                                        <p data-ng-if="$scope.fExt == 'jpg' || $scope.fExt == 'png' || $scope.fExt == 'gif' || $scope.fExt == 'jpeg'">
+                                            <a target="_blank" href="{{API_URL}}images/cases/medic/{{view[0].image1}}">
+                                                <img alt="Medic image" data-ng-src='{{API_URL}}images/cases/medic/{{view[0].image1}}'>
+                                            </a>
+                                        </p>
+                                        <p data-ng-if="view[0].image2">
+                                            <a target="_blank" href="{{API_URL}}images/cases/medic/{{view[0].image2}}">
+                                                <img alt="Medic image" data-ng-src='{{API_URL}}images/cases/medic/{{view[0].image2}}'>
+                                            </a>
+                                        </p>
+                                        <p data-ng-if="view[0].image3">
+                                            <a target="_blank" href="{{API_URL}}images/cases/medic/{{view[0].image2}}">
+                                                <img alt="Medic image" data-ng-src='{{API_URL}}images/cases/medic/{{view[0].image3}}'>
+                                            </a>
+                                        </p>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!-- panel widget -->
+
+
+                    </div>
+
+                    <div class="col-sm-9">
+                        <div class="tabs widget">
+                            <tabset>
+                                <tab active="mainTab.Details" heading="Details">
+                                    <div id="profile-tab" class="tab-pane active">
+                                        <div class="pd-20">
+                                            <div class="case_details_sp col-sm-12">
+                                                <div class="row">
+                                                    <span class="text-capitalize">Status: {{view[0].status}}</span>
+                                                    <span class="" data-ng-if="view[0].priority">Priority: High</span>
+                                                    <span class="" data-ng-if="!view[0].priority">Priority: Low</span>
+                                                    <span class="" data-ng-if="!view[0].due_date.date">Due Date: N/A</span>
+                                                    <span class="" ng-if="view[0].due_date.date">Due Date: <date data-ng-if="view[0].due_date.date" format-date-without-time="{{view[0].due_date.date}}"></date></span>  <span class="">Assigned: {{view[0].assigned_to}}</span>
+                                                </div>
+                                            </div>
+                                            <div class="vd_info tr m-relative m_mg-top">
+                                                <div class="email_download">
+                                                    <a href="#"   ng-click="featureNotConnected()" ><i  class="fa fa-download"></i></a>
+                                                    <a href="#"  ng-click="featureNotConnected()"><i class="fa fa-envelope"></i></a>
+                                                </div>
+                                            </div>
+
+                                            <span is-allowed="CUSTOMER-SERVICE,MEDIC,GENERAL|R,CASE-CAT"
+                                                  data-ng-if="view[0].case_category == 'ESCALATION'" class="escalate-label">
+                                                <i>Escalated to {{view[0].retailer}}</i>
+                                            </span>
+                                            <div class="clearfix"></div>
+
+
+                                            <h3 class="mgbt-xs-15 mgtp-10 font-semibold" style="float:left"><i class="icon-user mgr-10 profile-icon"></i> Customer Details </h3>
+                                            <div class="customer_btn">
+                                                <a ui-sref="customers.view({id:customer[0].customer_id})" target="_blank"  class="bt-add-note no_margin">View Customer Profile</a></div>
+
+
+                                            <div class="clearfix">&nbsp;</div>
+                                            <br>
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="col-sm-12">
+                                                        <div class="row mgbt-xs-0">
+                                                            <label class="col-xs-6 control-label">Customer ID:</label>
+
+                                                            <div class="col-xs-6 controls">
+                                                                {{customer[0].customer_id}}
+                                                            </div>
+                                                            <!-- col-sm-10 -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <div class="row mgbt-xs-0">
+                                                            <label class="col-xs-6 control-label">Customer Name:</label>
+
+                                                            <div class="col-xs-6 controls">{{customer[0].firstName}}
+                                                            </div>
+                                                            <!-- col-sm-10 -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <div class="row mgbt-xs-0">
+                                                            <label class="col-xs-6 control-label">Address:</label>
+
+                                                            <div class="col-xs-6 controls">
+                                                                {{customer[0].address1}}<span data-ng-show="customer[0].address2 != null ">,<br>{{customer[0].address2}}</span>
+                                                                <span data-ng-show="customer[0].address3 != null ">,<br>{{customer[0].address3}}</span>
+                                                            </div>
+                                                            <div class="col-xs-6 controls"
+                                                                 data-ng-if="!customer[0].address1 && !customer[0].address2 && !customer[0].address3">
+                                                                N/A
+                                                            </div>
+                                                            <!-- col-sm-10 -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <div class="row mgbt-xs-0">
+                                                            <label class="col-xs-6 control-label">Email Address:</label>
+
+                                                            <div class="col-xs-6 controls">{{customer[0].email}}</div>
+                                                            <!-- col-sm-10 -->
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-sm-12">
+                                                        <div class="row mgbt-xs-0">
+                                                            <label class="col-xs-6 control-label">Phone:</label>
+
+                                                            <div class="col-xs-6 controls">{{phone1 | phonenumber}}</div>
+                                                            <!-- col-sm-10 -->
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                    <div class="col-sm-12">
+                                                        <div class="row mgbt-xs-0">
+                                                            <label class="col-xs-6 control-label">Purchase Order ID:</label>
+                                                            <div class="col-xs-6 controls">{{orders[0].poNum}}</div>
+                                                            <!-- col-sm-10 -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <div class="row mgbt-xs-0">
+                                                            <label class="col-xs-6 control-label">Sales Order ID:</label>
+                                                            <div class="col-xs-6 controls">{{orders[0].soNum}}</div>
+                                                            <!-- col-sm-10 -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-12">
+                                                        <div class="row mgbt-xs-0">
+                                                            <label class="col-xs-6 control-label">Date of Order:</label>
+
+                                                            <div class="col-xs-6 controls">
+                                                                {{orders[0].order_date}}
+                                                            </div>
+                                                            <!-- col-sm-10 -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-12">
+                                                <table>
+                                                    <tr>
+                                                        <td style="padding:10px"> <a target="_blank" href="#"  ui-sref="orders.view({id:view[0].orderNo})" class="bt-add-view">View Order</a></td>
+                                                        <td>
+                                                            <div id="loginContainer">
+                                                                <ul id="loginButtonUl">
+                                                                    <li> <a href="#" id="loginButton"><span>Product &nbsp; <i class="fa fa-caret-down"></i> </span><em></em></a>
+                                                                        <div style="clear:both"></div>
+                                                                        <div id="loginBox">
+                                                                            <div id="loginForm">
+                                                                                <fieldset id="body">
+                                                                                    <div class="vd_checkbox checkbox-success" data-ng-repeat="line_items in orderItems">
+                                                                                        <a href="#"
+                                                                                           ng-click="showDetail(line_items.id,line_items.type)"
+                                                                                           target="_blank">{{line_items.name}}</a>
+                                                                                    </div>
+                                                                                </fieldset>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                            <br>
+
+                                            <!-- row -->
+                                            <hr class="pd-10"  />
+                                            <div class="row">
+                                                <!-- col-sm-7 -->
+                                                <div class="col-sm-12">
+                                                    <h3 class="mgbt-xs-15 font-semibold"><i class="fa fa-history mgr-10 profile-icon"></i>Case History</h3>
+                                                    <div class="panel">
+                                                        <div class="panel-body table-responsive">
+                                                            <table class="table table-striped table-hover">
+                                                                <tbody>
+                                                                <tr>
+                                                                    <td><strong>Action</strong></td>
+                                                                    <td><strong>User</strong></td>
+                                                                    <td><strong>Date</strong></td>
+                                                                    <td><strong>Time</strong></td>
+                                                                </tr>
+                                                                <tr>No data found</tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- col-sm-7 -->
+                                            </div>
+
+                                            <!-- row -->
+                                        </div>
+                                        <!-- pd-20 -->
+                                    </div>
+                                </tab>
+
+                                <tab active="mainTab.Attachments" heading="Attachments" is-allowed="CUSTOMER-SERVICE,MEDIC,GENERAL|R,ATTACHMENT-TAB">
+                                    <div id="photos-tab" class="tab-pane">
+                                        <div class="pd-20">
+                                            <div class="vd_info tr">
+                                                  <span  is-allowed="CUSTOMER-SERVICE,MEDIC,GENERAL|R,ATTACHMENT">
+                                                <a class="bt-add-note pull-right no_margin" href="#" data-ng-click="addAttachment()">
+                                                    <i class="fa fa-plus append-icon"></i> Add Attachment </a>
+                                                      </span>
+                                            </div>
+                                            <div class="clearfix">&nbsp;</div>
+                                            <br/>
+                                            <div class="row gallery_img" data-ng-repeat="attachment in medAttachments">
+                                                <noscript>
+                                                    {{$scope.fExt = attachment.AttachmentPath.split(".").pop()}}
+                                                </noscript>
+                                                <div class="gallery-item-img col-sm-4"
+                                                     data-ng-if="$scope.fExt == 'jpg' || $scope.fExt == 'png' || $scope.fExt == 'gif' || $scope.fExt == 'jpeg'">
+                                                    <a magnific-popup href="{{API_URL}}images/cases/attachments/{{attachment.AttachmentPath}}" data-rel="prettyPhoto[2]">
+                                                        <img alt="Product image" data-ng-src='{{API_URL}}images/cases/attachments/{{attachment.AttachmentPath}}'>
+                                                    </a>
+                                                </div>
+
+                                                <div class="gallery-item-img col-sm-4"
+                                                     data-ng-if="!($scope.fExt == 'jpg' || $scope.fExt == 'png' || $scope.fExt == 'gif' || $scope.fExt == 'jpeg')">
+                                                    <a href="{{API_URL}}images/cases/attachments/{{attachment.AttachmentPath}}" target="_blank" data-rel="prettyPhoto[2]">Download File ({{$scope.fExt}})
+                                                    </a>
+                                                </div>
+
+                                                <div class="col-sm-8">
+                                                    <p>{{attachment.att_description}}</p>
+                                                    <p>By {{attachment.created_by}}
+                                                        <span class="pull-right"><date format-date="{{attachment.created_at.date}}"></date> (EST)</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="" data-ng-show="medAttachments.length <= 0">
+                                                <h4 class="text-center">No Attachments Found !!!</h4>
+                                            </div>
+
+                                            <div class="clearfix"></div>
+
+                                        </div>
+                                        <!-- pd-20 -->
+                                    </div>
+                                </tab>
+
+                                <tab active="mainTab.Notes" heading="Notes">
+                                    <div id="allnote-tab" class="tab-pane">
+                                        <div class="pd-20">
+
+                                            <!--<div class="email_download pull-right" style="margin-left:10px;">
+                                                <a href="#" data-ng-click="featureNotConnected()"><i class="fa fa-download"></i></a>
+                                                <a href="#" data-ng-click="featureNotConnected()"><i class="fa fa-envelope"></i></a>
+                                            </div>-->
+
+                                            <div class="tr">
+                                                <span  is-allowed="CUSTOMER-SERVICE,MEDIC,GENERAL|R,NOTES">
+                                                        <a class="bt-add-note no_margin" data-ng-click="addNotes()">
+                                                            <i class="fa fa-plus append-icon"></i>Create Note</a>
+                                                </span>
+                                            </div>
+
+                                            <div class="clearfix">&nbsp;</div>
+                                            <br>
+                                            <div><!-- list Notes general -->
+                                                <div class="cmt-cnt" data-ng-repeat="note in medNotes">
+                                                    <img src="http://www.gravatar.com/avatar/5e543256c480ac577d30f76f9120eb74?d=mm&amp;s=35" alt="Notes">
+                                                    <div class="thecom">
+                                                        <strong>By : </strong> <span class="green">{{note.created_by}}</span>
+                                                        <span class="pull-right">
+                                                            <small>Visibility:</small><span class="com_select_view">{{note.note_visibility}}</span>
+                                                        </span>
+                                                        <br>
+                                                        <span class="com-dt"><date format-date="{{note.created_at.date}}"></date> (EST)</span>
+                                                        <p>{{note.note}}</p>
+
+                                                        <div class="note_gallery_download gallery_img">
+                                                            <div class="pull-right gallery-item-img">
+                                                                <span ng-if="note.image_path">
+                                                                    <a magnific-popup href='{{API_URL}}images/cases/notes/{{note.image_path}}'
+                                                                   target="_blank"
+                                                                   class="vd_blue">
+                                                                        <i class="fa fa-paperclip"></i> &nbsp; {{note.originalName}}</a>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="" data-ng-show="medNotes.length <= 0">
+                                                    <h4 class="text-center">No Notes Found !!!</h4>
+                                                </div>
+
+                                            </div><!-- list Notes general-->
+
+
+                                        </div>
+
+                                    </div>
+                                </tab>
+
+                                <tab active="mainTab.Reminders" heading="Reminders" is-allowed="CUSTOMER-SERVICE,MEDIC,GENERAL|R,REMINDER-TAB" >
+
+                                    <div class="pd-20">
+                                        <div class="tr">
+                                             <span  is-allowed="CUSTOMER-SERVICE,MEDIC,GENERAL|R,REMINDER-ADD">
+                                                    <a class="bt-add-note pull-right no_margin" data-toggle="modal"
+                                                                   href="#" data-ng-click="addReminder()"> <i
+                                                        class="fa fa-plus append-icon"></i> Add Reminder</a>
+                                             </span>
+
+                                        </div>
+
+
+                                        <div class="clearfix">&nbsp;</div>
+
+                                        <br>
+
+
+                                        <tabset type="pills">
+                                            <tab active="subTab.open" heading="Open">
+                                                <div class="cmt-container" data-ng-show="listOpen.length > 0">
+                                                    <div data-ng-repeat="lp in listOpen" class="cmt-cnt">
+                                                        <div class="thecom remm">
+                                                            <div class="col-sm-12">
+                                                                <div class="row">
+                                                                    <span class="com-dt red">{{lp.date.timestamp  | amFromUnix | amTimezone:lp.date.timezone.name | amDateFormat:'MM/DD/YYYY @ hh:mmA'}}</span>
+                                                                    <span class="pull-right">
+                                                                      <span class="com_select_view">
+                                                                          <button class="btn btn-primary"
+                                                                                  data-ng-click="editReminder(lp.id)">
+                                                                              Edit
+                                                                          </button>
+                                                                      </span>
+                                                                      <span class="com_select_view">
+                                                                          <button data-ng-click="setAsCompleted(lp.id)"
+                                                                                  class="btn btn-info">Set as
+                                                                              completed
+                                                                          </button>
+                                                                      </span>
+                                                                      <span class="com_select_view">
+                                                                          <span  is-allowed="CUSTOMER-SERVICE,MEDIC,GENERAL|R,REMINDER-DELETE">
+                                                                                  <button data-ng-click="deleteReminder(lp.id)"
+                                                                                          class="btn btn-danger">Delete
+                                                                                  </button>
+                                                                              </span>
+                                                                      </span>
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                            <br>
+
+                                                            <p>{{lp.reminder}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div data-ng-show="listOpen.length == 0 || !listOpen">
+                                                    <h4 class="text-center">No reminders to display</h4>
+                                                </div>
+
+                                            </tab>
+
+                                            <tab active="subTab.completed" heading="Completed">
+
+                                                <div class="cmt-container" data-ng-show="listCompleted.length > 0">
+                                                    <div data-ng-repeat="lc in listCompleted" class="cmt-cnt">
+                                                        <div class="thecom remm">
+                                                            <div class="col-sm-12">
+                                                                <div class="row">
+                                                                    <span class="com-dt green">{{lc.date.timestamp  | amFromUnix | amTimezone:lc.date.timezone.name | amDateFormat:'MM/DD/YYYY @ hh:mmA'}}</span>
+                                                                        <span class="pull-right">
+                                                                            <span class="com_select_view">
+                                                                                <button class="btn btn-primary"
+                                                                                        data-ng-click="editReminder(lc.id)">
+                                                                                    Edit
+                                                                                </button>
+                                                                            </span>
+                                                                            <span class="com_select_view">
+                                                                                <button class="btn btn-success"
+                                                                                        data-ng-click="editReminder(lc.id, true)">
+                                                                                    Set as Open
+                                                                                </button>
+                                                                            </span>
+                                                                            <span class="com_select_view">
+                                                                              <button data-ng-click="deleteReminder(lc.id)"
+                                                                                      class="btn btn-danger">Delete
+                                                                              </button>
+                                                                            </span>
+                                                                        </span>
+                                                                </div>
+                                                            </div>
+                                                            <br>
+
+                                                            <p>{{lc.reminder}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div data-ng-show="listCompleted.length == 0 || !listCompleted">
+                                                    <h4 class="text-center">No reminders to display</h4>
+                                                </div>
+
+                                            </tab>
+
+                                        </tabset>
+                                    </div>
+
+                                </tab>
+
+                            </tabset>
+                            <!-- tab-content -->
+                        </div>
+                        <!-- tabs-widget -->   </div>
+                </div>
+                <!-- row -->
+
+            </div>
+            <!-- .vd_content-section -->
+
+        </div>
+        <!-- .vd_content -->
+    </div>
+    <!-- .vd_container -->
+</div>
+<!-- .vd_content-wrapper -->
+
+<!-- Middle Content End -->

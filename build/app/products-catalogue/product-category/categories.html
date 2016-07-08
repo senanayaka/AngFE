@@ -1,0 +1,192 @@
+<!-- Middle Content Start -->
+<style type="text/css">
+    .sortorder:after {
+        content: '\25b2';
+    }
+    .sortorder.reverse:after {
+        content: '\25bc';
+    }
+</style>
+<div class="vd_content-wrapper">
+    <div class="vd_container">
+        <div class="vd_content clearfix">
+            <div class="vd_head-section clearfix">
+                <div style="font-size: 11px" class="vd_panel-header" ng-include="'app/common/breadcrumb.html'"></div>
+            </div>
+            <!-- vd_head-section -->
+            <div class="vd_title-section clearfix">
+                <div class="vd_panel-header">
+                    <div class="col-sm-6">
+                        <h1>Categories</h1>
+                    </div>
+                    <div class="vd_info tr">
+                        <div class="email_download"><a href="#"><i class="fa fa-download"></i></a> <a href="#"><i
+                                class="fa fa-print"></i></a></div>
+                    </div>
+                </div>
+                <!-- vd_panel-header -->
+            </div>
+            <!-- vd_title-section -->
+
+            <div class="vd_content-section clearfix">
+
+                <!-- my categories codes -->
+                <div class="row">
+                    <div class="col-md-7">
+                        <form class="form-horizontal popupform" >
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="filter">
+                                        <!-- Login Starts Here -->
+                                        <div id="loginContainer">
+                                            <ul id="loginButtonUl">
+                                                <li> <a href="#" id="loginButton"><span>Category &nbsp; <i class="fa fa-caret-down"></i> </span><em></em></a>
+                                                    <div style="clear:both"></div>
+                                                    <div id="loginBox">
+                                                        <div id="loginForm">
+                                                            <fieldset id="body">
+                                                                <div class="vd_checkbox checkbox-success" ng-repeat="searchCat in searchCats">
+                                                                    <input data-ng-show="searchCat.id != 0" type="checkbox" id="c_{{searchCat.id}}" name="{{searchCat.id}}" data-ng-model="productCategorySearch.category[searchCat.id]">
+                                                                    <label data-ng-show="searchCat.id != 0" for="c_{{searchCat.id}}">{{searchCat.name}}</label>
+                                                                </div>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <a href="#" id="loginButton"><span>Level &nbsp; <i class="fa fa-caret-down"></i> </span><em></em></a>
+                                                    <div style="clear:both"></div>
+                                                    <div id="loginBox">
+                                                        <div id="loginForm">
+                                                            <fieldset id="body">
+                                                                <div class="vd_checkbox checkbox-success" ng-repeat="level in levels">
+                                                                    <input type="checkbox" id="l_{{level.id}}" name="{{level.id}}" data-ng-model="productCategorySearch.level[level.id]">
+                                                                    <label for="l_{{level.id}}">Level {{level.id}}</label>
+                                                                </div>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li> <a href="#" id="loginButton"><span>Status &nbsp; <i class="fa fa-caret-down"></i> </span><em></em></a>
+                                                    <div style="clear:both"></div>
+                                                    <div id="loginBox">
+                                                        <div id="loginForm">
+                                                            <fieldset id="body">
+                                                                <div class="vd_checkbox checkbox-success">
+                                                                    <input type="checkbox" data-ng-model="productCategorySearch.statusActive" id="activeStatus" name="activeStatus" value="0">
+                                                                    <label for="activeStatus">Active</label>
+                                                                    <input type="checkbox" data-ng-model="productCategorySearch.statusDisable" id="disableStatus" name="disableStatus" value="1">
+                                                                    <label for="disableStatus">Inactive</label>
+                                                                </div>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <input type="text" placeholder="Keyword" data-ng-model="productCategorySearch.keyWord">
+                                                </li>
+                                                <li>
+                                                    <a class="bt-add-com pull-right no_margin" data-ng-click="searchProductCategory()">
+                                                        <i class="fa fa-search"></i>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a class="bt-add-com pull-right bg_white no_margin" data-ng-click="clearData()">
+                                                        <i class="fa fa-refresh"></i>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <!-- Login Ends Here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tr_reminder col-md-5">
+                        <div is-allowed="PRODUCTS-CATALOGUE,CATEGORIES,GENERAL|C,">
+                            <a data-ng-click="addProductCategory()" class="bt-add-com pull-right no_margin" data-toggle="modal" data-target="#createCategory"> <i class="fa fa-plus append-icon"></i>Create Category</a>
+                        </div>
+                        <div is-allowed="PRODUCTS-CATALOGUE,CATEGORIES,GENERAL|C,">
+                            <a data-ng-click="uploadCSV()" class="bt-add-com pull-right mg-right" data-toggle="modal" data-target="#uploadCSV"> <i class="fa fa-plus append-icon"></i>Upload CSV</a>
+                        </div>
+                    </div>
+                </div>
+
+                <span class="pull-right"><b class="font-22 font_green">{{catCount}} </b> records found</span>
+
+                <!-- table list -->
+                <div class="clearfix"> </div>
+                <div class="responsive"> <!-- table-scroll -->
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>
+                                <a href="" ng-click="order('name')">Name</a>
+                                <span class="sortorder" ng-show="predicate === 'name'" ng-class="{reverse:reverse}"></span>
+                            </th>
+                            <th>
+                                <a href="" ng-click="order('level')">Level</a>
+                                <span class="sortorder" ng-show="predicate === 'level'" ng-class="{reverse:reverse}"></span>
+                            </th>
+                            <th ng-click="order('noProduct')">
+                                <a href="" ng-click="order('noProduct')"># of Products</a>
+                                <span class="sortorder" ng-show="predicate === 'noProduct'" ng-class="{reverse:reverse}"></span>
+                            </th>
+                            <th ng-click="order('status')">
+                                <a href="" ng-click="order('status')">Status</a>
+                                <span class="sortorder" ng-show="predicate === 'status'" ng-class="{reverse:reverse}"></span>
+
+                            </th>
+                            <th is-allowed="PRODUCTS-CATALOGUE,CATEGORIES,GENERAL|C,">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr data-ng-show="categoryLists.length > 0" ng-repeat="catList in categoryLists | startFrom:(currentPage - 1) * pageSize | limitTo:pageLimit | orderBy:predicate:reverse">
+                            <td>{{catList.name}}</td>
+                            <td>Level {{catList.level}}</td>
+                            <td>{{catList.noProduct}}</td>
+                            <td>
+                                <span class="green" data-ng-show="!catList.status">Active</span>
+                                <span class="red" data-ng-show="catList.status">Inactive</span>
+                            </td>
+
+                            <td>
+                                <div  is-allowed="PRODUCTS-CATALOGUE,CATEGORIES,GENERAL|C,">
+                                    <a data-ng-click="editProductCategory(catList.id,catList)" class="edit_btn" data-toggle="modal" data-target="#createCategory"><i class="fa fa-pencil-square-o"></i></a>
+                                </div>
+                            </td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div data-ng-show="categoryLists.length<=0"> No Data Found..!</div>
+
+
+                </div>
+                <!--<div>-->
+                    <!--<div pagination total-items="filtered.length"  ng-model="currentPage" page="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" style="float: right"></div>-->
+                <!--</div>-->
+
+                <div data-ng-show="totalItems > pageLimit" class="text-center">
+                    <pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"
+                                items-per-page="pageLimit" boundary-links="true" rotate="false"
+                                max-size="maxSize"></pagination>
+                </div>
+                <!-- table list -->
+
+
+
+                <!-- my categories codes end-->
+
+            </div>
+            <!-- .vd_content-section -->
+
+        </div>
+        <!-- .vd_content -->
+    </div>
+    <!-- .vd_container -->
+</div>
+<!-- .vd_content-wrapper -->
+
+<!-- Middle Content End -->

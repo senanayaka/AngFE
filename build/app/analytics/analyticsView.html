@@ -1,0 +1,282 @@
+<div class="vd_content-wrapper">
+    <div class="vd_container">
+        <div class="vd_content clearfix">
+            <div class="vd_head-section clearfix">
+                <div class="vd_panel-header" data-ng-include="'app/common/breadcrumb.html'"></div>
+            </div>
+            <!-- vd_head-section -->
+            <div class="vd_title-section clearfix">
+                <div class="vd_panel-header col-sm-6 row">
+                    <h1>Analytics</h1>
+                </div>
+                <div class="vd_info tr m-relative m_mg-top">
+                    <div class="email_download">
+                        <a href="#" data-ng-click="featureNotConnected()"><i class="fa fa-download"></i></a>
+                        <a href="#" data-ng-click="featureNotConnected()"><i class="fa fa-envelope"></i></a>
+                    </div>
+                </div>
+                <!-- vd_panel-header -->
+            </div>
+            <!-- vd_title-section -->
+            <div class="vd_content-section clearfix">
+                <div class="row">
+                    <!-- .row -->
+                    <div class="col-sm-3 mg-bottom">
+                        <div class="vd_status-widget widget_blue_light1 widget_analytics">
+                            <!-- vd_panel-menu -->
+                            <a class="panel-body" href="">
+                                <div class="clearfix">
+                            <span class="menu-icon">
+                                <i class="icon-bars"></i>
+                            </span>
+                            <span class="menu-value">
+                               {{analytics.predicted}} %
+                            </span>
+                                </div>
+                                <div class="menu-text clearfix">
+                                    ACCURACY OF PREDICTED SALES AGAINST ACTUAL SALES ON PROMOTIONS IN THE LAST 30 DAYS
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!--col-xs-3 -->
+                    <div class="col-sm-3 mg-bottom">
+                        <div class="vd_status-widget widget_blue_light2 widget_analytics">
+                            <!-- vd_panel-menu -->
+                            <a class="panel-body" href="">
+                                <div class="clearfix">
+                            <span class="menu-icon">
+                                <i class="icon-bars"></i>
+                            </span>
+                            <span class="menu-value">
+                               {{analytics.transit}} Days
+                            </span>
+                                </div>
+                                <div class="menu-text clearfix">
+                                    Average transit time in the last 30 days
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!--col-xs-3 -->
+                    <div class="col-sm-3 mg-bottom">
+                        <div class="vd_status-widget widget_blue_dark1 widget_analytics">
+                            <!-- vd_panel-menu -->
+                            <a class="panel-body" href="">
+                                <div class="clearfix">
+                            <span class="menu-icon">
+                                <i class="icon-bars"></i>
+                            </span>
+                            <span class="menu-value">
+                               {{analytics.openOrders}} Days
+                            </span>
+                                </div>
+                                <div class="menu-text clearfix">
+                                    Average time orders have been left open in the last 30 days
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!--col-xs-3 -->
+                    <div class="col-sm-3 mg-bottom">
+                        <div class="vd_status-widget widget_blue_dark2 widget_analytics">
+                            <!-- vd_panel-menu -->
+                            <a class="panel-body" href="">
+                                <div class="clearfix">
+                            <span class="menu-icon">
+                                <i class="icon-bars"></i>
+                            </span>
+                            <span class="menu-value">
+                               {{analytics.issueResolution}} Days
+                            </span>
+                                </div>
+                                <div class="menu-text clearfix">
+                                    Average customer issue resolution time in the last 30 days
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <!--col-xs-3 -->
+                </div>
+                <!-- .row -->
+                <div class="clear"></div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <!--col-xs-12 -->
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <!--col-xs-9 -->
+                                <div class="panel vd_map-widget mainPanel">
+                                    <!-- map -->
+                                    <div class="panel-heading vd_bg-grey">
+                                        <h3 class="panel-title"> <span class="menu-icon"> <i class="fa fa-dot-circle-o"></i> </span>
+                                            <span class="menu-text">Sales based on States</span> </h3>
+                                        <div class="">
+                                            <div class=" menu entypo-icon smaller-font" data-placement="bottom" data-toggle="tooltip" data-original-title="Config">
+                                                <div class="vd_mega-menu-content  width-xs-2  left-xs" data-action="click-target" style="display: none;">
+                                                    <div class="child-menu">
+                                                        <div class="content-list content-menu">
+                                                            <ul class="list-wrapper pd-lr-10">
+                                                                <li> <a href=""> <div class="menu-icon"><i class=" fa fa-user"></i></div> <div class="menu-text">User Menu</div> </a> </li>
+                                                                <li> <a href=""> <div class="menu-icon"><i class=" icon-trophy"></i></div> <div class="menu-text">Panel Menu</div> </a> </li>
+                                                                <li> <a href=""> <div class="menu-icon"><i class=" fa fa-envelope"></i></div> <div class="menu-text">Other Menu</div> </a> </li>
+                                                                <li class="line"></li>
+                                                                <li> <a href=""> <div class="menu-icon"><i class=" fa fa-tasks"></i></div> <div class="menu-text"> Tasks</div> </a> </li>
+                                                                <li> <a href=""> <div class="menu-icon"><i class=" icon-lock"></i></div> <div class="menu-text">Privacy</div> </a> </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- vd_panel-menu -->
+                                    </div>
+                                    <div class="panel-body-list pd-15">
+                                        <ul class="nav nav-pills">
+                                            <li class="active"><a href="" aria-controls="us" role="tab" data-toggle="tab">North America</a></li>
+                                        </ul>
+                                        <br>
+                                        <div class="col-sm-12">
+                                            <form class="row no_row_bottom" novalidate name="state">
+                                                <div class="row no_row_bottom">
+                                                    <label class="col-xs-1 control-label from-to-width">From</label>
+                                                    <div class="col-sm-3 col-xs-6">
+                                                        <div class="form-group" data-ng-class="{'has-error' : state.fromDate.$invalid && !state.fromDate.$pristine}">
+                                                            <div class="input-group">
+                                                                <input class="form-control" type="text" name="fromDate" datepicker-popup="MM/dd/yyyy"
+                                                                       ng-click="open($event,'opened1')" data-ng-model="analyticsSearch.fromDate"
+                                                                       is-open="opened1"
+                                                                       date-disabled="disabled(date, mode)" close-on-date-selection="true"
+                                                                       show-weeks="false" min-date="minDate" required>
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-calendar"
+                                                                       ng-click="open($event,'opened1')"></i>
+                                                                </span>
+                                                            </div>
+                                                            <p data-ng-show="state.fromDate.$invalid && !state.fromDate.$pristine"
+                                                               class="help-block">From Date is required</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row no_row_bottom">
+                                                    <label class="col-xs-1 control-label from-to-width">To  </label>
+                                                    <div class="col-sm-3 col-xs-6">
+                                                        <div class="form-group" data-ng-class="{'has-error' : state.toDate.$invalid && !state.toDate.$pristine}">
+                                                            <div class="input-group">
+                                                                <input class="form-control" type="text" name="toDate" datepicker-popup="MM/dd/yyyy"
+                                                                       ng-click="open($event,'opened2')" data-ng-model="analyticsSearch.toDate"
+                                                                       is-open="opened2"
+                                                                       date-disabled="disabled(date, mode)" close-on-date-selection="true"
+                                                                       show-weeks="false" min-date="minDate" required>
+                                                                <span class="input-group-addon">
+                                                                    <i class="fa fa-calendar"
+                                                                       ng-click="open($event,'opened2')"></i>
+                                                                </span>
+                                                            </div>
+                                                            <p data-ng-show="state.toDate.$invalid && !state.toDate.$pristine"
+                                                               class="help-block">To Date is required</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-1 col-xs-2 row">
+                                                        <a data-ng-disabled="state.$invalid"
+                                                           data-ng-click="getStatesDate(analyticsSearch)" class="bt-add-com no_margin">
+                                                            <i class="fa fa-search"></i>
+                                                        </a>
+                                                        <!--<input type="button" value="submit" class="btn btn-primary"-->
+                                                        <!--data-ng-disabled="state.$invalid"-->
+                                                        <!--data-ng-click="getStatesDate(analyticsSearch)">-->
+                                                    </div>
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                        <div class="col-sm-12 ana_1024_view"> <!--<div class="vd_info tr ana_1024_view">-->
+                                            <div id="vmap-data" class="row">
+                                                <h4 class="name"></h4>
+                                                <div> <div class="map_details"><span>Revenue</span> : <span class="revenue"></span></div> <div class="map_details"><span>Units Sold</span> : <span class="unit"></span></div> </div>
+                                                <div> <div class="map_details"><span>Open Orders</span> : <span class="open_order"></span></div> <div class="map_details"><span>Open Orders Value</span> : <span class="no_open_order"></span></div> </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="tab-content">
+                                            <div role="tabpanel" class="tab-pane active" id="us">
+                                                <div id="vmap" style="width:100%; height: 400px;"></div>
+                                            </div>
+                                        </div>
+                                       <!-- <div class="tab-content" data-ng-show="!showUsaMpa">
+                                            <div role="tabpanel" class="tab-pane active" id="us">
+                                                <p>Please select date range.</p>
+                                            </div>
+                                        </div>-->
+
+                                    </div>
+                                </div>
+                                <!-- map -->
+                            </div>
+                            <!--col-xs-9 -->
+                            <div class="col-sm-3">
+                                <!--col-xs-3 -->
+                                <!--<div class="panel vd_map-widget widget">
+                                    &lt;!&ndash; panel 1 &ndash;&gt;
+                                    <div class="panel-heading vd_bg-red">
+                                        <h3 class="panel-title"> <span class="menu-icon"> <i class="fa fa-dot-circle-o"></i> </span>
+                                            <span class="menu-text">Items on Sale</span>
+                                        </h3>
+                                        &lt;!&ndash; vd_panel-menu &ndash;&gt;
+                                    </div>
+                                    <div class="panel-body-list pd-10">
+                                        <span class="col-sm-12 font-12">Number of Items on Sale This Month</span>
+                                        <span class="analyrics_menu-value">{{analytics.saleItems}} </span>
+                                    </div>
+                                </div>-->
+                                <!-- panel 1 -->
+                                <div class="panel vd_map-widget mainPanel">
+                                    <!-- panel 2 -->
+                                    <div class="panel-heading vd_bg-grey">
+                                        <h3 class="panel-title"> <span class="menu-icon"> <i class="fa fa-dot-circle-o"></i> </span> <span class="menu-text">Promotions</span> </h3>
+                                        <!-- vd_panel-menu -->
+                                    </div>
+                                    <div class="panel-body-list pd-10">
+                                        <span class="col-sm-12 font-12">Number of Promotions</span>
+                                        <span class="analyrics_menu-value">{{analytics.promotions}}  </span>
+                                    </div>
+                                </div>
+                                <!-- panel 2 -->
+                                <!--<div class="panel vd_map-widget widget">
+                                    &lt;!&ndash; panel 3 &ndash;&gt;
+                                    <div class="panel-heading new_green">
+                                        <h3 class="panel-title"> <span class="menu-icon"> <i class="fa fa-dot-circle-o"></i> </span> <span class="menu-text">Issues vs Sale</span> </h3>
+                                        &lt;!&ndash; vd_panel-menu &ndash;&gt;
+                                    </div>
+                                    <div class="panel-body-list pd-10">
+                                        <span class="col-sm-12 font-12">Issues over Sale</span>
+                                        <span class="analyrics_menu-value">N/A</span>
+                                        &lt;!&ndash;{{analytics.saleItems}} %&ndash;&gt;
+                                    </div>
+                                </div>-->
+                                <!-- panel 3 -->
+                            </div>
+                        </div>
+                        <!--col-xs-12 -->
+                    </div>
+                    <!-- .vd_content-section -->
+                </div>
+            </div>
+            <!-- .vd_content -->
+        </div>
+        <!-- .vd_container -->
+    </div>
+</div>
+<!--js-->
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+
+
+    });
+
+
+
+</script>

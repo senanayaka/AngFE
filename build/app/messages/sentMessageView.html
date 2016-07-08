@@ -1,0 +1,94 @@
+<!-- Middle Content Start -->
+
+<div class="vd_content-wrapper">
+    <div class="vd_container">
+        <div class="vd_content clearfix">
+            <div class="vd_head-section clearfix">
+                <div class="vd_panel-header" ng-include="'app/common/breadcrumb.html'"></div>
+            </div>
+            <!-- vd_head-section -->
+            <div class="vd_title-section clearfix">
+                <div class="vd_panel-header">
+                    <div class="col-sm-12">
+                        <h1>{{message.subject}}</h1>
+                    </div>
+                    <div class="vd_info tr">
+
+                    </div>
+                </div>
+                <!-- vd_panel-header -->
+            </div>
+            <!-- vd_title-section -->
+
+
+            <div class="vd_content-section clearfix">
+                <div class="panel widget light-widget">
+                    <div class="panel-heading no-title"></div>
+                    <!-- vd_panel-heading -->
+
+                    <div class="panel-body panel-body-padding">
+
+                        <form class="form-horizontal" data-ng-submit="save(newMessage)" id="newMessage"
+                              name="newMessage"
+                              novalidate>
+                            <div class="form-group clearfix">
+                                <label class="col-sm-2 control-label">To</label>
+
+                                <div class="col-sm-10 controls">
+                                    {{message.displayName}} - {{message.companyName}} ({{message.groupName}})
+                                </div>
+                            </div>
+                            <div class="form-group  clearfix">
+                                <label class="col-sm-2 control-label">Date</label>
+
+                                <div class="col-sm-10 controls">
+                                    <strong convert-timestamp="{{message.date.timestamp}}"
+                                            ng-if="message.date.timestamp"></strong>
+                                </div>
+                            </div>
+                            <div class="form-group  clearfix">
+                                <label class="col-sm-2 control-label">Message</label>
+
+                                <div class="col-sm-10 controls">
+                                    {{message.content}}
+                                </div>
+                            </div>
+                            <div class="form-group" ng-class="{ 'has-error': newMessage.message.$dirty && newMessage.message.$invalid }">
+                                <label class="col-sm-12 control-label sr-only">Message</label>
+
+                                <div class="col-sm-12 controls">
+                                    <textarea id="message" class="width-100 form-control" rows="15"
+                                              placeholder="Write your reply here" name="message" data-ng-model="messageForm.message" required></textarea>
+                                    <div class="help-block" ng-messages="newMessage.message.$error"
+                                         ng-if="newMessage.message.$dirty && newMessage.message.$invalid">
+                                        <span ng-message="required">Message is required.</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group form-actions">
+                                <div class="col-sm-12">
+                                    <button type="submit" class="btn btn-warning pull-right"
+                                            data-ng-disabled="isProcessing">Send <!--{{button}}-->
+                                    </button>
+                                    <a type="submit" ui-sref="messages.sent" class="btn vd_btn vd_bg-yellow vd_white">
+                                        Back to sent messages
+                                    </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- panel-body  -->
+
+                </div>
+                <!-- .vd_content-section -->
+
+
+            </div>
+            <!-- .vd_content -->
+        </div>
+        <!-- .vd_container -->
+    </div>
+    <!-- .vd_content-wrapper -->
+
+    <!-- Middle Content End -->

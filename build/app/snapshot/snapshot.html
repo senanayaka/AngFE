@@ -1,0 +1,457 @@
+<!-- Middle Content Start -->
+
+<div class="vd_content-wrapper" data-ng-init="settab('order')" >
+    <div class="vd_container">
+        <div class="vd_content clearfix">
+            <div class="vd_head-section clearfix">
+                <div class="vd_panel-header" ng-include="'app/common/breadcrumb.html'"></div>
+            </div>
+            <!-- vd_head-section -->
+            <div class="vd_title-section clearfix">
+                <div class="vd_panel-header">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h1>Snapshot</h1>
+                            <div class="row">
+                                <div class="col-sm-8">
+                                    <ul class="nav nav-pills year_margin" id="years-buttons">
+                                        <li class="active">
+                                            <a href="#" aria-controls="order" role="tab" data-toggle="tab" ng-click="settab('order')" >Order</a>
+                                        </li>
+                                        <li>
+                                            <a href="#" aria-controls="delivery" role="tab" data-toggle="tab"  ng-click="settab('delivery')" >Delivery</a>
+                                        </li>
+                                        <li  >
+                                            <a href="#" aria-controls="customer" role="tab" data-toggle="tab" ng-click="settab('customer')"  >Customer Service</a>
+                                        </li>
+                                        <!--
+                                            <li    >
+                                                <a  href="#" aria-controls="customer" role="tab" data-toggle="tab" ng-click="settab('return')"  >Return</a>
+                                            </li>
+                                            <li   >
+                                                <a  href="#" aria-controls="customer" role="tab" data-toggle="tab" ng-click="settab('replacement')" >Replacement</a>
+                                            </li>
+                                            <li  ><a href="#" aria-controls="customer" role="tab" data-toggle="tab" ng-click="settab('compensation')" >Compensation</a>
+                                            </li>
+                                            <li><a href="#" aria-controls="customer" role="tab" data-toggle="tab" ng-click="settab('medic')" >Medic</a></li> -->
+                                    </ul>
+                                </div>
+                                <div class="col-sm-4">
+                                    <a href="{{historical_url}}" class="btn new_blue pull-right year_margin vd_white">Historical Info</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="vd_info tr m-relative m_mg-top">
+                        <div class="email_download"><a href="#"><i class="fa fa-download"></i></a> <a href="#"><i
+                                class="fa fa-print"></i></a></div>
+                    </div>
+                </div>
+                <!-- vd_panel-header -->
+            </div>
+            <!-- vd_title-section -->
+
+            <div class="vd_content-section clearfix">
+
+                <!-- Year Tab panes -->
+                <div>
+                    <div>
+                        <!-- <ul class="nav nav-pills" id="years-buttons">
+                             <li ng-if="years" data-ng-class="{active:$index==selectedYear}" ng-repeat="year in years">
+                                 <a href="#" ng-click="setYear($index)">{{year}}</a>
+                             </li>
+                         </ul>
+                         <br/>
+                         <ul class="nav nav-pills" id="years-buttons">
+                             <li ng-if="years" data-ng-class="{active:$index==selectedMonth}" ng-repeat="month in months">
+                                 <a href="#" ng-click="setMonth($index)">{{month}}</a>
+                             </li>
+                         </ul>
+                         <br/>-->
+                        <!-- Month Tab panes -->
+                        <div>
+                            <div>
+                                <div class="row">
+                                    <div class="col-md-7 mgbt-md-20 mgbt-lg-0">
+
+                                        <div class="vd_interactive-widget light-widget">
+                                            <div class="panel-body-list">
+
+                                                <div  data-ng-show="graph1_title != '' "  class="panel vd_map-widget mainPanel">
+                                                    <div class="panel-heading vd_bg-grey">
+                                                        <h3 class="panel-title"> <span class="menu-icon">
+                                                            <i class="icon-graph"></i> </span>
+                                                            <span class="menu-text">{{graph1_title}}</span>
+                                                        </h3>
+                                                    </div>
+                                                    <div class="panel-body-list pd-20">
+                                                        <!--<span class="y-area">Order Items</span>-->
+                                                        <flot dataset="myData" options="myChartOptions" width="100%"
+                                                              height="255px"
+                                                              on-plot-hover="onEventPloatHover(event, pos, item)"></flot>
+                                                        <!--<span class="x-area">{{Year}}</span>-->
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--<div class="panel vd_interactive-widget light-widget widget">
+                                            <div class="panel-body-list">
+                                                <div class="vd_panel-menu">
+
+                                                </div>
+
+
+                                            </div>
+                                        </div>-->
+                                        <!-- Panel Widget -->
+                                        <div data-ng-show="graph1_new_title != '' " class="vd_interactive-widget light-widget">
+                                            <div class="panel-body-list">
+                                                <div class="panel vd_map-widget mainPanel">
+                                                    <div class="panel-heading vd_bg-grey">
+                                                        <h3 class="panel-title"> <span class="menu-icon">
+                                                            <i class="icon-graph"></i> </span>
+                                                            <span class="menu-text">{{graph1_new_title}}</span>
+                                                        </h3>
+                                                    </div>
+                                                    <div class="panel-body-list pd-20">
+                                                        <!--<span class="y-area">Order Items</span>-->
+                                                        <flot dataset="myData2" options="myChartOptions" width="100%"
+                                                              height="255px"
+                                                              on-plot-hover="onEventPloatHover(event, pos, item)"></flot>
+                                                        <!--<span class="x-area">{{Year}}</span>-->
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div   class="vd_interactive-widget light-widget">
+                                            <div class="panel-body-list">
+                                                <div  ng-if="graph2_title" class="panel vd_map-widget mainPanel">
+                                                    <div class="panel-heading vd_bg-grey">
+                                                        <h3 class="panel-title"><span class="menu-icon"> <i
+                                                                class="glyphicon glyphicon-map-marker"></i> </span> <span
+                                                                class="menu-text">{{graph2_title}}</span></h3>
+                                                    </div>
+                                                    <div class="panel-body-list pd-20">
+                                                        <div id="revenue-line-chart_customer_new" style="height:255px; "
+                                                             area-chart
+                                                             area-data="ordersShippedData"
+                                                             area-xkey='period'
+                                                             area-ykeys='["iphone", "ipad", "itouch"]'
+                                                             area-labels='["iPhone", "iPad", "iTouch"]'
+                                                                >
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div data-ng-show="graph_shipped_title != '' "  class="panel vd_map-widget mainPanel">
+                                                    <div class="panel-heading vd_bg-grey">
+                                                        <h3 class="panel-title"> <span class="menu-icon">
+                                                            <i class="icon-graph"></i> </span>
+                                                            <span class="menu-text">{{graph_shipped_title}}</span>
+                                                        </h3>
+                                                    </div>
+                                                    <div class="panel-body-list pd-20">
+                                                        <!--<span class="y-area">Order Items</span>-->
+                                                        <flot dataset="shippeddata" options="myChartOptions" width="100%"
+                                                              height="255px"
+                                                              on-plot-hover="onEventPloatHover(event, pos, item)"></flot>
+                                                        <!--<span class="x-area">{{Year}}</span>-->
+                                                    </div>
+                                                </div>
+
+
+                                                <div data-ng-show="graph0_title != '' "  class="panel vd_map-widget mainPanel">
+                                                    <div class="panel-heading vd_bg-grey">
+                                                        <h3 class="panel-title"> <span class="menu-icon">
+                                                            <i class="icon-graph"></i> </span>
+                                                            <span class="menu-text">{{graph0_title}}</span>
+                                                        </h3>
+                                                    </div>
+                                                    <div class="panel-body-list pd-20">
+                                                        <!--<span class="y-area">Order Items</span>-->
+                                                        <flot dataset="shippeddata" options="myChartOptions" width="100%"
+                                                              height="255px"
+                                                              on-plot-hover="onEventPloatHover(event, pos, item)"></flot>
+                                                        <!--<span class="x-area">{{Year}}</span>-->
+                                                    </div>
+                                                </div>
+
+                                                <div   data-ng-show="graph_resolved_title != '' "   class="panel vd_map-widget mainPanel">
+                                                    <div class="panel-heading vd_bg-grey">
+                                                        <h3 class="panel-title"> <span class="menu-icon">
+                                                            <i class="icon-graph"></i> </span>
+                                                            <span class="menu-text">{{graph_resolved_title}}</span>
+                                                        </h3>
+                                                    </div>
+                                                    <div class="panel-body-list pd-20">
+                                                        <!--<span class="y-area">Order Items</span>-->
+                                                        <flot dataset="resolveddata" options="myChartOptions" width="100%"
+                                                              height="255px"
+                                                              on-plot-hover="onEventPloatHover(event, pos, item)"></flot>
+                                                        <!--<span class="x-area">{{Year}}</span>-->
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div  ng-if="promotion_performance"  class="panel mainPanel">
+                                                    <div class="panel-heading vd_bg-grey">
+                                                        <h3 class="panel-title"><span class="menu-icon">
+                                                            <i class="fa fa-dot-circle-o"></i> </span> Promotion Performance
+                                                        </h3>
+                                                    </div>
+                                                    <div class="panel-body table-responsive">
+                                                        <table class="table table-striped" id="data-tables">
+                                                            <tbody>
+                                                            <tr>
+                                                                <td>Item Models</td>
+                                                                <td>Projections</td>
+                                                                <td>Shipped</td>
+                                                                <td>Open Orders</td>
+                                                                <td>Orders Processed</td>
+                                                                <td>Sell through %</td>
+                                                            </tr>
+
+                                                            <tr ng-repeat="data in promotion_performance"  >
+                                                                <td>{{data.promotionName}}</td>
+                                                                <td>{{data.projections }}</td>
+                                                                <td>{{data.inTransitOrders}}</td>
+                                                                <td>{{data.openOrders}}</td>
+                                                                <td>{{data.orders_processd}}</td>
+
+                                                                <td>{{(data.sales/data.projections)*100 | number : 1}} %</td>
+                                                            </tr>
+                                                            <!-- <tr>{{ val | number:0 }}
+                                                                 <td colspan="6">No data available.</td>
+                                                             </tr>-->
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+
+
+
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5">
+
+                                        <!------ shipped data  -->
+                                        <div ng-if="boxAShippedValue" class="row">
+
+                                            <div class="col-xs-6">
+                                                <div class="vd_status-widget widget_blue_light1">
+                                                    <a class="panel-body"  href="{{boxAShippedurl}}" >
+
+                                                        <div class="clearfix"><span class="menu-icon"> <i
+                                                                class="icon-bars"></i> </span> <span class="menu-value">{{boxAShippedValue | currency:"":0}}</span>
+                                                        </div>
+                                                        <div class="menu-text clearfix">{{boxAShippedurlAtitle}} <!--{{this_month_boxA}}--></div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!--col-xs-6 -->
+                                            <div class="col-xs-6">
+                                                <div class="vd_status-widget widget_blue_light2">
+
+                                                    <a class="panel-body"  href="{{boxBShippedurl}}">
+                                                        <div class="clearfix"><span class="menu-value">
+
+                                                         <span class="menu-icon" ng-if="customer_tab_var != 1" >
+                                                            $
+                                                        </span>
+                                                         <span class="menu-icon" ng-if="customer_tab_var == 1" >
+                                                            <i class="fa fa-adjust"></i>
+                                                        </span>
+
+                                                            {{boxBShippedValue | currency:"":0}} </span></div>
+                                                        <div class="menu-text clearfix">{{boxBShippedurlBtitle}} <!--{{this_month_boxB}}--> </div>
+                                                    </a></div>
+                                            </div>
+                                            <!--col-xs-6 -->
+                                        </div>
+
+
+                                        <!------  -->
+
+
+                                        <!-- .row -->
+                                        <div class="row">
+
+                                            <div class="col-xs-6">
+                                                <div class="vd_status-widget widget_blue_mid1">
+                                                    <a class="panel-body"  href="{{box1url}}" >
+
+                                                        <div class="clearfix"><span class="menu-icon"> <i
+                                                                class="icon-bars"></i> </span> <span class="menu-value">{{boxAval | currency:"":0}}</span>
+                                                        </div>
+                                                        <div class="menu-text clearfix">{{boxAtitle}} <!--{{this_month_boxA}}--></div>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!--col-xs-6 -->
+                                            <div class="col-xs-6">
+                                                <div class="vd_status-widget widget_blue_mid2">
+
+                                                    <a class="panel-body"  href="{{box2url}}">
+                                                        <div class="clearfix"><span class="menu-value">
+
+                                                         <span class="menu-icon" ng-if="customer_tab_var != 1" >
+                                                            $
+                                                        </span>
+                                                         <span class="menu-icon" ng-if="customer_tab_var == 1" >
+                                                            <i class="fa fa-adjust"></i>
+                                                        </span>
+
+                                                            {{boxBval | currency:"":0}} </span></div>
+                                                        <div class="menu-text clearfix">{{boxBtitle}} <!--{{this_month_boxB}}--> </div>
+                                                    </a></div>
+                                            </div>
+                                            <!--col-xs-6 -->
+                                        </div>
+                                        <!-- .row -->
+                                        <div class="row">
+                                            <div class="col-xs-6">
+                                                <div class="vd_status-widget widget_blue_dark1">
+                                                    <a class="panel-body" href="{{box3url}}">
+                                                        <div class="clearfix"><span class="menu-icon"> <i
+                                                                class="fa fa-adjust"></i> </span>
+                                                            <span class="menu-value" id="widget-orders-value-amount"> {{boxCval | currency:"":0}} </span></div>
+                                                        <div class="menu-text clearfix">{{boxCtitle}} <!--{{this_month_boxC}}--> </div>
+                                                    </a></div>
+                                            </div>
+                                            <!--col-xs-6 -->
+                                            <div class="col-xs-6">
+                                                <div class="vd_status-widget widget_blue_dark2">
+
+                                                    <a class="panel-body"   href="{{box4url}}" >
+                                                        <div class="clearfix"><span class="menu-value">
+
+                                                             <span class="menu-icon" ng-if="customer_tab_var != 1" >
+                                                            $
+                                                        </span>
+                                                         <span class="menu-icon" ng-if="customer_tab_var == 1" >
+                                                            <i class="fa fa-adjust"></i>
+                                                        </span>
+
+                                                            {{boxDval | currency:"":0}} </span></div>
+                                                        <div class="menu-text clearfix">{{boxDtitle}} <!--{{this_month_boxD}}--> </div>
+                                                    </a></div>
+                                            </div>
+                                            <!--col-md-xs-6 -->
+                                        </div>
+
+
+
+
+                                        <!--     Pie Chart 1  -->
+
+
+                                        <div   ng-if="pieDataset1" class="panel vd_map-widget mainPanel">
+                                            <div class="panel-heading vd_bg-grey">
+                                                <h3 class="panel-title"> <span class="menu-icon">
+                                                    <i class="glyphicon glyphicon-map-marker">
+                                                    </i> </span> <span class="menu-text">{{piechart1_title}}</span></h3>
+
+                                            </div>
+                                            <div class="panel-body-list">
+
+                                                <flot dataset="pieDataset1" options="pieOptions1" height="300px"
+                                                      on-plot-click="onEventPieClicked(event, pos, item,pie_type)"
+                                                      on-plot-hover="onEventPieHover(event, pos, item)">>
+                                                </flot>
+
+                                            </div>
+                                        </div>
+
+                                        <!--     Pie Chart 2  -->
+
+                                        <div  ng-if="pieDataset2"  class="panel vd_map-widget mainPanel">
+                                            <div class="panel-heading vd_bg-grey">
+                                                <h3 class="panel-title"> <span class="menu-icon">
+                                                    <i class="glyphicon glyphicon-map-marker">
+                                                    </i> </span> <span class="menu-text">{{piechart2_title}}</span></h3>
+                                            </div>
+                                            <div class="panel-body-list">
+
+                                                <flot dataset="pieDataset2" options="pieOptions2" height="300px"
+                                                      on-plot-click="onEventPieClicked(event, pos, item,pie_type)"
+                                                      on-plot-hover="onEventPieHover(event, pos, item)">>
+                                                </flot>
+
+                                            </div>
+                                        </div>
+
+
+                                        <!--     Pie Chart 3  -->
+
+                                        <div ng-if="pieDataset3"   class="panel vd_map-widget mainPanel">
+                                            <div class="panel-heading vd_bg-grey">
+                                                <h3 class="panel-title"> <span class="menu-icon">
+                                                    <i class="glyphicon glyphicon-map-marker">
+                                                    </i> </span> <span class="menu-text">{{piechart3_title}}</span></h3>
+                                            </div>
+                                            <div class="panel-body-list">
+
+                                                <flot dataset="pieDataset3" options="pieOptions3" height="300px"
+                                                      on-plot-click="onEventPieClicked(event, pos, item,pie_type)"
+                                                      on-plot-hover="onEventPieHover(event, pos, item)">>
+                                                </flot>
+
+                                            </div>
+                                        </div>
+
+                                        <!--   <div class="panel widget vd_realtime-chart-widget">
+                                                    <div class="panel-heading vd_bg-blue">
+                                                        <h3 class="panel-title"><span class="menu-icon"> <i
+                                                                class="icon-graph"></i> </span>Orders SLA </h3>
+
+                                                        <div class="vd_panel-menu">
+                                                            <div data-action="minimize" data-original-title="Minimize"
+                                                                 data-toggle="tooltip" data-placement="bottom"
+                                                                 class=" menu entypo-icon"></div>
+                                                            <div data-action="refresh" data-original-title="Refresh"
+                                                                 data-toggle="tooltip" data-placement="bottom"
+                                                                 class=" menu entypo-icon smaller-font"></div>
+                                                        </div>
+
+
+                                              </div>
+                                             <div class="panel-body-list pd-15">
+
+                                                  <div id="donut-example" donut-chart
+                                                       donut-data='[
+                                                              {label: "Download Sales", value: 12},
+                                                              {label: "In-Store Sales",value: 30},
+                                                              {label: "Mail-Order Sales", value: 20}
+                                                          ]'
+                                                       donut-colors='["#31C0BE","#c7254e","#98a0d3"]'
+                                                       donut-formatter='"currency"'></div>
+                                              </div>
+                                          </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- year Tab panes -->
+
+                    </div>
+                    <!-- .vd_content-section -->
+
+                </div>
+                <!-- .vd_content -->
+            </div>
+            <!-- .vd_container -->
+        </div>
+        <!-- .vd_content-wrapper -->
+    </div>
+</div>
+<!-- Middle Content End -->

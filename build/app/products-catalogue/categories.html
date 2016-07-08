@@ -1,0 +1,219 @@
+<!-- Middle Content Start -->
+
+<div class="vd_content-wrapper">
+    <div class="vd_container">
+        <div class="vd_content clearfix">
+            <div class="vd_head-section clearfix">
+                <div class="vd_panel-header" ng-include="'app/common/breadcrumb.html'"></div>
+            </div>
+            <!-- vd_head-section -->
+            <div class="vd_title-section clearfix">
+                <div class="vd_panel-header">
+                    <div class="col-sm-6">
+                        <h1>Categories</h1>
+                    </div>
+                    <div class="vd_info tr">
+                        <div class="email_download"><a href="#"><i class="fa fa-download"></i></a> <a href="#"><i
+                                class="fa fa-print"></i></a></div>
+                    </div>
+                </div>
+                <!-- vd_panel-header -->
+            </div>
+            <!-- vd_title-section -->
+
+            <div class="vd_content-section clearfix">
+
+                <!-- my categories codes -->
+                <div class="row">
+                    <div class="col-sm-7">
+                        <form class="form-horizontal popupform" >
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="filter">
+                                        <!-- Login Starts Here -->
+                                        <div id="loginContainer">
+                                            <ul id="loginButtonUl">
+                                                <li> <a href="#" id="loginButton"><span>Category &nbsp; <i class="fa fa-caret-down"></i> </span><em></em></a>
+                                                    <div style="clear:both"></div>
+                                                    <div id="loginBox">
+                                                        <div id="loginForm">
+                                                            <fieldset id="body">
+                                                                <div class="vd_checkbox checkbox-success" ng-repeat="searchCat in searchCats">
+                                                                    <input type="checkbox" id="{{searchCat.id}}" name="aaa">
+                                                                    <label for="{{searchCat.id}}">{{searchCat.category}}</label>
+                                                                </div>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li> <a href="#" id="loginButton"><span>Level &nbsp; <i class="fa fa-caret-down"></i> </span><em></em></a>
+                                                    <div style="clear:both"></div>
+                                                    <div id="loginBox">
+                                                        <div id="loginForm">
+                                                            <fieldset id="body">
+                                                                <div class="vd_checkbox checkbox-success" ng-repeat="searchLvl in searchLvls">
+                                                                    <input type="checkbox" id="level_{{searchLvl.id}}" name="aaa">
+                                                                    <label for="level_{{searchLvl.id}}">{{searchLvl.level}}</label>
+                                                                </div>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li> <a href="#" id="loginButton"><span>Status &nbsp; <i class="fa fa-caret-down"></i> </span><em></em></a>
+                                                    <div style="clear:both"></div>
+                                                    <div id="loginBox">
+                                                        <div id="loginForm">
+                                                            <fieldset id="body">
+                                                                <div class="vd_checkbox checkbox-success" ng-repeat="searchStatus in searchStatuss">
+                                                                    <input type="checkbox" id="status_{{searchStatus.id}}" name="aaa">
+                                                                    <label for="status_{{searchStatus.id}}">{{searchStatus.status}}</label>
+                                                                </div>
+                                                            </fieldset>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <input type="text" placeholder="Keyword">
+                                                </li>
+                                                <li> <a class="bt-add-com pull-right no_margin"> <i class="fa fa-search"></i> </a> </li>
+                                                <li> <a class="bt-add-com pull-right bg_white no_margin"> <i class="fa fa-refresh"></i> </a> </li>
+                                            </ul>
+                                        </div>
+                                        <!-- Login Ends Here -->
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="tr_reminder col-sm-5">
+                        <a data-ng-click="catAdd(catList)" class="bt-add-com pull-right no_margin" data-toggle="modal" data-target="#createCategory"> <i class="fa fa-plus append-icon"></i>Create Category</a>
+                        <a data-ng-click="uploadCSV()" class="bt-add-com pull-right mg-right" data-toggle="modal" data-target="#uploadCSV"> <i class="fa fa-plus append-icon"></i>Upload CSV</a>
+                    </div>
+                </div>
+
+                <!-- table list -->
+                <div class="clearfix"> </div>
+                <div class="responsive"> <!-- table-scroll -->
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Level</th>
+                            <th># of Products</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="catList in catLists">
+                            <td>{{catList.name}}</td>
+                            <td>{{catList.level}}</td>
+                            <td>{{catList.noProduct}}</td>
+                            <td>{{catList.status}}</td>
+                            <td><a data-ng-click="catEdit(catList)" class="edit_btn" data-toggle="modal" data-target="#createCategory"><i class="fa fa-pencil-square-o"></i></a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!-- table list -->
+
+                <!-- Modal create and edit-->
+                <div class="modal fade bs-example-modal-md" id="createCategory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog modal-md" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Create Category</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal popupform">
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Category Name: </label>
+                                        <div class="col-sm-8  note_input controls">
+                                            <input type="text" ng-model="catList.name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label" for="repeatSelect">Parent: </label>
+                                        <div class="col-sm-8">
+                                            <div class="select-style">
+                                                <select name="repeatSelect" id="repeatSelect" ng-model="catParents.repeatSelect">
+                                                    <option ng-repeat="catParent in catParents.availableOption" value="{{catParent.id}}">{{catParent.parent}}</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Satatus:  </label>
+                                        <div class="col-sm-8 controls">
+                                            <div class="vd_radio radio-success">
+                                                <input type="radio" checked="" value="option3" id="optionsRadios3" name="optionsRadios2">
+                                                <label for="optionsRadios3"> Active </label>
+                                                <input type="radio" value="option4" id="optionsRadios4" name="optionsRadios2">
+                                                <label for="optionsRadios4"> Inactive </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12">
+                                        <div class="add_note_footer">
+                                            <div class="footer_align">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-warning visibility_alert">Create</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal end create and edit-->
+
+                <!-- Modal upload csv and edit-->
+                <div class="modal fade bs-example-modal-md" id="uploadCSV" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog modal-md" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="Upload">Upload CSV - Category</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal popupform">
+
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">File</label>
+                                        <div class="col-sm-8 controls">
+                                            <div class="input-group">
+                                                <input type="file">
+                                            </div>
+                                        </div>
+                                    </div><!-- form-group -->
+
+                                    <div class="col-sm-12">
+                                        <div class="add_note_footer">
+                                            <div class="footer_align">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-warning">Create</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Modal end upload csv and edit-->
+
+                <!-- my categories codes end-->
+
+            </div>
+            <!-- .vd_content-section -->
+
+        </div>
+        <!-- .vd_content -->
+    </div>
+    <!-- .vd_container -->
+</div>
+<!-- .vd_content-wrapper -->
+
+<!-- Middle Content End -->

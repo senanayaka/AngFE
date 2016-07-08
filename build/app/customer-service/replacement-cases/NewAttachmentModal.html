@@ -1,0 +1,40 @@
+<div class="modal-header">
+    <button type="button" class="close" data-ng-click="cancel()">
+        <span aria-hidden="true">&times;</span></button>
+    <h4 class="modal-title" id="myModalLabel">Add Attachment</h4>
+</div>
+<div class="modal-body">
+    <form class="form-horizontal popupform" name="attached" novalidate>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group image1">
+                    <label class="col-sm-4 control-label">Attachment: </label>
+                    <div class="col-sm-8 controls">
+                        <div class="input-group" data-ng-class="{'has-error' : attached.attachFile.$invalid }">
+                            <input name="attachFile" type="file" file-model="repAttach.attachment"
+                                   required data-ng-model="repAttach.attachment">
+                        </div>
+                        <p data-ng-show="attached.attachFile.$invalid"
+                           class="help-block">Attachment is required.</p>
+                    </div>
+                </div>
+                <div class="form-group image1">
+                    <label class="col-sm-4 control-label">Description: </label>
+                    <div class="col-sm-8 controls">
+                        <textarea data-ng-model="repAttach.desc"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12">
+            <div class="add_note_footer">
+                <div class="footer_align">
+                    <button type="button" class="btn btn-default" data-ng-click="cancel()">Close</button>
+                    <button type="button" class="btn btn-warning visibility_alert"
+                            data-ng-click="attachmentSave(repAttach)"
+                            data-ng-disabled="attached.$invalid">Create</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,264 @@
+ <!-- Middle Content Start -->
+        <div class="vd_content-wrapper">
+            <div class="vd_container">
+                <div class="vd_content clearfix">
+
+                    <div class="vd_head-section clearfix">
+                        <div class="vd_panel-header" ng-include="'app/common/breadcrumb.html'"></div>
+                    </div>
+                    <!-- vd_head-section -->
+
+                    <div class="vd_title-section clearfix">
+                        <div class="vd_panel-header no-subtitle">
+                            <h1>{{productData.name}}</h1>
+                        </div>
+                    </div>
+                    <div class="vd_content-section clearfix">
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <div class="panel widget light-widget panel-bd-top">
+                                    <div class="panel-heading no-title"> </div>
+                                    <div class="panel-body normal_padding">
+
+                                        <div  class="text-center vd_info-parent" data-ng-repeat="productImage in productData.productImages"
+                                                data-ng-if="productData.productImages" data-ng-show="$index==0">
+                                           <a href="{{API_URL}}images/products/{{productImage.imagePath}}" magnific-popup>
+                                               <img check-image-order ng-src="{{API_URL}}images/products/{{productImage.imagePath}}">
+                                           </a>
+                                        </div>
+                                        <br>
+                                        <p>{{productData.shortDesc}}</p>
+                                    </div>
+                                </div>
+                                <!-- panel widget -->
+
+                            </div>
+                            <div class="col-sm-9">
+                                <div class="tabs widget">
+                                    <ul class="nav nav-tabs widget">
+                                        <li class="active">
+                                            <a data-toggle="tab" href="#profile-tab">Product Details
+                                                <span class="menu-active"><i class="fa fa-caret-up"></i></span>
+                                            </a></li>
+                                    </ul>
+                                    <div class="tab-content">
+
+                                        <div id="profile-tab" class="tab-pane active">
+                                            <div class="pd-20">
+                                                <!-- <div class="vd_info tr"> <a class="btn vd_btn btn-xs vd_bg-yellow"> <i class="fa fa-pencil append-icon"></i> Edit </a> </div>      -->
+                                                <div class="vd_info tr">
+                                                    <div class="email_download">
+                                                        <a href="#" data-ng-click="featureNotConnected()"><i class="fa fa-download"></i></a>
+                                                        <a href="#" data-ng-click="featureNotConnected()"><i class="fa fa-envelope"></i></a>
+                                                    </div>
+                                                </div>
+
+                                                <h3 class="mgbt-xs-15 mgtp-10 font-semibold"><!-- <i class="icon-user mgr-10 profile-icon"></i> -->
+                                                    Description
+                                                </h3>
+
+                                                <div class="vd_info customerview">
+
+                                                    <!--  <a class="btn vd_btn btn-xs vd_bg-yellow" href="custormer_specific.php">View Custormer Profile</a> -->
+                                                </div>
+
+                                                <p>{{productData.description}}</p>
+
+                                                <div>
+                                                    <h3 class="mgbt-xs-15 mgtp-10 font-semibold"><!-- <i class="icon-user mgr-10 profile-icon"></i> -->
+                                                        General Details
+                                                    </h3>
+                                                    <ul>
+                                                        <li data-ng-if="productData.sku">SKU:              {{productData.sku}}</li>
+                                                        <li data-ng-if="productData.type">Type:              {{productData.type}}</li>
+                                                        <li data-ng-if="productData.type">Vendor Name:           {{productData.company}}</li>
+                                                        <li data-ng-if="productData.status">Status:               Active</li>
+                                                        <li data-ng-if="!productData.status">Status:               Inactive</li>
+                                                        <li data-ng-if="productData.productCountryName">Country of Manufacture: {{productData.productCountryName}}</li>
+                                                        <li data-ng-if="productData.category">Category : <span data-ng-repeat="cat in productData.category">{{cat.cname}}, </span></li>
+                                                        <li data-ng-if="productData.createdAt">Created On :         {{productData.createdAt}}</li>
+                                                        <li data-ng-if="productData.updatedAt">Updated On:           {{productData.updatedAt.date | date:'mm-dd-yyyy'}}</li>
+                                                    </ul>
+                                                </div>
+                                                <div data-ng-if="productData.type=='UNIT'">
+                                                    <h3 class="mgbt-xs-15 mgtp-10 font-semibold"><!-- <i class="icon-user mgr-10 profile-icon"></i> -->
+                                                        Dimensions
+                                                    </h3>
+                                                    <ul>
+                                                        <li>Height              : <span data-ng-if="productData.height">{{productData.height}} feet</span><span data-ng-if="!productData.height">-</span></li>
+                                                        <li>Width               : <span data-ng-if="productData.width">{{productData.width}} feet</span><span data-ng-if="!productData.width">-</span></li>
+                                                        <li>Depth               : <span data-ng-if="productData.depth">{{productData.depth}} feet</span><span data-ng-if="!productData.depth">-</span></li>
+                                                        <li>Volume              : <span data-ng-if="productData.volume">{{productData.volume}} feet<sup>3</sup></span><span data-ng-if="!productData.volume">-</span></li>
+                                                        <li>Weight              : <span data-ng-if="productData.weight">{{productData.weight}} lb</span><span data-ng-if="!productData.weight">-</span></li>
+                                                    </ul>
+                                                </div>
+
+                                                <div data-ng-if="productData.type=='UNIT'">
+                                                    <h3 class="mgbt-xs-15 mgtp-10 font-semibold"><!-- <i class="icon-user mgr-10 profile-icon"></i> -->
+                                                        Colors and Materials
+                                                    </h3>
+                                                    <ul>
+                                                        <li data-ng-if="productData.colour">Color : <span data-ng-repeat="col in productData.colour">{{col.colour}}, </span></li>
+                                                        <li data-ng-if="productData.primaryMaterial">Primary Material    : <span data-ng-repeat="mat in productData.primaryMaterial">{{mat.material}}, </span></li>
+                                                    </ul>
+                                                </div>
+
+                                                <div>
+                                                    <h3 class="mgbt-xs-15 mgtp-10 font-semibold"><!-- <i class="icon-user mgr-10 profile-icon"></i> -->
+                                                        Price Details
+                                                    </h3>
+                                                    <ul>
+                                                        <li data-ng-if="productData.currentPrice">Listed price              :$ {{productData.currentPrice | number: 2}} </li>
+                                                        <li data-ng-if="productData.declaredPrice">Declared value              :$ {{productData.declaredPrice | number: 2}}</li>
+                                                    </ul>
+                                                </div>
+
+                                                <!-- row -->
+                                                <hr class="pd-10"  />
+                                                <div data-ng-if="productData.type=='COLLECTION'">
+
+                                                    <!-- col-sm-7 -->
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <h3 class="mgbt-xs-15 mgtp-10 font-semibold"><!-- <i class="icon-user mgr-10 profile-icon"></i> -->
+                                                            Configurations
+                                                        </h3>
+                                                    </div>
+                                                </div>
+                                                    <!-- col-sm-7 -->
+
+                                                    <div class="view-container">
+                                                        <div class="cmt-cnt cm_view pvs_view" data-ng-if="productData.type=='COLLECTION'" data-ng-repeat="configurationProduct in productData.configurationProducts">
+                                                            <!--| startFrom:(currentPage - 1) * pageSize | limitTo:pageSize-->
+                                                            <div class="row form-group cm_view_head pvs_view_head">
+                                                                <label class="col-sm-6 col-xs-12 note_label control-label pd-5-10">{{configurationProduct.Title}}</label>
+                                                                <!--<label class="col-sm-6 note_label control-label"> <span class="pull-right"> Case number: {{value.case_id}}
+                                                                    &nbsp;
+                                                                    <a data-target="#editCase" data-toggle="modal" href="#" ng-click="editCompCase(value.case_id)" class="bt-add-view">Edit</a>
+                                                                    &nbsp;
+                                                                    <a href="#" ui-sref="customerService.compensationCases.view({id:value.case_id})" class="bt-add-view">View</a></span> </label>-->
+                                                                <label class="col-sm-6 col-xs-12 note_label ontrol-label">
+                                                                    <div class="col-md-4 col-sm-3"></div>
+                                                                    <div class="col-sm-4 col-xs-6">
+                                                                        <div class="select-style temp_hide_status row">
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-md-4 col-sm-5 col-xs-6 compen_view">
+                                                                  <span class="pull-right row">
+                                                                      <!--Case number: {{value.case_id}} &nbsp;-->
+                                                                      <span data-ng-show="configurationProduct.id == null" class="bt-add-view" data-ng-click="showDetail(configurationProduct.id,'UNIT')">View</span>
+                                                                  </span>
+                                                                    </div>
+                                                                </label>
+
+                                                            </div>
+
+                                                            <div class="col-sm-12">
+                                                                <div class="row no_row_bottom">
+                                                                    <div class="row no_row_bottom">
+                                                                        <div class="col-sm-12">
+                                                                            <div class="form-group">
+                                                                                <p>KIT ID: {{configurationProduct.sku}}</p>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row no_row_bottom">
+                                                                        <div class="col-sm-12">
+                                                                            <div class="cm_view_foot">
+
+                                                                                <table class="table table-striped table-hover">
+                                                                                    <tbody>
+                                                                                    <tr>
+                                                                                        <td><strong>SKU ID</strong></td>
+                                                                                        <td><strong>Product Name</strong></td>
+                                                                                        <td><strong>Config. Specific Price</strong></td>
+                                                                                        <td><strong>Quantity</strong></td>
+                                                                                        <td><strong>Action</strong></td>
+                                                                                    </tr>
+                                                                                    <tr data-ng-repeat="configUnit in configurationProduct.configUnits">
+                                                                                        <td>{{configUnit.unit.product.sku}}</td>
+                                                                                        <td>{{configUnit.unit.product.name}}</td>
+                                                                                        <td>{{configUnit.unit.product.price}}</td>
+                                                                                        <td>{{configUnit.unit.quantity}}</td>
+                                                                                        <td><a href="#" data-ng-click="showConfigUnitDetail(configUnit.unit.product.id, 1)"><i class="fa fa-eye"></i></a></td>
+                                                                                    </tr>
+
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                </div>
+                                                <!-- row -->
+
+                                            </div>
+                                            <!-- pd-20 -->
+
+
+
+
+                                        </div>
+                                        <!-- home-tab -->
+
+                                    </div>
+                                    <!-- tab-content -->
+                                </div>
+                                <!-- tabs-widget --> </div>
+                        </div>
+                        <!-- row -->
+
+                    </div>
+                    <!-- .vd_content-section -->
+
+                </div>
+                <!-- .vd_content -->
+            </div>
+            <!-- .vd_container -->
+        </div>
+        <!-- .vd_content-wrapper -->
+        <!-- Middle Content End -->

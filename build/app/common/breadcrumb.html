@@ -1,0 +1,39 @@
+<ui-breadcrumbs displayname-property="data.pageName"
+                [template-url="" ]
+                [abstract-proxy-property="" ]>
+</ui-breadcrumbs>
+<div class="vd_panel-menu" data-ng-hide="hideViewAs">
+    <div class="vd_info tr">
+        <div class="dropdown vendor_list_search" dropdown is-open="status.isopen">
+            <button id="single-button" type="button" class="btn btn-vec_search" dropdown-toggle ng-disabled="disabled">
+                {{filterLabel}}<span ng-show="selectedPlatform">: {{selectedPlatform}}</span><span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu paltform_dropdown" role="menu" aria-labelledby="single-button">
+                <li>
+                    <span class="twitter-typeahead" style="position: relative; display: inline-block;">
+                        <input ng-click="$event.stopPropagation()" ng-model="$parent.platformFilter" type="text"
+                               class="typeahead" placeholder="Search">
+                    </span>
+                </li>
+                <h4>
+                    <span class="twitter-typeahead" style="position: relative; display: inline-block;">
+                    <b class="typeahead tt-input" autocomplete="off" spellcheck="false" dir="auto"
+                       style="position: relative; vertical-align: top; background-color: transparent;">
+                        <a class="hc" href="#" ng-click="setPlatform('','Platform')">{{mainLabel}}</a>
+                    </b>
+                    </span>
+                </h4>
+
+                <div class="paltform_dropdown_scroll">
+                    <li ng-repeat='option in platformDropdown'><b>{{option.title}}</b>
+                        <ul>
+                            <li ng-repeat='suboption in option.data | filter:platformFilter'>
+                                <a class="hc" ng-click="setPlatform(suboption, option.title)" href="#">{{suboption.name}}</a>
+                            </li>
+                        </ul>
+                    </li>
+                </div>
+            </ul>
+        </div>
+    </div>
+</div>
